@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CaseLink Network — DMV Region</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #040d1a;
+      --panel: rgba(10,22,40,0.85);
+      --border: rgba(255,255,255,0.08);
+      --blue: #2563eb;
+      --blue-light: #3b82f6;
+      --blue-glow: rgba(37,99,235,0.4);
+      --green: #10b981;
+      --green-glow: rgba(16,185,129,0.4);
+      --purple: #8b5cf6;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #475569;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh; overflow: hidden;
+      display: flex; flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* TOP BAR */
+    .top-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 28px; height: 56px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      flex-shrink: 0; z-index: 10;
+    }
+
+    .top-bar-left { display: flex; align-items: center; gap: 16px; }
+
+    .logo { font-weight: 800; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+    .logo-box { width: 26px; height: 26px; background: var(--blue); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900; }
+
+    .caption {
+      font-size: 0.78rem; color: var(--text-muted); font-weight: 500;
+      border-left: 1px solid var(--border); padding-left: 16px;
+    }
+
+    .top-bar-right { display: flex; align-items: center; gap: 12px; }
+
+    /* LEGEND */
+    .legend {
+      display: flex; align-items: center; gap: 16px;
+    }
+
+    .legend-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.75rem; color: var(--text-muted);
+    }
+
+    .legend-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+    }
+
+    /* CANVAS WRAPPER */
+    .canvas-wrapper {
+      flex: 1; position: relative; overflow: hidden;
+    }
+
+    canvas {
+      display: block; width: 100%; height: 100%;
+    }
+
+    /* TOOLTIP */
+    .tooltip {
+      position: absolute; pointer-events: none;
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 14px;
+      font-size: 0.8rem; color: var(--text);
+      backdrop-filter: blur(12px);
+      opacity: 0; transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .tooltip.show { opacity: 1; }
+    .tooltip-name { font-weight: 700; margin-bottom: 3px; }
+    .tooltip-detail { color: var(--text-muted); }
+
+    /* CONTROLS PANEL */
+    .controls-panel {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 12px;
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 14px; padding: 12px 20px;
+      backdrop-filter: blur(14px);
+      flex-wrap: wrap; justify-content: center;
+    }
+
+    .ctrl-btn {
+      padding: 9px 20px; border-radius: 9px; border: 1px solid var(--border);
+      background: transparent; color: var(--text-muted);
+      font-size: 0.82rem; font-weight: 600; cursor: pointer;
+      font-family: inherit; transition: all 0.2s; white-space: nowrap;
+    }
+    .ctrl-btn:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+    .ctrl-btn.primary { background: var(--blue); border-color: var(--blue); color: white; }
+    .ctrl-btn.primary:hover { background: var(--blue-light); }
+    .ctrl-btn.active { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.3); color: var(--green); }
+    .ctrl-btn:disabled { opacity: 0.4; cursor: default; }
+
+    .speed-control {
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .speed-label { font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; }
+
+    input[type="range"].speed-slider {
+      -webkit-appearance: none; appearance: none;
+      width: 90px; height: 3px; background: var(--border);
+      border-radius: 2px; outline: none; cursor: pointer;
+    }
+
+    input[type="range"].speed-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 14px; height: 14px;
+      border-radius: 50%; background: var(--blue-light); cursor: pointer;
+    }
+
+    /* STATS OVERLAY */
+    .stats-overlay {
+      position: absolute; top: 20px; right: 20px;
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 14px; padding: 18px 22px;
+      backdrop-filter: blur(14px);
+      min-width: 190px;
+    }
+
+    .stats-title {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-dim); margin-bottom: 14px;
+    }
+
+    .stat-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .stat-label { font-size: 0.78rem; color: var(--text-muted); }
+    .stat-value { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; }
+    .stat-blue { color: var(--blue-light); }
+    .stat-green { color: var(--green); }
+    .stat-purple { color: var(--purple); }
+
+    /* GROWTH PROGRESS */
+    .growth-bar {
+      margin-top: 14px; display: none;
+    }
+
+    .growth-bar.show { display: block; }
+    .growth-bar-label { font-size: 0.7rem; color: var(--text-dim); margin-bottom: 6px; }
+    .growth-bar-track {
+      height: 3px; background: var(--border); border-radius: 2px; overflow: hidden;
+    }
+    .growth-bar-fill {
+      height: 100%; background: linear-gradient(90deg, var(--blue), var(--green));
+      width: 0%; transition: width 0.2s;
+    }
+
+    /* HINT */
+    .click-hint {
+      position: absolute; top: 20px; left: 20px;
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 14px;
+      font-size: 0.75rem; color: var(--text-dim);
+      backdrop-filter: blur(10px);
+      transition: opacity 0.5s;
+    }
+
+    .click-hint.fade { opacity: 0; }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-left">
+    <div class="logo">
+      <div class="logo-box">CL</div>
+      CaseLink
+    </div>
+    <div class="caption">The CaseLink Network — DMV Region</div>
+  </div>
+  <div class="top-bar-right">
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--blue); box-shadow:0 0 8px var(--blue-glow);"></div>
+        General Dentist (GP)
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--green); box-shadow:0 0 8px var(--green-glow);"></div>
+        Specialist
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--purple); box-shadow:0 0 8px rgba(139,92,246,0.4);"></div>
+        Active referral
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CANVAS -->
+<div class="canvas-wrapper">
+  <canvas id="mainCanvas"></canvas>
+
+  <!-- TOOLTIP -->
+  <div class="tooltip" id="tooltip">
+    <div class="tooltip-name" id="tooltipName"></div>
+    <div class="tooltip-detail" id="tooltipDetail"></div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-overlay">
+    <div class="stats-title">Network Stats</div>
+    <div class="stat-row">
+      <span class="stat-label">GPs connected</span>
+      <span class="stat-value stat-blue" id="statGPs">0</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Specialists</span>
+      <span class="stat-value stat-green" id="statSPs">0</span>
+    </div>
+    <div class="stat-row" style="margin-bottom:0;">
+      <span class="stat-label">Referrals sent</span>
+      <span class="stat-value stat-purple" id="statRefs">0</span>
+    </div>
+    <div class="growth-bar" id="growthBar">
+      <div class="growth-bar-label">Network growth...</div>
+      <div class="growth-bar-track"><div class="growth-bar-fill" id="growthFill"></div></div>
+    </div>
+  </div>
+
+  <!-- HINT -->
+  <div class="click-hint" id="clickHint">💡 Click any GP node to send a referral</div>
+
+  <!-- CONTROLS -->
+  <div class="controls-panel">
+    <button class="ctrl-btn primary" id="growthBtn" onclick="simulateGrowth()">📈 Simulate growth</button>
+    <button class="ctrl-btn" id="resetBtn" onclick="resetNetwork()">↺ Reset</button>
+    <div class="speed-control">
+      <span class="speed-label">Speed</span>
+      <input type="range" class="speed-slider" id="speedSlider" min="0.3" max="3" step="0.1" value="1" oninput="updateSpeed()" />
+    </div>
+    <button class="ctrl-btn" onclick="window.open('index.html','_self')">← Back to site</button>
+  </div>
+</div>
+
+<script>
+  const canvas = document.getElementById('mainCanvas');
+  const ctx = canvas.getContext('2d');
+  const tooltip = document.getElementById('tooltip');
+  const statsGPs = document.getElementById('statGPs');
+  const statsSPs = document.getElementById('statSPs');
+  const statsRefs = document.getElementById('statRefs');
+  const growthBar = document.getElementById('growthBar');
+  const growthFill = document.getElementById('growthFill');
+  const growthBtn = document.getElementById('growthBtn');
+
+  const SPECIALTIES = ['Ortho', 'OS', 'Perio', 'Endo', 'Oral Surg'];
+  const GP_NAMES = ['Capitol Hill','Dupont','Bethesda','Silver Spring','Arlington','Alexandria','Reston','Tysons','Rockville','Chevy Chase','Georgetown','Cleveland Pk','NoMa','Shaw','Logan Cir'];
+  const SP_NAMES = ['Dr. Chen','Dr. Patel','Dr. Morris','Dr. Kim','Dr. Hayes','Dr. Singh','Dr. Lopez','Dr. Wright'];
+
+  let nodes = [];
+  let connections = [];
+  let particles = [];
+  let referralCount = 0;
+  let speed = 1;
+  let growing = false;
+  let growthProgress = 0;
+  let t = 0;
+  let autoFireTimer;
+  let hintFaded = false;
+
+  function resize() {
+    canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+    canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    resetNetwork();
+  }
+
+  function resetNetwork() {
+    nodes = []; connections = []; particles = [];
+    clearTimeout(autoFireTimer);
+    growing = false; growthProgress = 0;
+    growthBar.classList.remove('show');
+    growthBtn.disabled = false;
+    growthBtn.classList.remove('active');
+    growthBtn.textContent = '📈 Simulate growth';
+    referralCount = 0;
+    buildInitialNetwork();
+    updateStats();
+    autoFire();
+  }
+
+  function buildInitialNetwork() {
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+    const pad = 80;
+
+    // Seed GPs
+    const gpCount = 8;
+    for (let i = 0; i < gpCount; i++) {
+      addNode('gp', Math.random() * (w * 0.45 - pad) + pad, Math.random() * (h - pad*2) + pad, GP_NAMES[i % GP_NAMES.length]);
+    }
+
+    // Seed Specialists
+    const spCount = 5;
+    const spSpecialties = SPECIALTIES.slice(0, spCount);
+    for (let i = 0; i < spCount; i++) {
+      addNode('sp', w * 0.55 + Math.random() * (w * 0.35 - pad), Math.random() * (h - pad*2) + pad, SP_NAMES[i % SP_NAMES.length], spSpecialties[i]);
+    }
+
+    // Wire connections
+    wireConnections();
+  }
+
+  function addNode(type, x, y, name, specialty) {
+    const sp = specialty || (type === 'sp' ? SPECIALTIES[Math.floor(Math.random()*SPECIALTIES.length)] : null);
+    nodes.push({
+      x, y, type, name, specialty: sp,
+      r: type === 'gp' ? 18 : 22,
+      pulse: Math.random() * Math.PI * 2,
+      vx: (Math.random()-0.5)*0.18 * (type==='gp'?1.2:0.8),
+      vy: (Math.random()-0.5)*0.18 * (type==='gp'?1.2:0.8),
+      opacity: 0, // fades in
+      active: false,
+    });
+  }
+
+  function wireConnections() {
+    const gpNodes = nodes.filter(n => n.type === 'gp');
+    const spNodes = nodes.filter(n => n.type === 'sp');
+    connections = [];
+
+    gpNodes.forEach(gp => {
+      const gpIdx = nodes.indexOf(gp);
+      const numConns = 1 + Math.floor(Math.random() * Math.min(3, spNodes.length));
+      const picks = [...spNodes].sort(() => Math.random()-0.5).slice(0, numConns);
+      picks.forEach(sp => {
+        const spIdx = nodes.indexOf(sp);
+        // avoid duplicates
+        if (!connections.find(c => c.from === gpIdx && c.to === spIdx)) {
+          connections.push({ from: gpIdx, to: spIdx, opacity: 1 });
+        }
+      });
+    });
+  }
+
+  function sendReferralFrom(gpIdx) {
+    const conns = connections.filter(c => c.from === gpIdx);
+    if (!conns.length) return;
+    const conn = conns[Math.floor(Math.random() * conns.length)];
+    particles.push({
+      conn, t: 0,
+      speed: (0.006 + Math.random()*0.004) * speed,
+    });
+    nodes[gpIdx].active = true;
+    setTimeout(() => { if (nodes[gpIdx]) nodes[gpIdx].active = false; }, 600);
+    referralCount++;
+    updateStats();
+    if (!hintFaded) {
+      document.getElementById('clickHint').classList.add('fade');
+      hintFaded = true;
+    }
+  }
+
+  function autoFire() {
+    const gpNodes = nodes.filter(n => n.type === 'gp');
+    if (gpNodes.length) {
+      const gp = gpNodes[Math.floor(Math.random()*gpNodes.length)];
+      const idx = nodes.indexOf(gp);
+      if (idx >= 0) sendReferralFrom(idx);
+    }
+    const delay = (800 + Math.random()*1200) / Math.max(speed, 0.5);
+    autoFireTimer = setTimeout(autoFire, delay);
+  }
+
+  function simulateGrowth() {
+    if (growing) return;
+    growing = true;
+    growthBtn.disabled = true;
+    growthBtn.classList.add('active');
+    growthBtn.textContent = '📈 Growing...';
+    growthBar.classList.add('show');
+    growthFill.style.width = '0%';
+
+    const totalNewNodes = 14;
+    let added = 0;
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+
+    function addNextNode() {
+      if (added >= totalNewNodes) {
+        setTimeout(() => {
+          growthBar.classList.remove('show');
+          growthBtn.disabled = false;
+          growthBtn.classList.remove('active');
+          growthBtn.textContent = '📈 Simulate growth';
+          growing = false;
+        }, 1200);
+        return;
+      }
+
+      const isGP = added < 9;
+      const gpNodes = nodes.filter(n => n.type === 'gp');
+      const spNodes = nodes.filter(n => n.type === 'sp');
+
+      let x, y;
+      if (isGP) {
+        x = Math.random() * (w * 0.48 - 60) + 40;
+        y = Math.random() * (h - 120) + 60;
+        const name = GP_NAMES[(gpNodes.length) % GP_NAMES.length];
+        addNode('gp', x, y, name);
+      } else {
+        x = w * 0.52 + Math.random() * (w * 0.4 - 60) + 20;
+        y = Math.random() * (h - 120) + 60;
+        const sp = SPECIALTIES[(spNodes.length) % SPECIALTIES.length];
+        addNode('sp', x, y, SP_NAMES[spNodes.length % SP_NAMES.length], sp);
+      }
+
+      // Connect new node
+      wireConnections();
+      added++;
+      growthFill.style.width = (added / totalNewNodes * 100) + '%';
+      updateStats();
+
+      const delay = 400 + Math.random()*400;
+      setTimeout(addNextNode, delay / speed);
+    }
+
+    addNextNode();
+  }
+
+  function updateSpeed() {
+    speed = parseFloat(document.getElementById('speedSlider').value);
+  }
+
+  function updateStats() {
+    const gpCount = nodes.filter(n => n.type === 'gp').length;
+    const spCount = nodes.filter(n => n.type === 'sp').length;
+    statsGPs.textContent = gpCount;
+    statsSPs.textContent = spCount;
+    statsRefs.textContent = referralCount;
+  }
+
+  // Interaction — click GP to send
+  canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+
+    for (let i = 0; i < nodes.length; i++) {
+      const n = nodes[i];
+      const dx = mx - n.x, dy = my - n.y;
+      if (Math.sqrt(dx*dx+dy*dy) < n.r + 6 && n.type === 'gp') {
+        sendReferralFrom(i);
+        break;
+      }
+    }
+  });
+
+  // Hover tooltip
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    let hit = null;
+
+    for (let i = 0; i < nodes.length; i++) {
+      const n = nodes[i];
+      const dx = mx - n.x, dy = my - n.y;
+      if (Math.sqrt(dx*dx+dy*dy) < n.r + 8) { hit = n; break; }
+    }
+
+    if (hit) {
+      const tw = 180;
+      let tx = e.clientX + 12;
+      let ty = e.clientY - 40;
+      if (tx + tw > window.innerWidth - 20) tx = e.clientX - tw - 12;
+      tooltip.style.left = tx + 'px';
+      tooltip.style.top = ty + 'px';
+      document.getElementById('tooltipName').textContent = hit.name;
+      document.getElementById('tooltipDetail').textContent = hit.type === 'gp'
+        ? 'General Dentist · Click to send referral'
+        : hit.specialty + ' Specialist';
+      tooltip.classList.add('show');
+      canvas.style.cursor = hit.type === 'gp' ? 'pointer' : 'default';
+    } else {
+      tooltip.classList.remove('show');
+      canvas.style.cursor = 'default';
+    }
+  });
+
+  canvas.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+
+  function lerp(a, b, t2) { return a + (b-a)*t2; }
+
+  function draw() {
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+    t += 0.016 * speed;
+    ctx.clearRect(0, 0, w, h);
+
+    // Subtle dot grid
+    ctx.fillStyle = 'rgba(255,255,255,0.025)';
+    for (let gx = 0; gx < w; gx += 28) {
+      for (let gy = 0; gy < h; gy += 28) {
+        ctx.beginPath(); ctx.arc(gx, gy, 1, 0, Math.PI*2); ctx.fill();
+      }
+    }
+
+    // Move nodes
+    nodes.forEach(n => {
+      n.x += n.vx * speed; n.y += n.vy * speed;
+      n.pulse += 0.022 * speed;
+      n.opacity = Math.min(1, n.opacity + 0.04);
+      if (n.x < 24 || n.x > w-24) n.vx *= -1;
+      if (n.y < 24 || n.y > h-24) n.vy *= -1;
+    });
+
+    // Draw connections
+    connections.forEach(c => {
+      const f = nodes[c.from], t2 = nodes[c.to];
+      if (!f || !t2) return;
+      const alpha = Math.min(f.opacity, t2.opacity) * 0.07;
+      ctx.beginPath(); ctx.moveTo(f.x, f.y); ctx.lineTo(t2.x, t2.y);
+      ctx.strokeStyle = `rgba(100,150,255,${alpha})`;
+      ctx.setLineDash([4, 7]); ctx.lineWidth = 1;
+      ctx.stroke(); ctx.setLineDash([]);
+    });
+
+    // Draw nodes
+    nodes.forEach(n => {
+      if (!n) return;
+      const alpha = n.opacity;
+      const color = n.type === 'gp' ? '#2563eb' : '#10b981';
+      const glowColor = n.type === 'gp' ? `rgba(37,99,235,` : `rgba(16,185,129,`;
+      const pulse = Math.sin(n.pulse)*0.4 + 0.6;
+
+      ctx.save();
+      ctx.globalAlpha = alpha;
+
+      // Outer pulse ring
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r + 8 + Math.sin(n.pulse)*5, 0, Math.PI*2);
+      ctx.strokeStyle = glowColor + (0.12 * pulse) + ')';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Glow fill
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+      ctx.fillStyle = glowColor + '0.12)'; ctx.fill();
+
+      // Active flash
+      if (n.active) {
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r + 12, 0, Math.PI*2);
+        ctx.strokeStyle = glowColor + '0.5)';
+        ctx.lineWidth = 2; ctx.stroke();
+      }
+
+      // Border
+      ctx.shadowBlur = 16 * pulse; ctx.shadowColor = color;
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+      ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      ctx.restore();
+
+      // Label
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.font = `bold ${n.type === 'gp' ? 9 : 8}px Inter,sans-serif`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#ffffff';
+      const label = n.type === 'gp' ? 'GP' : (n.specialty ? n.specialty.slice(0,4) : 'SP');
+      ctx.fillText(label, n.x, n.y);
+      ctx.restore();
+    });
+
+    // Draw particles
+    particles = particles.filter(p => p.t < 1);
+    particles.forEach(p => {
+      p.t += p.speed * speed;
+      const f = nodes[p.conn.from], t2 = nodes[p.conn.to];
+      if (!f || !t2) { p.t = 1; return; }
+      const px = lerp(f.x, t2.x, p.t);
+      const py = lerp(f.y, t2.y, p.t);
+
+      // Trail
+      const trailLen = 5;
+      for (let i = 0; i < trailLen; i++) {
+        const tp = Math.max(0, p.t - p.speed * speed * i * 3);
+        const trailX = lerp(f.x, t2.x, tp);
+        const trailY = lerp(f.y, t2.y, tp);
+        const trailAlpha = (1 - i/trailLen) * 0.4;
+        ctx.save();
+        ctx.beginPath(); ctx.arc(trailX, trailY, 3.5 - i*0.5, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(139,92,246,${trailAlpha})`; ctx.fill();
+        ctx.restore();
+      }
+
+      ctx.save();
+      ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI*2);
+      ctx.fillStyle = '#8b5cf6';
+      ctx.shadowBlur = 16; ctx.shadowColor = '#8b5cf6';
+      ctx.fill();
+      ctx.restore();
+
+      // Sparkle at arrival
+      if (p.t > 0.95) {
+        const sp = nodes[p.conn.to];
+        if (sp) {
+          ctx.save();
+          ctx.beginPath(); ctx.arc(sp.x, sp.y, sp.r + 14 * (1 - p.t)*20, 0, Math.PI*2);
+          ctx.strokeStyle = `rgba(16,185,129,${(1-p.t)*3})`;
+          ctx.lineWidth = 2; ctx.stroke();
+          ctx.restore();
+        }
+      }
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+</script>
+</body>
+</html>

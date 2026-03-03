@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CaseLink ROI Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0a1628;
+      --navy-light: #0f2040;
+      --card: #111d35;
+      --card2: #0d1829;
+      --border: rgba(255,255,255,0.08);
+      --blue: #2563eb;
+      --blue-light: #3b82f6;
+      --green: #10b981;
+      --green-light: #34d399;
+      --red: #ef4444;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #475569;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,22,40,0.95);
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+
+    .logo { font-weight: 800; font-size: 1.1rem; display: flex; align-items: center; gap: 9px; text-decoration: none; color: var(--text); }
+    .logo-icon { width: 28px; height: 28px; background: var(--blue); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; }
+
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    .demo-link { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; text-decoration: none; }
+    .demo-link:hover { color: var(--text); }
+    .demo-btn {
+      background: var(--blue); color: white; padding: 8px 18px;
+      border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .demo-btn:hover { background: var(--blue-light); }
+
+    /* HERO */
+    .hero-strip {
+      text-align: center; padding: 64px 48px 48px;
+      background: linear-gradient(180deg, rgba(37,99,235,0.06) 0%, transparent 100%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--blue-light); margin-bottom: 14px;
+    }
+
+    .hero-strip h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900; letter-spacing: -0.035em; margin-bottom: 14px;
+    }
+
+    .hero-strip p {
+      font-size: 1rem; color: var(--text-muted); max-width: 520px; margin: 0 auto;
+    }
+
+    /* TABS */
+    .tabs {
+      display: flex; gap: 4px;
+      background: var(--card2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 4px;
+      max-width: 360px; margin: 36px auto 0;
+    }
+
+    .tab {
+      flex: 1; padding: 9px 16px; border-radius: 7px;
+      font-size: 0.88rem; font-weight: 600; cursor: pointer;
+      border: none; background: transparent;
+      color: var(--text-muted); font-family: inherit;
+      transition: all 0.2s;
+    }
+    .tab.active { background: var(--blue); color: white; }
+
+    /* MAIN LAYOUT */
+    .main {
+      display: grid; grid-template-columns: 400px 1fr;
+      gap: 32px; max-width: 1140px; margin: 48px auto;
+      padding: 0 32px 80px;
+    }
+
+    @media (max-width: 900px) {
+      .main { grid-template-columns: 1fr; padding: 0 20px 60px; }
+    }
+
+    /* INPUTS PANEL */
+    .inputs-panel {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 18px; padding: 32px;
+      height: fit-content;
+      position: sticky; top: 80px;
+    }
+
+    .inputs-panel h2 { font-size: 1rem; font-weight: 700; margin-bottom: 28px; }
+
+    .input-group { margin-bottom: 28px; }
+
+    .input-header {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .input-label { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+    .input-value {
+      font-size: 1.05rem; font-weight: 800;
+      color: var(--blue-light); font-variant-numeric: tabular-nums;
+    }
+
+    .input-sub { font-size: 0.76rem; color: var(--text-dim); margin-top: 3px; }
+
+    input[type="range"] {
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 4px;
+      background: var(--border); border-radius: 2px; outline: none;
+      cursor: pointer; margin: 8px 0;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--blue); cursor: pointer;
+      box-shadow: 0 0 10px rgba(37,99,235,0.5);
+      transition: transform 0.15s;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+    .range-labels {
+      display: flex; justify-content: space-between;
+      font-size: 0.7rem; color: var(--text-dim); margin-top: 4px;
+    }
+
+    .callout {
+      background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 10px; padding: 14px 16px; margin-top: 24px;
+    }
+
+    .callout p {
+      font-size: 0.82rem; color: var(--green-light); line-height: 1.5;
+    }
+
+    .callout strong { font-weight: 700; }
+
+    /* RESULTS PANEL */
+    .results-panel { display: flex; flex-direction: column; gap: 24px; }
+
+    .results-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) { .results-grid { grid-template-columns: 1fr; } }
+
+    .result-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px; transition: all 0.3s;
+      position: relative; overflow: hidden;
+    }
+
+    .result-card.primary {
+      border-color: rgba(16,185,129,0.3);
+      background: rgba(16,185,129,0.05);
+    }
+
+    .result-card.warning {
+      border-color: rgba(239,68,68,0.2);
+      background: rgba(239,68,68,0.03);
+    }
+
+    .result-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px;
+    }
+
+    .result-value {
+      font-size: 2rem; font-weight: 900; letter-spacing: -0.04em;
+      line-height: 1; transition: all 0.3s;
+    }
+
+    .result-card.warning .result-value { color: var(--red); }
+    .result-card.primary .result-value { color: var(--green); }
+    .result-card.blue .result-value { color: var(--blue-light); }
+
+    .result-desc { font-size: 0.78rem; color: var(--text-dim); margin-top: 8px; }
+
+    /* PAYBACK */
+    .payback-card {
+      background: var(--card); border: 1px solid rgba(37,99,235,0.3);
+      border-radius: 16px; padding: 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+
+    .payback-left h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .payback-left p { font-size: 0.82rem; color: var(--text-muted); }
+
+    .payback-badge {
+      background: var(--blue-dim, rgba(37,99,235,0.15));
+      border: 1px solid rgba(37,99,235,0.3);
+      border-radius: 12px; padding: 12px 24px; text-align: center;
+    }
+
+    .payback-badge .payback-val {
+      font-size: 1.6rem; font-weight: 900; color: var(--blue-light);
+      letter-spacing: -0.03em;
+    }
+
+    .payback-badge .payback-lbl { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* CHART */
+    .chart-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px;
+    }
+
+    .chart-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 20px; }
+    .chart-container { height: 220px; position: relative; }
+
+    /* DEMO CTA */
+    .demo-cta {
+      background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(16,185,129,0.08));
+      border: 1px solid rgba(37,99,235,0.25);
+      border-radius: 16px; padding: 32px;
+      text-align: center;
+    }
+
+    .demo-cta h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
+    .demo-cta p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 24px; }
+
+    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary-lg {
+      background: var(--blue); color: white;
+      padding: 13px 28px; border-radius: 10px;
+      font-size: 0.95rem; font-weight: 700; text-decoration: none;
+      border: none; cursor: pointer; font-family: inherit;
+      transition: all 0.2s; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .btn-primary-lg:hover { background: var(--blue-light); transform: translateY(-1px); }
+
+    .btn-outline-lg {
+      background: transparent; color: var(--text-muted);
+      padding: 13px 28px; border-radius: 10px;
+      font-size: 0.95rem; font-weight: 700; text-decoration: none;
+      border: 1px solid var(--border); cursor: pointer; font-family: inherit;
+      transition: all 0.2s;
+    }
+    .btn-outline-lg:hover { color: var(--text); border-color: var(--text-muted); }
+
+    /* NUMBER FLIP ANIMATION */
+    .flipping { animation: numFlip 0.25s ease-out; }
+
+    @keyframes numFlip {
+      0% { transform: translateY(-8px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .hidden-gp { display: none; }
+    .hidden-sp { display: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">
+    <div class="logo-icon">CL</div>
+    CaseLink
+  </a>
+  <div class="header-right">
+    <a href="demo.html" class="demo-link">Watch demo</a>
+    <a href="#" class="demo-btn">Request demo</a>
+  </div>
+</header>
+
+<div class="hero-strip">
+  <div class="eyebrow">ROI Calculator</div>
+  <h1>How much revenue are<br>you leaving on the table?</h1>
+  <p>Adjust the sliders below to see exactly how CaseLink impacts your practice's bottom line.</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('gp')">🦷 I'm a GP</button>
+    <button class="tab" onclick="switchTab('specialist')">⚕️ I'm a Specialist</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- INPUTS -->
+  <div class="inputs-panel">
+    <h2>Your Practice</h2>
+
+    <!-- GP INPUTS -->
+    <div id="gp-inputs">
+      <div class="input-group">
+        <div class="input-header">
+          <span class="input-label">Monthly referrals sent</span>
+          <span class="input-value" id="gp-refs-val">20</span>
+        </div>
+        <input type="range" id="gp-refs" min="5" max="100" value="20" oninput="recalculate()" />
+        <div class="range-labels"><span>5</span><span>100</span></div>
+        <div class="input-sub">Referrals you send to specialists each month</div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-header">
+          <span class="input-label">Avg case value</span>
+          <span class="input-value" id="gp-value-val">$1,200</span>
+        </div>
+        <input type="range" id="gp-value" min="500" max="5000" step="100" value="1200" oninput="recalculate()" />
+        <div class="range-labels"><span>$500</span><span>$5,000</span></div>
+        <div class="input-sub">Average revenue per completed specialist case</div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-header">
+          <span class="input-label">Current completion rate</span>
+          <span class="input-value" id="gp-rate-val">65%</span>
+        </div>
+        <input type="range" id="gp-rate" min="30" max="90" value="65" oninput="recalculate()" />
+        <div class="range-labels"><span>30%</span><span>90%</span></div>
+        <div class="input-sub">% of your referrals that result in a completed appointment</div>
+      </div>
+    </div>
+
+    <!-- SPECIALIST INPUTS -->
+    <div id="sp-inputs" style="display:none;">
+      <div class="input-group">
+        <div class="input-header">
+          <span class="input-label">Monthly referrals received</span>
+          <span class="input-value" id="sp-refs-val">30</span>
+        </div>
+        <input type="range" id="sp-refs" min="10" max="150" value="30" oninput="recalculate()" />
+        <div class="range-labels"><span>10</span><span>150</span></div>
+        <div class="input-sub">Referrals received from GPs each month</div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-header">
+          <span class="input-label">Avg case value</span>
+          <span class="input-value" id="sp-value-val">$1,200</span>
+        </div>
+        <input type="range" id="sp-value" min="500" max="5000" step="100" value="1200" oninput="recalculate()" />
+        <div class="range-labels"><span>$500</span><span>$5,000</span></div>
+        <div class="input-sub">Average revenue per completed case at your practice</div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-header">
+          <span class="input-label">Current completion rate</span>
+          <span class="input-value" id="sp-rate-val">65%</span>
+        </div>
+        <input type="range" id="sp-rate" min="30" max="90" value="65" oninput="recalculate()" />
+        <div class="range-labels"><span>30%</span><span>90%</span></div>
+        <div class="input-sub">% of received referrals that get scheduled and completed</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>💡 Industry insight:</strong> Most specialists recover their $499/month in the first 2 completed referrals. The average specialist on CaseLink adds 7 new cases per month within 90 days.</p>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel">
+
+    <div class="results-grid">
+      <div class="result-card warning">
+        <div class="result-label">Referrals lost / month</div>
+        <div class="result-value" id="lost-refs">7</div>
+        <div class="result-desc">Cases that slip through without CaseLink</div>
+      </div>
+
+      <div class="result-card warning">
+        <div class="result-label">Revenue lost / month</div>
+        <div class="result-value" id="lost-rev">$8,400</div>
+        <div class="result-desc">Missed revenue from dropped referrals</div>
+      </div>
+
+      <div class="result-card primary">
+        <div class="result-label">With CaseLink (92%)</div>
+        <div class="result-value" id="recovered-rev">$5,160</div>
+        <div class="result-desc">Revenue recovered through higher completion</div>
+      </div>
+
+      <div class="result-card primary">
+        <div class="result-label">Monthly revenue gain</div>
+        <div class="result-value" id="monthly-gain">$4,661</div>
+        <div class="result-desc">After $499/mo CaseLink cost for specialists</div>
+      </div>
+    </div>
+
+    <div class="payback-card">
+      <div class="payback-left">
+        <h3>Annual ROI</h3>
+        <p>Based on your inputs, CaseLink generates this much additional revenue per year.</p>
+      </div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div class="payback-badge">
+          <div class="payback-val" id="annual-roi">$55,932</div>
+          <div class="payback-lbl">Annual gain</div>
+        </div>
+        <div class="payback-badge">
+          <div class="payback-val" id="payback-period">2.4 wks</div>
+          <div class="payback-lbl">Payback period</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Revenue: Before vs. After CaseLink</div>
+      <div class="chart-container">
+        <canvas id="roiChart"></canvas>
+      </div>
+    </div>
+
+    <div class="demo-cta">
+      <h3>Ready to stop losing referrals?</h3>
+      <p>See how CaseLink works in a live 15-minute demo. No commitment required.</p>
+      <div class="cta-buttons">
+        <a href="demo.html" class="btn-primary-lg">See it in action</a>
+        <a href="mailto:nick@caselink.net" class="btn-outline-lg">Request a demo</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  let activeTab = 'gp';
+  let chart;
+
+  function switchTab(tab) {
+    activeTab = tab;
+    document.querySelectorAll('.tab').forEach((t, i) => {
+      t.classList.toggle('active', (i === 0 && tab === 'gp') || (i === 1 && tab === 'specialist'));
+    });
+    document.getElementById('gp-inputs').style.display = tab === 'gp' ? 'block' : 'none';
+    document.getElementById('sp-inputs').style.display = tab === 'specialist' ? 'block' : 'none';
+    recalculate();
+  }
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString();
+  }
+
+  function animateValue(el, newText) {
+    el.classList.remove('flipping');
+    void el.offsetWidth;
+    el.classList.add('flipping');
+    el.textContent = newText;
+  }
+
+  function recalculate() {
+    let refs, caseVal, rate;
+
+    if (activeTab === 'gp') {
+      refs = parseInt(document.getElementById('gp-refs').value);
+      caseVal = parseInt(document.getElementById('gp-value').value);
+      rate = parseInt(document.getElementById('gp-rate').value) / 100;
+      document.getElementById('gp-refs-val').textContent = refs;
+      document.getElementById('gp-value-val').textContent = '$' + caseVal.toLocaleString();
+      document.getElementById('gp-rate-val').textContent = Math.round(rate * 100) + '%';
+    } else {
+      refs = parseInt(document.getElementById('sp-refs').value);
+      caseVal = parseInt(document.getElementById('sp-value').value);
+      rate = parseInt(document.getElementById('sp-rate').value) / 100;
+      document.getElementById('sp-refs-val').textContent = refs;
+      document.getElementById('sp-value-val').textContent = '$' + caseVal.toLocaleString();
+      document.getElementById('sp-rate-val').textContent = Math.round(rate * 100) + '%';
+    }
+
+    const caselinkRate = 0.92;
+    const lostRefs = Math.round(refs * (1 - rate));
+    const lostRev = lostRefs * caseVal;
+    const completedBefore = Math.round(refs * rate) * caseVal;
+    const completedAfter = Math.round(refs * caselinkRate) * caseVal;
+    const recoveredRev = completedAfter - completedBefore;
+    const cost = activeTab === 'specialist' ? 499 : 0;
+    const monthlyGain = recoveredRev - cost;
+    const annualROI = monthlyGain * 12;
+    const paybackWeeks = cost > 0 ? (cost / monthlyGain * 4.33).toFixed(1) : 0;
+
+    animateValue(document.getElementById('lost-refs'), lostRefs);
+    animateValue(document.getElementById('lost-rev'), fmt(lostRev));
+    animateValue(document.getElementById('recovered-rev'), fmt(recoveredRev));
+    animateValue(document.getElementById('monthly-gain'), fmt(monthlyGain));
+    animateValue(document.getElementById('annual-roi'), fmt(annualROI));
+    document.getElementById('payback-period').textContent = cost > 0
+      ? (parseFloat(paybackWeeks) < 1 ? '< 1 wk' : paybackWeeks + ' wks')
+      : 'N/A (free)';
+
+    updateChart(completedBefore, completedAfter, lostRev);
+  }
+
+  function updateChart(before, after, lost) {
+    if (chart) {
+      chart.data.datasets[0].data = [before, before + lost];
+      chart.data.datasets[1].data = [after, 0];
+      chart.update('active');
+      return;
+    }
+
+    const ctx = document.getElementById('roiChart').getContext('2d');
+    chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Without CaseLink', 'With CaseLink'],
+        datasets: [
+          {
+            label: 'Revenue Captured',
+            data: [before, after],
+            backgroundColor: 'rgba(37,99,235,0.7)',
+            borderColor: 'rgba(37,99,235,1)',
+            borderWidth: 1.5,
+            borderRadius: 6,
+          },
+          {
+            label: 'Revenue Lost',
+            data: [lost, 0],
+            backgroundColor: 'rgba(239,68,68,0.45)',
+            borderColor: 'rgba(239,68,68,0.7)',
+            borderWidth: 1.5,
+            borderRadius: 6,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            labels: { color: '#94a3b8', font: { family: 'Inter', size: 12 } }
+          },
+          tooltip: {
+            callbacks: {
+              label: ctx => ' ' + ctx.dataset.label + ': $' + Math.round(ctx.raw).toLocaleString()
+            }
+          }
+        },
+        scales: {
+          x: {
+            stacked: true,
+            grid: { color: 'rgba(255,255,255,0.04)' },
+            ticks: { color: '#94a3b8', font: { family: 'Inter' } }
+          },
+          y: {
+            stacked: true,
+            grid: { color: 'rgba(255,255,255,0.04)' },
+            ticks: {
+              color: '#94a3b8',
+              font: { family: 'Inter' },
+              callback: v => '$' + (v / 1000).toFixed(0) + 'k'
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // Init
+  recalculate();
+</script>
+</body>
+</html>
