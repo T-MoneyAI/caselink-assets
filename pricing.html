@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CaseLink Pricing Strategy & Analysis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #ffffff;
+  color: #1a1a2e;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.header-bar {
+  background: #0a1628;
+  color: #a8c0e0;
+  text-align: center;
+  padding: 10px 24px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-bar span { color: #e2c97e; }
+.container { max-width: 860px; margin: 0 auto; padding: 48px 32px 80px; }
+.doc-title-block {
+  border-left: 5px solid #2563eb;
+  padding: 28px 32px;
+  background: #f0f6ff;
+  margin-bottom: 40px;
+  border-radius: 0 8px 8px 0;
+}
+.doc-title-block h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0a1628;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.doc-meta { font-size: 13px; color: #4b5563; line-height: 1.8; }
+.doc-meta strong { color: #0a1628; }
+.content h2 {
+  font-size: 19px;
+  font-weight: 800;
+  color: #0a1628;
+  margin: 40px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e2e8f0;
+}
+.content h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e3a5f;
+  margin: 28px 0 10px;
+}
+.content h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2563eb;
+  margin: 20px 0 8px;
+}
+.content p { margin-bottom: 16px; color: #374151; }
+.content ul, .content ol { margin: 0 0 16px 24px; }
+.content li { margin-bottom: 6px; color: #374151; }
+.content strong { color: #0a1628; font-weight: 700; }
+.content em { color: #4b5563; }
+.content blockquote {
+  background: #fff7ed;
+  border-left: 4px solid #ea580c;
+  padding: 14px 18px;
+  margin: 24px 0;
+  border-radius: 0 6px 6px 0;
+  font-size: 14px;
+  color: #7c2d12;
+  font-style: italic;
+}
+.content hr {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 36px 0;
+}
+.content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 20px 0 28px;
+}
+.content th {
+  background: #0a1628;
+  color: #a8c0e0;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.content td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #374151;
+}
+.content tr:nth-child(even) td { background: #f8fafc; }
+.content code {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 13px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  color: #2563eb;
+}
+footer {
+  text-align: center;
+  padding: 32px;
+  font-size: 12px;
+  color: #9ca3af;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 40px;
+}
+</style>
+</head>
+<body>
+<div class="header-bar">CaseLink · <span>Confidential</span> · Pricing Strategy</div>
+<div class="container">
+  <div class="doc-title-block">
+    <h1>CaseLink Pricing Strategy & Analysis</h1>
+    <div class="doc-meta">
+      <strong>Prepared for:</strong> Nick Campbell, CEO &nbsp;·&nbsp;
+      <strong>Date:</strong> March 2026 &nbsp;·&nbsp;
+      <strong>Status:</strong> Internal Working Document
+    </div>
+  </div>
+  <div class="content">
+    <p><strong>Prepared for Nick Campbell, CEO — March 2026</strong><br />
+<strong>Status: Internal Working Document</strong></p>
+<hr />
+<h2>Quick Summary (Read This First)</h2>
+<p>Here's the bottom line before you dig in:</p>
+<ul>
+<li><strong>Fix the website today:</strong> $399 vs $499 is a trust killer. Pick one and update it immediately. The recommendation is <strong>$399/month</strong> as your active price for new specialists right now.</li>
+<li><strong>Run a 45-day structured pilot</strong> with clear milestones before billing starts.</li>
+<li><strong>Charter pricing at $299/month, locked for 24 months</strong>, for your first 25 specialists. You have roughly 10–15 slots left if you've already signed some.</li>
+<li><strong>Don't monetize GPs until you have 75+ paying specialists.</strong> The network is the product right now.</li>
+<li><strong>Push annual plans hard.</strong> Your goal should be 60% of customers on annual by month 12.</li>
+<li><strong>No per-transaction fees.</strong> The legal risk isn't worth it at this stage.</li>
+<li><strong>Enterprise/DSO pricing: $1,500–$3,000/month per location</strong>, minimum 3-location commitment.</li>
+</ul>
+<p>Now let's break down why.</p>
+<hr />
+<h2>1. Pricing Power Analysis — What Can You Actually Get Away With?</h2>
+<h3>The Competitive Landscape</h3>
+<p>Here's where the major dental SaaS tools sit on price:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Category</th>
+<th>Monthly Price</th>
+<th>What You Get</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weave</td>
+<td>Communications (phone, text, chat)</td>
+<td>$400–$600</td>
+<td>Patient comms, phones, reviews</td>
+</tr>
+<tr>
+<td>NexHealth</td>
+<td>Scheduling + communications</td>
+<td>$500–$1,000</td>
+<td>Online booking, reminders, forms</td>
+</tr>
+<tr>
+<td>Dental Intelligence</td>
+<td>Analytics + reporting</td>
+<td>$400–$800</td>
+<td>Production dashboards, benchmarks</td>
+</tr>
+<tr>
+<td>Archy</td>
+<td>Full PMS (practice mgmt system)</td>
+<td>$600–$900</td>
+<td>Everything — scheduling, billing, charting</td>
+</tr>
+<tr>
+<td>RevenueWell</td>
+<td>Marketing + patient engagement</td>
+<td>$300–$600</td>
+<td>Email campaigns, recall, reviews</td>
+</tr>
+<tr>
+<td>Solutionreach</td>
+<td>Patient engagement</td>
+<td>$300–$500</td>
+<td>Reminders, surveys, newsletters</td>
+</tr>
+<tr>
+<td>Lighthouse 360</td>
+<td>Patient communications</td>
+<td>$300–$400</td>
+<td>Automated reminders, recall</td>
+</tr>
+<tr>
+<td><strong>CaseLink</strong></td>
+<td><strong>Referral coordination</strong></td>
+<td><strong>$399–$499</strong></td>
+<td><strong>Specialist referral workflow</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>Where CaseLink's Value Actually Sits</h3>
+<p>CaseLink isn't competing with these tools. It's filling a gap none of them address well.</p>
+<p>Every specialist practice already pays for some of the tools above. What they don't have is a clean system for <em>receiving referrals</em> — knowing what's coming in, from whom, at what stage, and whether it converted. They're living on phone calls, faxes, paper referral pads, and sticky notes. The coordination cost is real and measurable.</p>
+<p>The key insight: <strong>CaseLink is a revenue tool, not a cost tool.</strong> This completely changes the pricing conversation.</p>
+<p>A communications tool (Weave, Lighthouse) reduces staff time and improves patient experience — both real values, but harder to attach a dollar figure to. CaseLink, if used well, directly impacts the referral pipeline. More referrals tracked = more cases closed = more revenue. That's a much stronger ROI argument.</p>
+<h3>The Psychological Price Ceiling for Dental Specialists</h3>
+<p>Dental specialists are not price-sensitive the way GPs are. Their revenue per chair is significantly higher. Here's a rough look by specialty:</p>
+<table>
+<thead>
+<tr>
+<th>Specialty</th>
+<th>Avg Annual Revenue (Solo Practice)</th>
+<th>Monthly Software Comfort Zone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Oral Surgery</td>
+<td>$800K–$2M+</td>
+<td>$500–$1,200</td>
+</tr>
+<tr>
+<td>Orthodontics</td>
+<td>$700K–$1.5M</td>
+<td>$400–$900</td>
+</tr>
+<tr>
+<td>Periodontist</td>
+<td>$500K–$1.2M</td>
+<td>$300–$700</td>
+</tr>
+<tr>
+<td>Endodontist</td>
+<td>$600K–$1.4M</td>
+<td>$400–$800</td>
+</tr>
+</tbody>
+</table>
+<p>The psychological ceiling for a solo specialist is approximately <strong>$600–$700/month</strong> for a point solution. Above that, they want it to feel like infrastructure (a PMS). Below $300, they wonder if it's good enough to trust with their referral relationships.</p>
+<p>The <strong>sweet spot is $399–$499</strong> for a solo specialist right now, when CaseLink is still early and proving itself. As the feature set expands and the referral network densifies (more GPs on the platform = more value per specialist), the price ceiling rises. A mature CaseLink with deep network effects is worth $700–$900/month to a specialist. You're not there yet. Charge accordingly and raise as you earn it.</p>
+<h3>Willingness-to-Pay by Specialty</h3>
+<p><strong>Oral Surgeons</strong> have the highest willingness to pay. They handle the highest-acuity cases, their average case value is the highest in dentistry, and missing a referral is expensive. An oral surgeon who loses two implant cases per month to a competitor who's easier to refer to has lost $5,000–$15,000 in revenue. They feel this pain acutely. <strong>Ceiling: $600–$800/month. Recommended price: $499.</strong></p>
+<p><strong>Orthodontists</strong> have high willingness to pay but are more relationship-driven. A big ortho practice can have 30+ active GP referral sources. Managing those relationships matters to them. They also run high volume with predictable case values ($5,000–$8,000 per case). <strong>Ceiling: $500–$700/month. Recommended price: $399–$499.</strong></p>
+<p><strong>Periodontists</strong> are the most analytical specialty. They will ask you for data on their referral patterns and want to see ROI before committing. They're also heavily impacted by insurance networks, so not every referral converts cleanly. <strong>Ceiling: $400–$600/month. Recommended price: $399.</strong></p>
+<p><strong>Endodontists</strong> have the highest case volume but lowest average case value (~$1,200–$1,800 per root canal). They also see the most emergency referrals, which means fast coordination matters. They're price-sensitive relative to oral surgeons but value speed. <strong>Ceiling: $400–$500/month. Recommended price: $399.</strong></p>
+<h3>ROI Argument at Different Price Points</h3>
+<p>This is the conversation you need to have in every sales call. The math:</p>
+<p><strong>One new case per month = the product pays for itself.</strong> Here's the specifics:</p>
+<table>
+<thead>
+<tr>
+<th>Price Point</th>
+<th>Break-Even Cases/Month</th>
+<th>Specialty Where This Is Easy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$299/month</td>
+<td>0.2–0.5 cases</td>
+<td>All specialties</td>
+</tr>
+<tr>
+<td>$399/month</td>
+<td>0.3–0.7 cases</td>
+<td>All specialties</td>
+</tr>
+<tr>
+<td>$499/month</td>
+<td>0.4–1.0 cases</td>
+<td>Oral surgery, ortho</td>
+</tr>
+<tr>
+<td>$699/month</td>
+<td>0.5–1.5 cases</td>
+<td>Oral surgery, ortho</td>
+</tr>
+<tr>
+<td>$999/month</td>
+<td>1.0–2.5 cases</td>
+<td>Oral surgery only</td>
+</tr>
+</tbody>
+</table>
+<p>At $399–$499/month, the ROI case is <em>trivially easy</em>. One captured referral that would have otherwise been lost — one patient who called but never showed up, one referral that slipped through because the front desk was busy — pays for the platform. You should be able to tell that story in every demo.</p>
+<h3>Conversion Now vs. Revenue Long-Term</h3>
+<p>This is the real tension: charge more now and convert fewer, or charge less now and build the network faster.</p>
+<p><strong>The right answer for CaseLink right now is to prioritize network density over short-term revenue.</strong> You need GP-to-specialist connections on the platform. Every specialist you sign activates multiple GPs. Every GP activates more specialists. The network effect is the moat. Optimizing for cash too early stunts the network.</p>
+<p><strong>Recommendation:</strong> $399/month for new specialists during 2026. Plan a price increase to $499 when you hit 100 paying specialists, and to $599–$699 when the GP network crosses 500 active GPs. Raise prices with announcements that cite new features and network growth. Never raise prices quietly.</p>
+<hr />
+<h2>2. Pilot Agreement Structure</h2>
+<h3>The Right Pilot Format: 45-Day Milestone Pilot</h3>
+<p><strong>Don't do a 30-day pilot.</strong> It's not enough time for a dental practice. Week 1 is setup. Week 2 is "the staff is still figuring it out." By day 30, they haven't seen a single referral cycle complete end-to-end. You'll get feedback like "it's fine, I guess" and then they'll churn.</p>
+<p><strong>Don't do a 60-day pilot</strong> with no structure. It drags. Decision-makers get distracted. You lose momentum.</p>
+<p><strong>The 45-day milestone pilot is the answer:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Timeline</th>
+<th>What Happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M1: Setup Complete</strong></td>
+<td>Days 1–7</td>
+<td>CaseLink onboards the practice. All staff trained. Profile live. At least 3 referring GPs invited.</td>
+</tr>
+<tr>
+<td><strong>M2: First Referral</strong></td>
+<td>Days 8–21</td>
+<td>Practice receives (or sends) their first referral through CaseLink. CaseLink reviews it with them.</td>
+</tr>
+<tr>
+<td><strong>M3: Referral Loop Closed</strong></td>
+<td>Days 22–38</td>
+<td>At least one referral completes the full loop — referral sent, appointment scheduled, outcome documented.</td>
+</tr>
+<tr>
+<td><strong>M4: Value Review</strong></td>
+<td>Days 39–45</td>
+<td>30-minute call with CaseLink team. Review referral volume, response time, GP engagement. Go/no-go decision.</td>
+</tr>
+</tbody>
+</table>
+<p>If all four milestones are hit, the practice converts to paid. If they haven't hit M3 by day 38, extend the pilot by 14 days — once. This shows commitment on your side and protects the relationship.</p>
+<h3>What's Free vs. Paid During Pilot</h3>
+<p><strong>Free during pilot:</strong><br />
+- Full platform access (no feature gating — let them see everything)<br />
+- White-glove setup and onboarding (this is your competitive advantage early)<br />
+- Unlimited referrals<br />
+- Dedicated onboarding contact (even if that's you, Nick)<br />
+- GP invitations and network setup<br />
+- 1:1 training sessions (up to 2)</p>
+<p><strong>Why give full access?</strong> Because feature-limited pilots create frustration, not conversion. Let them fall in love with the whole product.</p>
+<p><strong>What should cost something?</strong><br />
+- Nothing during pilot. The goal is adoption and proof of value, not revenue from uncertain customers.<br />
+- The exception: if a practice asks for custom integrations or third-party PMS connections, that's a professional services conversation, not pilot scope.</p>
+<h3>What the Practice Commits To</h3>
+<p>This is critical. A pilot without commitments is just a free trial. The practice signs a lightweight commercial agreement that includes:</p>
+<ol>
+<li><strong>A named champion</strong> — one person (office manager, dentist, or operations lead) who is accountable for adoption</li>
+<li><strong>Staff training attendance</strong> — at least 2 staff members attend the onboarding session</li>
+<li><strong>Minimum referral entry</strong> — they agree to enter all referrals (received or sent) through CaseLink during the pilot period, not alongside old systems</li>
+<li><strong>Two feedback sessions</strong> — a 20-minute check-in at day 15 and the full value review at day 45</li>
+<li><strong>GP network seeding</strong> — invite at least 5 referring GPs to the platform during the pilot</li>
+</ol>
+<p>If the practice isn't willing to commit to these, they're not ready for a pilot. Disqualify them and come back in 3 months.</p>
+<h3>What CaseLink Commits To</h3>
+<p>CaseLink commits to the following in writing (not just verbally):</p>
+<ol>
+<li><strong>Dedicated onboarding</strong> — practice has a named contact who responds within 4 business hours</li>
+<li><strong>Setup complete within 5 business days</strong> of agreement signing</li>
+<li><strong>At least 3 GP invitations sent</strong> on the practice's behalf (you do the outreach, they approve)</li>
+<li><strong>Data export</strong> — if they choose not to convert, all their referral data is exported to them in a standard format within 5 business days</li>
+<li><strong>No billing during pilot</strong> — the billing clock doesn't start until M4 sign-off</li>
+<li><strong>Success metrics agreed upfront</strong> — before the pilot starts, you and the practice agree on what "success" looks like (e.g., "10 referrals logged and 1 complete loop")</li>
+</ol>
+<h3>What Triggers Conversion to Paid</h3>
+<p>Two things must both be true:<br />
+1. The practice has completed M3 (at least one full referral loop)<br />
+2. The practice's champion says "yes" at the M4 review call</p>
+<p>If M3 is complete but they're hesitant at M4, offer one of these, in this order:<br />
+- Month-to-month with no annual commitment (removes risk)<br />
+- One additional free month on top of charter pricing (delays revenue but saves the deal)<br />
+- A 30-day money-back guarantee on their first paid month</p>
+<p>Don't offer a price discount at M4. If you do, you train every future customer to hesitate at the end of pilots to get a discount.</p>
+<h3>Pilot Commercial Terms Template</h3>
+<p>Here's language you can use in your pilot agreement (have your lawyer clean it up, but this is the commercial substance):</p>
+<hr />
+<p><strong>CaseLink Pilot Agreement — Commercial Terms</strong></p>
+<p><em>Practice:</em> [Practice Name]<br />
+<em>Pilot Start Date:</em> [Date]<br />
+<em>Pilot End Date:</em> [Date + 45 days]</p>
+<p><strong>Pilot Period:</strong> CaseLink will provide full access to the CaseLink platform at no charge during the pilot period defined above.</p>
+<p><strong>Practice Commitments:</strong><br />
+- Designate [Name] as the practice's primary champion for the pilot<br />
+- Ensure at least [2] staff members complete the onboarding training<br />
+- Route all referral activity through CaseLink during the pilot period<br />
+- Participate in a check-in call at approximately day 15 and a value review call at approximately day 45<br />
+- Invite at least [5] referring GP practices to the CaseLink network</p>
+<p><strong>CaseLink Commitments:</strong><br />
+- Assign [Name] as the practice's dedicated onboarding contact<br />
+- Complete platform setup within 5 business days of agreement execution<br />
+- Provide data export of all referral records in the event the practice does not convert to paid<br />
+- Not begin billing until the practice's explicit authorization following the day-45 value review</p>
+<p><strong>Conversion to Paid:</strong><br />
+Following the value review call, if the practice elects to continue, it will be enrolled at the [Charter Member / Standard] rate of $[X]/month, billed [monthly/annually]. The charter rate will be locked in for [24 months].</p>
+<p><strong>No obligation:</strong> The practice has no obligation to continue beyond the pilot period and may exit at any point during the pilot without penalty or charge.</p>
+<hr />
+<hr />
+<h2>3. First Mover / Charter Pricing Strategy</h2>
+<h3>What Charter Pricing Is (and Why It Works)</h3>
+<p>Charter pricing isn't a discount. It's a <em>founding story</em> that you're giving select customers permission to be part of.</p>
+<p>The psychology works because:<br />
+1. <strong>Scarcity is real.</strong> You only have 25 spots. That's not made up — it's structural.<br />
+2. <strong>The upside is real.</strong> Charter members get a lower price forever. That's a genuine long-term benefit.<br />
+3. <strong>Status is real.</strong> Being a founding customer of a platform that wins is something people tell their peers about.<br />
+4. <strong>It creates alignment.</strong> Charter customers want you to succeed because their long-term price depends on it. They become your best advocates.</p>
+<p>This is fundamentally different from running a "50% off sale." Discounts cheapen your brand. Charter pricing elevates it.</p>
+<h3>The Charter Member Offer</h3>
+<p><strong>Charter Membership: $299/month — locked for 24 months</strong></p>
+<p>Here's what charter members get:</p>
+<table>
+<thead>
+<tr>
+<th>Benefit</th>
+<th>Charter Member</th>
+<th>Standard Customer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Monthly price</td>
+<td>$299</td>
+<td>$399+</td>
+</tr>
+<tr>
+<td>Price lock</td>
+<td>24 months guaranteed</td>
+<td>No lock</td>
+</tr>
+<tr>
+<td>Annual option</td>
+<td>$2,990/year ($249/mo equivalent)</td>
+<td>$3,990/year</td>
+</tr>
+<tr>
+<td>Setup &amp; onboarding</td>
+<td>White-glove, no charge</td>
+<td>White-glove, no charge</td>
+</tr>
+<tr>
+<td>Product advisory role</td>
+<td>Yes — quarterly input sessions</td>
+<td>No</td>
+</tr>
+<tr>
+<td>"Founding Member" badge in platform</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Priority feature requests</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Direct access to CEO</td>
+<td>Yes (via Slack or WhatsApp)</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Public recognition (if they want it)</td>
+<td>Optional case study, testimonial</td>
+<td>Standard case study</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why $299 and not $249 or $199?</strong></p>
+<p>Because $299 is real money. It signals you have a real product. Anything under $250/month for a specialist starts to feel like a side project. $299 says "we're building something serious and giving you a founder's deal." If you price it at $149, you'll attract price-sensitive customers who are the first to leave when you raise prices.</p>
+<p><strong>Why 24 months and not lifetime?</strong></p>
+<p>Lifetime charter pricing sounds generous but creates a long-term problem. In 3 years, your charter members are paying 40% of what new customers pay. That's a revenue drag and creates resentment among your team. 24 months gives charter members a real benefit (they get ~$2,400 in savings vs. a standard customer over the period) while keeping your business healthy after year 2.</p>
+<p>After 24 months, charter members get offered a "loyal customer" rate — split the difference between their charter price and current standard price. So if standard is $499 at that point, charter members get offered $399 for another 12 months. This rewards loyalty without subsidizing forever.</p>
+<h3>How to Create Urgency Without Being Manipulative</h3>
+<p>Do <strong>not</strong> do:<br />
+- Fake countdown timers<br />
+- "This offer expires Friday" when it doesn't<br />
+- "Only 3 spots left" when you have 15 left</p>
+<p>Do <strong>do:</strong><br />
+- Tell the truth: "We're offering charter pricing to the first 25 specialist practices on the platform. We've already signed [X]. Once we hit 25, this price goes away permanently."<br />
+- Create a waitlist when you're below 25 but the prospect isn't ready: "Let me hold a charter spot for you for 10 days. After that I have to release it."<br />
+- Reference social proof: "Our most recent charter member signed last week — they're a 3-doctor oral surgery group in Bethesda."</p>
+<p>The best urgency is real urgency. When you're at 20 charter members, tell prospects you have 5 spots left. That's true. That's urgent. No manipulation required.</p>
+<h3>When to Sunset the Charter Offer</h3>
+<p><strong>Close charter pricing at 25 specialists, not at a date.</strong></p>
+<p>Don't say "charter pricing ends March 31." Say "charter pricing is available for the first 25 practices on the platform." The moment you have 25 signed, it's done. This keeps the scarcity real and prevents late-quarter scrambles where everyone waits until the last day.</p>
+<p>After charter closes:<br />
+- Standard price: $399/month (or whatever you've decided)<br />
+- Annual option: $3,990/year (2 months free)<br />
+- No more advisory access, no more price locks</p>
+<p>You may want to have one more "early adopter" tier after charter closes (spots 26–50, at $349/month for 12 months). This gives you a pricing story for your next growth phase. But be careful — too many tiers get confusing. Keep it simple.</p>
+<hr />
+<h2>4. Pricing by Client Type</h2>
+<h3>Solo Specialist (1 Provider)</h3>
+<p><strong>The situation:</strong> Highest price sensitivity. The dentist is often the decision-maker AND the one using the platform. They don't have a big operations team. Budget approval is fast but so is cancellation.</p>
+<p><strong>The value delivered:</strong> Moderate. A solo specialist has a smaller referral network, lower volume, and less complexity to manage. The ROI argument is still solid but requires concrete examples.</p>
+<p><strong>Recommended pricing:</strong><br />
+- Charter rate: $299/month<br />
+- Standard rate: $399/month<br />
+- Annual: $3,990/year ($332.50/month equivalent)<br />
+- No per-seat pricing — solo practices don't think in seats</p>
+<p><strong>Sales approach:</strong> Lead with the time savings and missed referral recovery angle. "How many referral calls does your front desk miss in a week?" Get them to estimate what one recovered case per month is worth to them.</p>
+<p><strong>Terms:</strong> Month-to-month is fine at first. Push for annual after the first 60 days when they've seen value.</p>
+<hr />
+<h3>Group Specialist Practice (2–5 Providers)</h3>
+<p><strong>The situation:</strong> Multiple providers, likely a full-time office manager, possibly multiple locations. Decision-making takes a week or two, not a day. They have a real operations problem — coordinating referrals across 3 doctors who all have different referring GPs.</p>
+<p><strong>The value delivered:</strong> High. Multiple providers means more referral sources, more complexity, more to gain from a clean system. The analytics value increases too — they want to know which GP is sending most cases to which doctor.</p>
+<p><strong>Per-seat or flat rate?</strong></p>
+<p><strong>Flat rate wins here.</strong> Per-seat pricing for a 2-5 provider group creates friction every time they add a provider. It also feels punitive — "now that we're growing, we pay more?" Flat rate rewards them for growing with you.</p>
+<p><strong>Recommended pricing:</strong><br />
+- Charter rate: $399/month (flat, all providers)<br />
+- Standard rate: $549/month (flat, all providers)<br />
+- Annual: $5,490/year ($457.50/month equivalent)</p>
+<p><strong>Why more than solo?</strong> Because the value is genuinely higher. More providers = more referral relationships = more complexity solved. The price reflects the value, not the headcount.</p>
+<p><strong>Terms:</strong> Push hard for annual on group practices. They have the budget and the stability. Offer 2 months free on annual to seal it.</p>
+<hr />
+<h3>Multi-Specialty Group (GP + Specialist Under One Roof)</h3>
+<p><strong>The situation:</strong> This is a different animal entirely. They are both the sender and receiver of referrals. Internal referrals between GP and specialist happen all the time. External referrals come in from outside GPs, and external referrals go out when they don't have a specialist on staff for a given case.</p>
+<p><strong>The value delivered:</strong> Very high — but the use case is different. For a multi-specialty group, CaseLink becomes an internal coordination and workflow tool, not just an external referral platform. It also gives them visibility into which internal referrals are converting and which are leaking to outside specialists.</p>
+<p><strong>How to price it:</strong></p>
+<p>Option A: <strong>Specialist module + GP module combo</strong>, flat rate for the whole group<br />
+Option B: <strong>Per-location pricing</strong> if they have multiple offices</p>
+<p><strong>Recommended pricing:</strong><br />
+- Solo multi-specialty (1 location, 2–6 providers): $499–$699/month depending on size<br />
+- Multi-location: Move to enterprise pricing (see DSO section below)</p>
+<p><strong>The pitch:</strong> "You're already paying to coordinate referrals internally — in staff time, missed appointments, and lost cases. CaseLink gives you a single referral log that everyone in the practice can see, across GP and specialist departments. You'll know exactly how many internal cases converted and how many walked out the door to a competitor specialist."</p>
+<hr />
+<h3>OSO/DSO (Multi-Location Specialist Group)</h3>
+<p><strong>The situation:</strong> 5–20 locations, centralized procurement, often a dedicated operations or IT contact. They move slowly (3–6 month sales cycle) but they sign bigger contracts. Once they're in, they rarely leave — switching costs are too high.</p>
+<p><strong>The value delivered:</strong> Highest of any segment. Centralized reporting across locations, standardized referral workflow, benchmarking across offices, and the ability to see which GPs are referring to which locations.</p>
+<p><strong>Pricing structure:</strong></p>
+<p>Do NOT use per-location pricing below 5 locations. Above 5, use:</p>
+<table>
+<thead>
+<tr>
+<th>DSO Size</th>
+<th>Price Range</th>
+<th>Structure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5–9 locations</td>
+<td>$1,500–$2,000/month</td>
+<td>Flat for all locations</td>
+</tr>
+<tr>
+<td>10–15 locations</td>
+<td>$2,000–$2,500/month</td>
+<td>Flat for all locations</td>
+</tr>
+<tr>
+<td>16–20 locations</td>
+<td>$2,500–$3,500/month</td>
+<td>Negotiated, annual only</td>
+</tr>
+<tr>
+<td>20+ locations</td>
+<td>Custom</td>
+<td>Multi-year contract, professional services</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Minimum commitment:</strong> Annual only. No month-to-month for DSOs. They need to be committed partners, and a 12-month term gives you both the stability to invest in their onboarding.</p>
+<p><strong>Implementation fee:</strong> Consider a $2,000–$5,000 one-time implementation fee for DSOs with 10+ locations. This covers custom setup, training, and integration work. It also creates a positive anchoring effect — if they pay $3,000 upfront, they're invested in making it work.</p>
+<p><strong>Contract terms:</strong><br />
+- 12-month minimum, auto-renews<br />
+- 60-day out clause (mutual, after month 12)<br />
+- Price locked for term, CPI adjustment at renewal<br />
+- Dedicated account manager (even if that's a part-time function for now)</p>
+<p><strong>Enterprise pilot:</strong> Instead of a standard pilot, offer a <strong>30-day paid proof of concept at 50% of the annual rate.</strong> DSOs are used to POC costs. It signals you're serious. If they convert, credit the POC fee toward their first month.</p>
+<hr />
+<h3>Dental Schools and Academic Centers</h3>
+<p><strong>The situation:</strong> Dental schools train tomorrow's dentists and run active clinical practices with faculty specialists and residents. They are both a teaching environment and a real referral ecosystem. Their budget structure is institutional (grants, department budgets, tuition-funded), which means slow procurement but multi-year contracts.</p>
+<p><strong>The dual value:</strong><br />
+1. <strong>Teaching tool</strong> — dental students learn referral coordination on CaseLink, graduate, and are already familiar with it when they enter private practice<br />
+2. <strong>Operational tool</strong> — the faculty clinic has a real referral coordination problem just like any other specialist practice</p>
+<p><strong>Pricing approach:</strong></p>
+<p>Don't give dental schools the same pricing as a commercial practice. Their ability to pay is lower (institutional budgets), but their strategic value is very high (pipeline of future customers).</p>
+<p><strong>Recommended pricing:</strong><br />
+- <strong>Academic Partner pricing: $199–$299/month</strong> for the clinical practice (faculty specialists)<br />
+- Teaching/resident access: included at no additional charge<br />
+- Requirement: students use their real names and school emails; data stays within FERPA compliance<br />
+- Partnership terms: school provides a named faculty contact who participates in quarterly product reviews</p>
+<p><strong>The long game:</strong> Every dental student who learns CaseLink in school and then graduates into private practice is a pre-sold customer. Dental schools are marketing channels disguised as customers. Price them like partners, not revenue.</p>
+<p><strong>Additional upside:</strong> Dental school partnerships provide academic credibility ("Used at [School] School of Dentistry") that is worth significantly more than the $200/month delta you'd get charging them full price.</p>
+<hr />
+<h2>5. GP Monetization — When and How</h2>
+<h3>The Network Effect Problem</h3>
+<p>Right now, GPs are free because their presence creates value for specialists. Every GP on the platform is a referral source for your paying specialists. The more GPs you have, the more valuable the platform is to specialists. If you start charging GPs too early, you slow GP adoption, which slows specialist adoption, which slows everything.</p>
+<p><strong>This is the two-sided market trap.</strong> The side that creates value for the other side should be subsidized until you have critical mass.</p>
+<h3>When to Start Charging GPs</h3>
+<p><strong>The trigger: 75+ paying specialists AND 300+ active GPs in the network.</strong></p>
+<p>Here's why those numbers:<br />
+- At 75 paying specialists, there's enough specialist density that a GP in the DMV area can find a specialist for almost any referral type on the platform<br />
+- At 300+ active GPs, the network is big enough that losing 20–30% of GPs to a pricing change doesn't collapse the specialist's referral pipeline<br />
+- GPs who are actively using the platform (sending 3+ referrals/month) will convert. Casual users will churn. That's okay at this point.</p>
+<p><strong>Do NOT start charging GPs in 2026.</strong> Focus on hitting 100 specialists first.</p>
+<h3>Free vs. Paid Tier for GPs</h3>
+<p>When you're ready, use a freemium model — not an all-or-nothing gate:</p>
+<p><strong>GP Free Tier (forever):</strong><br />
+- Send unlimited referrals<br />
+- Track referral status (sent, accepted, scheduled, completed)<br />
+- View specialist directory<br />
+- Basic notifications when referral status changes<br />
+- Up to 2 users (dentist + one staff)</p>
+<p><strong>GP Pro Tier ($49/month, recommended):</strong><br />
+- Referral analytics dashboard (where are my referrals going? What's the conversion rate?)<br />
+- Multi-provider access (3+ providers at the practice)<br />
+- Priority routing (referral gets a visual priority flag to specialists)<br />
+- Patient communication templates<br />
+- Integration with their PMS for automatic referral logging<br />
+- Referral history export</p>
+<p><strong>Why $49?</strong> GPs are significantly more price-sensitive than specialists. Their average annual revenue ($400K–$900K) is lower and they have high overhead. $49/month feels like a "productivity tool" budget item, not a "practice management platform" budget item. You can push to $79 as the network matures, but start at $49.</p>
+<h3>How to Introduce GP Pricing Without Killing the Network</h3>
+<p><strong>Do it in phases, with lots of warning:</strong></p>
+<p><strong>Phase 1 (3 months before launch):</strong> Announce to all active GPs that Pro features are coming. Give them a preview of what they'll get. Let them opt into a "founding GP" beta to test it for free.</p>
+<p><strong>Phase 2 (1 month before launch):</strong> Email all GPs. "We're launching GP Pro next month. The first 100 GPs to subscribe get 3 months free and are locked in at the founding rate ($39/month forever)." This creates urgency for the engaged GPs.</p>
+<p><strong>Phase 3 (launch):</strong> Turn on billing. Free tier remains free forever. Pro goes to $49. Communicate clearly that free referrals will always be free — you're not taking anything away, you're adding something.</p>
+<p><strong>Key rule:</strong> Never put a referral behind a paywall. Sending and receiving referrals must always be free. If GPs ever feel like they need to pay to send referrals, they'll just call the specialist's office directly. Game over.</p>
+<h3>How Two-Sided Health Networks Have Done This</h3>
+<p><strong>Doximity</strong> (physician social network) started with completely free access for doctors, built a 500K+ doctor network, then began monetizing through pharmaceutical/healthcare advertising and recruiter access — not by charging physicians. The network was too valuable to price-gate.</p>
+<p><strong>Zocdoc</strong> originally charged providers (dentists, doctors) to be listed and bookable. They eventually had to flip to a per-booking model because the listing fee was killing adoption. They learned that access to the network should have a low (or zero) barrier.</p>
+<p><strong>The lesson for CaseLink:</strong> The referral act itself (GP sends, specialist receives) should remain free forever. Charge for <em>intelligence</em> on top of the referral — analytics, benchmarking, automation, reporting. Those are legitimate SaaS value-adds that don't feel like a tax on the core workflow.</p>
+<hr />
+<h2>6. Usage-Based / Transaction Pricing — Should They Do It?</h2>
+<h3>The Options</h3>
+<p><strong>Per referral fee above a threshold:</strong> Charge nothing for the first 10 referrals/month, then $5 or $10 per additional referral.</p>
+<p><strong>Per completed loop fee:</strong> Charge when a referral results in a scheduled appointment.</p>
+<p><strong>Per appointment booked:</strong> Charge a booking fee when CaseLink-coordinated referral results in a confirmed appointment.</p>
+<p><strong>Premium feature add-ons:</strong> Charge for specific features (insurance pre-auth, AI routing, benchmarking) above the base subscription.</p>
+<h3>The Stark Law / Anti-Kickback Problem</h3>
+<p>This is critical to understand. <strong>Charging a fee per referral completed, per appointment booked, or per case that goes through the platform is legally risky in the dental/healthcare context.</strong></p>
+<p>The federal Anti-Kickback Statute (AKS) and its dental equivalent in state regulations prohibit arrangements where a fee is paid that could be construed as compensation for referring patients. While the AKS technically applies to Medicare/Medicaid and dental is largely private-pay, many states have analogous laws that apply more broadly.</p>
+<p>A transaction fee structured as "you pay us when a referral results in an appointment" could be read as CaseLink profiting from the referral itself. That's a regulatory gray zone you don't want to be in, especially as a HIPAA-compliant platform that is going to be scrutinized.</p>
+<p><strong>Even if it's ultimately legal, the perception risk is real.</strong> If a dental board or compliance officer at a DSO reads your pricing page and sees "per-completed-referral fee," they may have concerns that slow or kill the sale. The legal review alone adds weeks to a DSO deal.</p>
+<p><strong>The recommendation: No transaction-based fees. Period.</strong></p>
+<h3>Premium Feature Add-Ons — Yes, With Caveats</h3>
+<p>Premium features that add genuine value above the core subscription are fine. These are products, not transaction fees:</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Price</th>
+<th>When to Launch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Referral analytics dashboard (advanced)</td>
+<td>Included in standard</td>
+<td>Now</td>
+</tr>
+<tr>
+<td>Multi-location reporting (DSO)</td>
+<td>Included in enterprise tier</td>
+<td>Now</td>
+</tr>
+<tr>
+<td>Insurance pre-authorization assistant</td>
+<td>$50–$100/month add-on</td>
+<td>Year 2</td>
+</tr>
+<tr>
+<td>AI referral routing (auto-suggest specialist)</td>
+<td>$50/month add-on</td>
+<td>Year 2</td>
+</tr>
+<tr>
+<td>Benchmarking (compare against network averages)</td>
+<td>Included in Pro / GP Pro</td>
+<td>Year 2</td>
+</tr>
+<tr>
+<td>API access / custom integrations</td>
+<td>$200–$500/month</td>
+<td>Year 2</td>
+</tr>
+</tbody>
+</table>
+<p>Keep add-ons simple in year 1. A complex pricing page confuses buyers and slows sales cycles.</p>
+<h3>Bottom Line on Usage-Based</h3>
+<p><strong>No.</strong> At this stage, usage-based pricing creates legal risk, complicates the sales conversation, and penalizes your best customers (high-volume specialists are your most valuable customers — don't charge them more per referral). Stick with flat subscription pricing. Revisit in 2027 when you have legal counsel, product depth, and enough data to price add-ons intelligently.</p>
+<hr />
+<h2>7. Annual vs. Monthly Pricing</h2>
+<h3>The Math</h3>
+<p><strong>"2 months free" vs. "20% off" — which one wins?</strong></p>
+<p>They're mathematically equivalent (2/12 = 16.7%, which is close to 20%), but psychologically very different.</p>
+<p>"2 months free" wins almost every time in practice because:<br />
+- It's additive ("you get something free") vs. subtractive ("you pay less")<br />
+- People understand "free months" intuitively — no math required<br />
+- It anchors to the higher monthly rate (the customer sees the $399/month price and knows they're saving $798 by going annual)</p>
+<p><strong>Don't use "20% off." Use "2 months free."</strong></p>
+<h3>The Numbers</h3>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Monthly</th>
+<th>Annual (billed upfront)</th>
+<th>Savings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Charter</td>
+<td>$299/mo</td>
+<td>$2,990/yr ($249/mo equivalent)</td>
+<td>~$600/yr</td>
+</tr>
+<tr>
+<td>Solo Standard</td>
+<td>$399/mo</td>
+<td>$3,990/yr ($332/mo equivalent)</td>
+<td>~$800/yr</td>
+</tr>
+<tr>
+<td>Group Standard</td>
+<td>$549/mo</td>
+<td>$5,490/yr ($457/mo equivalent)</td>
+<td>~$1,100/yr</td>
+</tr>
+<tr>
+<td>DSO (5–9 locations)</td>
+<td>N/A</td>
+<td>$18,000/yr</td>
+<td>Negotiated</td>
+</tr>
+</tbody>
+</table>
+<h3>Cash Flow Impact</h3>
+<p>This matters more than people realize. If you sign 50 specialists on monthly plans, you're collecting $399 × 50 = $19,950/month. But that's $239,400/year that takes 12 months to collect.</p>
+<p>If those same 50 specialists signed annual plans, you collect $3,990 × 50 = $199,500 upfront in month 1. That's nearly $200K you can deploy immediately — on hiring, product development, marketing, or just survival.</p>
+<p>At your stage, <strong>annual plans are rocket fuel.</strong> Prioritize them.</p>
+<h3>How to Structure the Annual Offer in the Sales Conversation</h3>
+<p>Never offer annual as an afterthought. Build it into the close:</p>
+<ol>
+<li>Present the monthly price first: "Our specialist rate is $399/month."</li>
+<li>Pause. Let them respond.</li>
+<li>Then: "Most of our practices actually go annual — it's $3,990 for the year, which works out to just under $333 a month. You get two months free and it simplifies your billing. Do you want to go that route?"</li>
+</ol>
+<p>The "most of our practices go annual" line is powerful because it creates social proof and normalizes the annual decision. Use it even when it's aspirationally true.</p>
+<p><strong>If they resist annual:</strong> "Totally fine. We can start monthly and I'll check in with you at 90 days. Most people switch to annual once they've seen the value." Then set a 90-day reminder and follow up. You'll convert a meaningful percentage.</p>
+<h3>Target Annual Plan Mix</h3>
+<table>
+<thead>
+<tr>
+<th>Month</th>
+<th>Target % on Annual Plans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Month 3</td>
+<td>20%</td>
+</tr>
+<tr>
+<td>Month 6</td>
+<td>35%</td>
+</tr>
+<tr>
+<td>Month 9</td>
+<td>50%</td>
+</tr>
+<tr>
+<td>Month 12</td>
+<td>60%</td>
+</tr>
+</tbody>
+</table>
+<p>If you're below these targets, it means your sales process isn't presenting annual aggressively enough, OR your customers don't have enough confidence in the product yet to commit. Both are solvable — the first with sales coaching, the second with better onboarding and early success milestones.</p>
+<hr />
+<h2>8. Competitive Pricing Scenarios</h2>
+<h3>Assumptions</h3>
+<p>Before the scenarios, let's set shared assumptions:</p>
+<ul>
+<li><strong>Conversion rate</strong> = % of demos/pilots that become paying customers</li>
+<li><strong>Churn rate</strong> = monthly, after the pilot period</li>
+<li><strong>Average selling price (ASP)</strong> = blended across customer types</li>
+<li><strong>Active GP effect</strong> = each specialist brings 3–5 GPs (not paying, but growing the network)</li>
+</ul>
+<h3>Scenario A: Hold at $499/Month (Standard Price)</h3>
+<p><strong>What this means:</strong> Fix the $399/$499 inconsistency by landing at $499. This is the higher end of what the market can currently bear.</p>
+<p><strong>Assumptions:</strong><br />
+- Conversion rate: 35% (higher price = longer sales cycle, more hesitation)<br />
+- Monthly churn: 3.5%<br />
+- Annual churn: ~35% (specialists who don't get clear ROI)<br />
+- ASP (blended with charters at $299): ~$420</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>100 Specialists</th>
+<th>250 Specialists</th>
+<th>500 Specialists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Monthly Revenue</td>
+<td>$42,000</td>
+<td>$105,000</td>
+<td>$210,000</td>
+</tr>
+<tr>
+<td>Annual Revenue</td>
+<td>$504,000</td>
+<td>$1,260,000</td>
+<td>$2,520,000</td>
+</tr>
+<tr>
+<td>Annual Churn Cost</td>
+<td>~$176,000</td>
+<td>~$441,000</td>
+<td>~$882,000</td>
+</tr>
+<tr>
+<td>Net ARR</td>
+<td>~$328,000</td>
+<td>~$819,000</td>
+<td>~$1,638,000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The problem with $499:</strong> At this price, your conversion rate suffers in the early phase when you have limited case studies and a small network. You'll win the oral surgeons but lose some endodontists and periodontists who feel it's expensive for an unproven platform. The churn risk is also higher — customers who paid a premium expect premium results, and early platforms don't always deliver.</p>
+<hr />
+<h3>Scenario B: Raise to $699/Month</h3>
+<p><strong>What this means:</strong> A more aggressive pricing move, targeting high-value specialists. Fewer customers, higher ACV.</p>
+<p><strong>Assumptions:</strong><br />
+- Conversion rate: 22% (significant drop — early-stage product at $699 is a hard sell)<br />
+- Monthly churn: 4.5% (customers who paid $699 have less patience for early bugs)<br />
+- Annual churn: ~42%<br />
+- ASP (blended with charters at $299): ~$520</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>100 Specialists</th>
+<th>250 Specialists</th>
+<th>500 Specialists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Monthly Revenue</td>
+<td>$52,000</td>
+<td>$130,000</td>
+<td>$260,000</td>
+</tr>
+<tr>
+<td>Annual Revenue</td>
+<td>$624,000</td>
+<td>$1,560,000</td>
+<td>$3,120,000</td>
+</tr>
+<tr>
+<td>Annual Churn Cost</td>
+<td>~$262,000</td>
+<td>~$655,000</td>
+<td>~$1,310,000</td>
+</tr>
+<tr>
+<td>Net ARR</td>
+<td>~$362,000</td>
+<td>~$905,000</td>
+<td>~$1,810,000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The problem with $699:</strong> You can get to higher revenue per customer, but you'll grow more slowly. Getting to 100 specialists at $699 takes significantly longer than at $399–$499. In a network effects business, slow growth compounds negatively. Fewer specialists means fewer GPs means less value for everyone. You also risk being out-competed by a well-funded competitor who prices lower and captures the network before you can. <strong>Do not raise to $699 yet.</strong> This is a price for year 3–4 when your network effects are defensible.</p>
+<hr />
+<h3>Scenario C: Drop to $299/Month + Usage Fees</h3>
+<p><strong>What this means:</strong> Lower barrier to entry, recover revenue through transaction or feature fees. (Note: We recommended against transaction fees in Section 6, but this scenario models it anyway.)</p>
+<p><strong>Assumptions:</strong><br />
+- Conversion rate: 55% (much easier sell, low-risk entry)<br />
+- Monthly churn: 2.5% (lower price = lower expectations = happier customers)<br />
+- Annual churn: ~27%<br />
+- ASP (base $299 + $50 avg add-ons): ~$340</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>100 Specialists</th>
+<th>250 Specialists</th>
+<th>500 Specialists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Monthly Revenue</td>
+<td>$34,000</td>
+<td>$85,000</td>
+<td>$170,000</td>
+</tr>
+<tr>
+<td>Annual Revenue</td>
+<td>$408,000</td>
+<td>$1,020,000</td>
+<td>$2,040,000</td>
+</tr>
+<tr>
+<td>Annual Churn Cost</td>
+<td>~$110,000</td>
+<td>~$275,000</td>
+<td>~$551,000</td>
+</tr>
+<tr>
+<td>Net ARR</td>
+<td>~$298,000</td>
+<td>~$745,000</td>
+<td>~$1,489,000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The problem with $299:</strong> Lower revenue per customer, but faster growth. The network effects are stronger (more specialists on the platform), but you're leaving revenue on the table. Also, the usage fee component adds complexity and creates the legal risk discussed in Section 6.</p>
+<hr />
+<h3>Scenario Comparison</h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Price</th>
+<th>ARR at 100 Specialists</th>
+<th>ARR at 500 Specialists</th>
+<th>Conversion Rate</th>
+<th>Growth Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A: $499</td>
+<td>$499</td>
+<td>~$328K</td>
+<td>~$1.64M</td>
+<td>35%</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>B: $699</td>
+<td>$699</td>
+<td>~$362K</td>
+<td>~$1.81M</td>
+<td>22%</td>
+<td>High</td>
+</tr>
+<tr>
+<td>C: $299 + fees</td>
+<td>$299+</td>
+<td>~$298K</td>
+<td>~$1.49M</td>
+<td>55%</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The recommendation:</strong> None of these scenarios is ideal in isolation. The optimal strategy is <strong>a tiered approach that starts at $399 (better than A, more accessible than B, and more sustainable than C)</strong>, with charter pricing at $299 for the first 25, and a planned increase to $499 at customer 50 and $599 at customer 100. This stair-step approach captures network effects early while systematically raising prices as you earn it.</p>
+<hr />
+<h2>9. Price Presentation — How to Have the Pricing Conversation</h2>
+<h3>The Core Principle: Price Is a Late Topic</h3>
+<p>The biggest mistake in early SaaS sales is answering "how much does it cost?" before you've established value. Price without value context is just a number to argue with. Price after value context is a decision to make.</p>
+<p>Here's how to structure the conversation:</p>
+<h3>The 3-Question Sequence Before You Mention Price</h3>
+<p><strong>Question 1: "What does your current referral process look like?"</strong></p>
+<p>This opens the discovery. Let them describe their current state — phone calls, faxes, handwritten referral pads, back-and-forth with the front desk. The worse it sounds (and it usually sounds pretty bad), the stronger the setup for CaseLink.</p>
+<p><strong>Question 2: "When a referral falls through — patient doesn't schedule, appointment gets lost — how do you find out about it?"</strong></p>
+<p>This is the money question. Most specialists don't have a clean answer. Either the GP calls and asks what happened (awkward for the relationship), or the referral just... disappears. When they admit they don't have a clean way to catch failed referrals, you've identified the pain.</p>
+<p><strong>Question 3: "If you knew you were losing 2–3 referrals per month to coordination issues, what would that be worth to you to recover?"</strong></p>
+<p>Let them do the math out loud. A periodontist with a $2,000 average case who loses 3 referrals/month is leaving $6,000 on the table. Every month. $72,000/year. Once they've said those numbers out loud, $399/month is an obvious investment.</p>
+<h3>After the 3 Questions: How to Present the Price</h3>
+<p>"Based on what you've described, CaseLink would give you a single place where every referral from every GP practice you work with is tracked, from the moment it's sent to the moment the appointment is confirmed and the case is documented. Your front desk stops managing referrals by phone, and you stop finding out about lost patients when it's too late.</p>
+<p>For a specialist practice your size, we're at $399 per month. Most of our specialists go annual — that's $3,990, which works out to about $333 a month. You'd be covered for a full year, and you get two months free."</p>
+<p>Then stop talking. Don't over-explain. Don't apologize for the price. Let them respond.</p>
+<h3>Handling "That's Too Expensive"</h3>
+<p>Do NOT immediately offer a discount. Instead:</p>
+<p><strong>Reframe to ROI:</strong> "I hear you. Let's make sure the math works. You mentioned losing roughly [X] referrals per month to coordination issues. At your average case value, that's [Y dollars]. CaseLink at $399 pays for itself if it helps you recover one of those. What would make you confident that was realistic?"</p>
+<p>This puts the question back on their confidence in the outcome, not on the price. If they say they're not sure it would recover even one referral, that's a product confidence problem — extend the pilot, offer references, show case studies.</p>
+<p><strong>If they're still stuck on price:</strong> "I understand it's a real budget consideration. Here's what I can do — let's start you on a 45-day pilot so you can see the value before you commit to anything. There's no billing during the pilot. After the pilot, if you want to continue, we can look at the best plan for your practice at that point."</p>
+<p>This isn't a discount — it's a risk removal. You preserve the price integrity while reducing the buyer's anxiety.</p>
+<h3>When to Discount (and When Not To)</h3>
+<p><strong>Discount when:</strong><br />
+- The practice commits to annual upfront (the "annual plan" discount — 2 months free)<br />
+- It's a multi-location deal and they're committing more seats<br />
+- They're a dental school / academic partner (strategic, not financial)<br />
+- They're a reference customer willing to do a case study, speak at events, or provide a LinkedIn testimonial</p>
+<p><strong>Do NOT discount when:</strong><br />
+- Someone just says "it's too expensive" without a real constraint<br />
+- A competitor told them they could do it cheaper (unpack the comparison first)<br />
+- The sales cycle is dragging and you're trying to accelerate (discounting doesn't solve a decision-making problem)<br />
+- A charter customer asks for an additional discount on top of charter pricing (you already gave them $100/month off forever)</p>
+<p><strong>The rule:</strong> Discounts should be tied to something the buyer gives you, not just to their reluctance to commit. Annual commitment, reference access, pilot success — all legitimate reasons to flex. "I need to think about it" is not.</p>
+<h3>The Milestone Billing Pitch</h3>
+<p>For practices that are genuinely hesitant about risk:</p>
+<p>"We're so confident you'll see value that we don't start billing until you've hit three milestones: your setup is complete, your first referral comes in through the platform, and that referral closes into a scheduled appointment. Most practices hit all three within 45 days. You won't see an invoice until we've proven the product works for your practice."</p>
+<p>This framing is powerful because it makes the billing trigger a success event, not a calendar date. The practice is psychologically ready to pay because they've already won.</p>
+<h3>The Word-for-Word Pricing Script</h3>
+<p>(Adapt to your natural voice, but this is the structure)</p>
+<hr />
+<p><strong>You:</strong> "Before I talk about pricing, I want to make sure I understand what problem you're actually trying to solve. Can you walk me through what happens today when a GP calls in a referral?"</p>
+<p><strong>[Let them describe their process.]</strong></p>
+<p><strong>You:</strong> "And when a referral doesn't result in a scheduled appointment — what's your signal that something fell through?"</p>
+<p><strong>[They'll say something like "usually the GP calls us" or "honestly, we don't always know."]</strong></p>
+<p><strong>You:</strong> "That's really common. Most specialist practices find out about lost referrals the worst possible way — after the patient has already gone somewhere else. What do you think that's costing you in a typical month?"</p>
+<p><strong>[Get them to say a number.]</strong></p>
+<p><strong>You:</strong> "Right. So at [their case value], even recovering one lost referral per month more than covers what you'd invest in CaseLink. Here's where we stand: for a practice your size, it's $399 per month. The most popular option is the annual plan — $3,990 for the year, which is two months free. We also run a 45-day pilot period where you're not billed anything until you've seen the platform actually work for your practice. Want me to walk you through what the pilot looks like?"</p>
+<hr />
+<p>That last question redirects from price negotiation to process. Most prospects say yes. Now you're in onboarding mode, not sales mode.</p>
+<hr />
+<h2>10. Recommended Pricing Architecture</h2>
+<p>This is the actual recommendation. Make these decisions and move on.</p>
+<h3>The Decision Table</h3>
+<table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fix the $399/$499 website inconsistency</td>
+<td><strong>Yes, immediately. Set standard price to $399.</strong></td>
+</tr>
+<tr>
+<td>Active specialist price (new customers)</td>
+<td><strong>$399/month</strong></td>
+</tr>
+<tr>
+<td>Charter price (first 25 specialists)</td>
+<td><strong>$299/month</strong></td>
+</tr>
+<tr>
+<td>Charter lock-in period</td>
+<td><strong>24 months</strong></td>
+</tr>
+<tr>
+<td>When to raise to $499</td>
+<td><strong>At 50 paying specialists</strong></td>
+</tr>
+<tr>
+<td>When to raise to $599</td>
+<td><strong>At 100 paying specialists + 300 active GPs</strong></td>
+</tr>
+<tr>
+<td>Annual discount structure</td>
+<td><strong>"2 months free" = $3,990/year for $399 plan</strong></td>
+</tr>
+<tr>
+<td>Annual plan target by month 12</td>
+<td><strong>60% of paying specialists</strong></td>
+</tr>
+<tr>
+<td>Pilot length</td>
+<td><strong>45 days, milestone-based</strong></td>
+</tr>
+<tr>
+<td>GP monetization trigger</td>
+<td><strong>75+ specialists AND 300+ active GPs</strong></td>
+</tr>
+<tr>
+<td>GP free tier</td>
+<td><strong>Unlimited referrals, tracking, up to 2 users</strong></td>
+</tr>
+<tr>
+<td>GP Pro price</td>
+<td><strong>$49/month</strong></td>
+</tr>
+<tr>
+<td>Solo specialist (1 provider) standard</td>
+<td><strong>$399/month</strong></td>
+</tr>
+<tr>
+<td>Group specialist (2–5 providers) standard</td>
+<td><strong>$549/month</strong></td>
+</tr>
+<tr>
+<td>Multi-specialty group</td>
+<td><strong>$499–$699/month</strong></td>
+</tr>
+<tr>
+<td>DSO (5–9 locations)</td>
+<td><strong>$1,500–$2,000/month, annual only</strong></td>
+</tr>
+<tr>
+<td>DSO (10–15 locations)</td>
+<td><strong>$2,000–$2,500/month, annual only</strong></td>
+</tr>
+<tr>
+<td>Dental school / academic</td>
+<td><strong>$199–$299/month, partnership terms</strong></td>
+</tr>
+<tr>
+<td>Transaction-based pricing</td>
+<td><strong>No</strong></td>
+</tr>
+<tr>
+<td>Premium add-ons (Year 1)</td>
+<td><strong>No — keep it simple</strong></td>
+</tr>
+<tr>
+<td>Premium add-ons (Year 2+)</td>
+<td><strong>Yes — $50–$100/month for AI routing, pre-auth, API</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>Revenue Projections by Tier</h3>
+<p>Assuming you hit the 2026 goal of 100 paying specialists with the following mix:</p>
+<p><strong>Assumed Customer Mix at 100 Specialists:</strong><br />
+- 15 charter members (at $299/month)<br />
+- 60 solo specialists (at $399/month)<br />
+- 20 group practices (at $549/month)<br />
+- 5 DSOs / multi-location (at $1,750/month avg)</p>
+<table>
+<thead>
+<tr>
+<th>Segment</th>
+<th>Count</th>
+<th>Monthly Price</th>
+<th>Monthly Revenue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Charter members</td>
+<td>15</td>
+<td>$299</td>
+<td>$4,485</td>
+</tr>
+<tr>
+<td>Solo specialists</td>
+<td>60</td>
+<td>$399</td>
+<td>$23,940</td>
+</tr>
+<tr>
+<td>Group practices</td>
+<td>20</td>
+<td>$549</td>
+<td>$10,980</td>
+</tr>
+<tr>
+<td>DSO/enterprise</td>
+<td>5</td>
+<td>$1,750</td>
+<td>$8,750</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>100</strong></td>
+<td>—</td>
+<td><strong>$48,155/month</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Annual run rate at 100 specialists: ~$578,000</strong></p>
+<p>With 60% on annual plans:<br />
+- $346,800 collected upfront (annual)<br />
+- $231,300 collected monthly<br />
+- <strong>Total Year 1 collections: ~$578K–$620K</strong> (including partial-year annuals)</p>
+<p>At 250 specialists (2027 target), with the same mix and higher average prices (price increase to $499 standard):<br />
+- Estimated ARR: $1.4M–$1.6M</p>
+<p>At 500 specialists (2028 target) with GP Pro revenue added:<br />
+- Estimated ARR: $3.2M–$4.0M</p>
+<hr />
+<h3>The Stair-Step Pricing Roadmap</h3>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Timing</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–25 specialists</td>
+<td>Now (2026 Q1)</td>
+<td>Charter pricing at $299, pilot structure in place</td>
+</tr>
+<tr>
+<td>25 specialists reached</td>
+<td>2026 Q1–Q2</td>
+<td>Close charter pricing, move to $399 standard</td>
+</tr>
+<tr>
+<td>50 specialists</td>
+<td>2026 Q2–Q3</td>
+<td>Raise standard to $449 for new customers. Existing customers stay put.</td>
+</tr>
+<tr>
+<td>75 specialists</td>
+<td>2026 Q3–Q4</td>
+<td>Begin planning GP Pro launch. Raise standard to $499.</td>
+</tr>
+<tr>
+<td>100 specialists</td>
+<td>2026 Q4</td>
+<td>Announce GP Pro launch with founding GP pricing. Enterprise/DSO tier formalized.</td>
+</tr>
+<tr>
+<td>200 specialists + 300 GPs</td>
+<td>2027</td>
+<td>Launch GP Pro at $49/month. Premium add-ons for specialists.</td>
+</tr>
+<tr>
+<td>500 specialists</td>
+<td>2028</td>
+<td>Raise standard to $599–$699. Full add-on catalog live. Consider Series A if not already done.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>Final Notes for Nick</h3>
+<p>A few things that don't fit neatly anywhere else:</p>
+<p><strong>Fix the website today.</strong> The $399 vs. $499 discrepancy is a trust and credibility issue. A prospect who sees $399 on the website and gets a quote for $499 feels deceived — or wonders what else is inconsistent. Pick a number (recommend $399) and update every page. Today, not next week.</p>
+<p><strong>Don't overthink this.</strong> Early-stage pricing is about getting the next 25 customers, not optimizing for a perfect long-term model. The numbers in this document are based on comparable markets and sound logic, but the truth is: your actual customers will tell you the right price through their behavior. Charge something, watch what converts and what doesn't, and adjust.</p>
+<p><strong>Raise prices faster than you're comfortable with.</strong> Every startup undercharges. The price that feels scary to you feels reasonable to a specialist who is losing $10,000/month in uncaptured referrals. If you're converting nearly everyone you pitch, your price is too low.</p>
+<p><strong>Your pricing is your brand.</strong> $399/month says "serious product, fair value." $99/month says "side project." $799/month at this stage says "overconfident." You're in the right zone. Execute the stair-step plan and let the results speak.</p>
+<p>Go get those 100 specialists.</p>
+<hr />
+<p><em>Document prepared March 2026 | CaseLink Pricing Strategy v1.0</em><br />
+<em>For internal use only — not for distribution to prospects or customers</em></p>
+  </div>
+</div>
+<footer>© 2026 CaseLink &nbsp;·&nbsp; Confidential — Internal Use Only &nbsp;·&nbsp; <a href="index.html" style="color:#2563eb;">← Back to CaseLink</a></footer>
+</body>
+</html>
