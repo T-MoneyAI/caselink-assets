@@ -6,22 +6,23 @@
   <title>CaseLink Strategy Document — Version 2.0</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #ffffff;
-      color: #1a1a2e;
+      background: #f0f2f6;
+      color: #101011;
       font-size: 15px;
       line-height: 1.7;
     }
 
     /* ── Header Bar ── */
     .header-bar {
-      background: #0a1628;
-      color: #a8c0e0;
+      background: #0099ff;
+      color: rgba(255,255,255,0.85);
       text-align: center;
       padding: 10px 24px;
       font-size: 12px;
@@ -32,32 +33,35 @@
       top: 0;
       z-index: 100;
     }
-    .header-bar span { color: #e2c97e; }
+    .header-bar span { color: #c4e1ff; }
 
     /* ── Layout ── */
     .container {
       max-width: 860px;
       margin: 0 auto;
-      padding: 48px 32px 80px;
+      padding: 48px 32px 80px;;
+    background: #ffffff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
 
     /* ── Document Title Block ── */
     .doc-title-block {
-      border-left: 5px solid #2563eb;
+      border-left: 5px solid #0099ff;
       padding: 28px 32px;
-      background: #f0f6ff;
+      background: rgba(0,153,255,0.06);
       margin-bottom: 40px;
       border-radius: 0 8px 8px 0;
     }
     .doc-title-block h1 {
+      font-family: 'Switzer', 'Inter Display', sans-serif;
       font-size: 26px;
       font-weight: 800;
-      color: #0a1628;
+      color: #101011;
       margin-bottom: 12px;
       line-height: 1.3;
     }
     .doc-meta { font-size: 13px; color: #4b5563; line-height: 1.8; }
-    .doc-meta strong { color: #0a1628; }
+    .doc-meta strong { color: #101011; }
 
     /* ── Confidential Notice ── */
     .confidential-notice {
@@ -85,7 +89,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #0a1628;
+      color: #101011;
       margin-bottom: 16px;
       border: none;
       padding: 0;
@@ -104,34 +108,35 @@
     .toc ol li:last-child { border-bottom: none; }
     .toc ol li::before {
       content: counter(toc-counter, decimal-leading-zero) ". ";
-      color: #2563eb;
+      color: #0099ff;
       font-weight: 600;
       font-size: 12px;
       margin-right: 4px;
     }
     .toc ol li a {
-      color: #1e3a5f;
+      color: #0099ff;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.15s;
     }
-    .toc ol li a:hover { color: #2563eb; text-decoration: underline; }
+    .toc ol li a:hover { color: #0099ff; text-decoration: underline; }
 
     /* ── Section Headings ── */
     h2 {
+      font-family: 'Switzer', 'Inter Display', sans-serif;
       font-size: 20px;
       font-weight: 800;
-      color: #0a1628;
+      color: #101011;
       margin-top: 56px;
       margin-bottom: 18px;
       padding-bottom: 10px;
-      border-bottom: 2px solid #2563eb;
+      border-bottom: 2px solid #0099ff;
       scroll-margin-top: 64px;
     }
     h3 {
       font-size: 16px;
       font-weight: 700;
-      color: #1e3a5f;
+      color: #0099ff;
       margin-top: 32px;
       margin-bottom: 12px;
       scroll-margin-top: 64px;
@@ -155,19 +160,19 @@
       padding-left: 24px;
     }
     li { margin-bottom: 6px; color: #1f2937; }
-    li strong { color: #0a1628; }
+    li strong { color: #101011; }
 
     /* ── Callout / Highlight Boxes ── */
     .callout {
       background: #eff6ff;
-      border-left: 4px solid #2563eb;
+      border-left: 4px solid #0099ff;
       border-radius: 0 8px 8px 0;
       padding: 16px 20px;
       margin: 24px 0;
       font-size: 14px;
-      color: #1e3a5f;
+      color: #0099ff;
     }
-    .callout strong { color: #0a1628; }
+    .callout strong { color: #101011; }
 
     .callout-stat {
       background: #f0fdf4;
@@ -214,7 +219,7 @@
     }
     code {
       background: #f1f5f9;
-      color: #0a1628;
+      color: #101011;
       padding: 2px 6px;
       border-radius: 4px;
       font-size: 12.5px;
@@ -233,7 +238,7 @@
       box-shadow: 0 1px 4px rgba(10,22,40,0.08);
     }
     thead {
-      background: #0a1628;
+      background: #0099ff;
       color: #ffffff;
     }
     thead th {
@@ -253,13 +258,13 @@
       vertical-align: top;
       line-height: 1.5;
     }
-    td strong { color: #0a1628; }
+    td strong { color: #101011; }
 
     /* ── Email Template Blocks ── */
     .email-block {
       background: #f8fafc;
       border: 1px solid #cbd5e1;
-      border-top: 4px solid #2563eb;
+      border-top: 4px solid #0099ff;
       border-radius: 0 0 8px 8px;
       padding: 24px 28px;
       margin: 24px 0;
@@ -269,7 +274,7 @@
     }
     .email-block .email-subject {
       font-weight: 700;
-      color: #0a1628;
+      color: #101011;
       margin-bottom: 12px;
       font-size: 13px;
       text-transform: uppercase;
@@ -284,7 +289,7 @@
     }
 
     /* ── Inline highlight for key numbers ── */
-    .num { font-weight: 700; color: #2563eb; }
+    .num { font-weight: 700; color: #0099ff; }
 
     /* ── Checklist ── */
     .checklist { list-style: none; padding-left: 0; }
@@ -300,7 +305,7 @@
     footer {
       margin-top: 72px;
       padding: 24px 32px;
-      background: #0a1628;
+      background: #0099ff;
       color: #8fa8c8;
       font-size: 12px;
       text-align: center;
@@ -322,7 +327,7 @@
 <body>
 
   <div class="header-bar">
-    <span>CaseLink</span> — Confidential&nbsp;&nbsp;|&nbsp;&nbsp;Prepared March 2026
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:22px;width:auto;display:inline-block;vertical-align:middle"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="rgba(255,255,255,0.9)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg> — Confidential&nbsp;&nbsp;|&nbsp;&nbsp;Prepared March 2026
   </div>
 
   <div class="container">

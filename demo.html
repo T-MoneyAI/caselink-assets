@@ -4,32 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CaseLink — Live Demo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy: #0a1628;
-      --sidebar: #070f1e;
-      --card: #111d35;
-      --card2: #0d1a30;
-      --border: rgba(255,255,255,0.08);
-      --border2: rgba(255,255,255,0.04);
-      --blue: #2563eb;
-      --blue-light: #3b82f6;
-      --blue-dim: rgba(37,99,235,0.15);
-      --green: #10b981;
-      --green-dim: rgba(16,185,129,0.12);
+      --navy: #ffffff;
+      --sidebar: #f0f2f6;
+      --card: #ffffff;
+      --card2: #f5f9ff;
+      --border: rgba(0,0,0,0.08);
+      --border2: rgba(0,0,0,0.05);
+      --blue: #0099ff;
+      --blue-light: #0099ff;
+      --blue-dim: rgba(0,153,255,0.1);
+      --green: #059669;
+      --green-dim: rgba(5,150,105,0.12);
       --yellow: #f59e0b;
       --red: #ef4444;
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
-      --text-dim: #475569;
+      --text: #101011;
+      --text-muted: #606266;
+      --text-dim: #a7a7a7;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--navy);
+      font-family: 'Inter', 'Inter Display', sans-serif;
+      background: #f0f2f6;
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       height: 100vh; overflow: hidden;
@@ -41,7 +42,7 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 32px;
       height: 64px;
-      background: var(--sidebar);
+      background: #f0f2f6;
       border-bottom: 1px solid var(--border);
       flex-shrink: 0;
     }
@@ -51,11 +52,7 @@
       display: flex; align-items: center; gap: 8px;
     }
 
-    .logo-icon {
-      width: 28px; height: 28px; background: var(--blue);
-      border-radius: 6px; display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 900;
-    }
+    /* logo-icon removed */
 
     .steps-track {
       display: flex; align-items: center; gap: 0;
@@ -74,8 +71,8 @@
     }
 
     .step-dot.active {
-      border-color: var(--blue); background: var(--blue); color: white;
-      box-shadow: 0 0 12px rgba(37,99,235,0.5);
+      border-color: var(--blue); background: #0099ff; color: white;
+      box-shadow: 0 4px 12px rgba(0,153,255,0.3);
     }
 
     .step-dot.done {
@@ -98,16 +95,16 @@
     }
 
     .ctrl-btn {
-      padding: 7px 16px; border-radius: 7px; border: 1px solid var(--border);
+      padding: 7px 16px; border-radius: 30px; border: 1px solid var(--border);
       background: transparent; color: var(--text-muted); font-size: 0.8rem;
       font-weight: 600; cursor: pointer; transition: all 0.2s;
       font-family: inherit;
     }
-    .ctrl-btn:hover { border-color: var(--blue-light); color: var(--text); }
+    .ctrl-btn:hover { border-color: var(--blue); color: var(--text); }
     .ctrl-btn.primary {
-      background: var(--blue); border-color: var(--blue); color: white;
+      background: linear-gradient(180deg, rgb(136,186,255) 0%, rgb(62,142,255) 100%); border-color: var(--blue); color: white;
     }
-    .ctrl-btn.primary:hover { background: var(--blue-light); }
+    .ctrl-btn.primary:hover { opacity: 0.9; }
 
     /* MAIN LAYOUT */
     .demo-main {
@@ -116,7 +113,7 @@
 
     /* SIDEBAR */
     .sidebar {
-      width: 220px; background: var(--sidebar);
+      width: 220px; background: #f0f2f6;
       border-right: 1px solid var(--border);
       display: flex; flex-direction: column;
       padding: 24px 0;
@@ -138,12 +135,12 @@
       font-size: 0.83rem; color: var(--text-muted); font-weight: 500;
       transition: all 0.15s;
     }
-    .sidebar-item:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+    .sidebar-item:hover { background: rgba(0,0,0,0.04); color: var(--text); }
     .sidebar-item.active { background: var(--blue-dim); color: var(--blue-light); }
     .sidebar-item .icon { width: 16px; text-align: center; font-size: 14px; }
 
     .sidebar-badge {
-      margin-left: auto; background: var(--blue);
+      margin-left: auto; background: linear-gradient(180deg, rgb(136,186,255) 0%, rgb(62,142,255) 100%);
       color: white; font-size: 0.65rem; font-weight: 700;
       padding: 1px 7px; border-radius: 100px;
       opacity: 0; transition: opacity 0.3s;
@@ -155,20 +152,23 @@
     /* CONTENT AREA */
     .content {
       flex: 1; overflow: hidden; position: relative;
-      background: #0d1829;
+      background: #f0f2f6;
     }
 
     .step-panel {
       position: absolute; inset: 0;
       opacity: 0; pointer-events: none;
-      transition: opacity 0.4s, transform 0.4s;
-      transform: translateX(16px);
+      visibility: hidden;
+      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0.35s;
+      transform: translateX(20px);
       overflow-y: auto;
       padding: 32px;
     }
     .step-panel.active {
       opacity: 1; pointer-events: all;
+      visibility: visible;
       transform: translateX(0);
+      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0s;
     }
 
     /* STEP 1 — FORM */
@@ -178,7 +178,7 @@
     .page-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 28px; }
 
     .form-card {
-      background: var(--card); border: 1px solid var(--border);
+      background: #ffffff; border: 1px solid var(--border);
       border-radius: 14px; padding: 28px; max-width: 560px;
     }
 
@@ -188,13 +188,13 @@
     .form-field { display: flex; flex-direction: column; gap: 6px; }
     .form-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.02em; }
     .form-input {
-      background: var(--card2); border: 1px solid var(--border);
+      background: #f5f9ff; border: 1px solid var(--border);
       border-radius: 8px; padding: 9px 12px;
       font-size: 0.88rem; color: var(--text); font-family: inherit;
       outline: none; transition: border-color 0.2s;
     }
     .form-input:focus { border-color: var(--blue); }
-    .form-input.filled { border-color: rgba(16,185,129,0.3); color: var(--text); }
+    .form-input.filled { border-color: rgba(5,150,105,0.3); color: var(--text); }
 
     select.form-input { cursor: pointer; }
 
@@ -208,30 +208,31 @@
     .urgency-pill.selected { border-color: var(--yellow); background: rgba(245,158,11,0.1); color: var(--yellow); }
 
     .send-btn {
-      width: 100%; padding: 13px; border-radius: 10px;
-      background: var(--blue); color: white; border: none;
+      width: 100%; padding: 13px; border-radius: 30px;
+      background: linear-gradient(180deg, rgb(136,186,255) 0%, rgb(62,142,255) 100%); color: white; border: none;
       font-size: 0.95rem; font-weight: 700; cursor: pointer;
       font-family: inherit; margin-top: 20px;
       transition: all 0.3s;
-      box-shadow: 0 0 20px rgba(37,99,235,0.3);
+      box-shadow: 0 4px 20px rgba(0,153,255,0.25);
     }
     .send-btn.pulsing { animation: btnPulse 0.8s ease-in-out 2; }
-    .send-btn.sent { background: var(--green); box-shadow: 0 0 20px rgba(16,185,129,0.3); }
+    .send-btn.sent { background: var(--green); box-shadow: 0 0 20px rgba(5,150,105,0.3); }
 
     @keyframes btnPulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(37,99,235,0.3); }
-      50% { transform: scale(1.02); box-shadow: 0 0 32px rgba(37,99,235,0.6); }
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(0,153,255,0.25); }
+      50% { transform: scale(1.02); box-shadow: 0 0 32px rgba(0,153,255,0.5); }
     }
 
     /* STEP 2 — SPLIT VIEW */
-    .split-view { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .split-view { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 
     .panel-card {
-      background: var(--card); border: 1px solid var(--border);
+      background: #ffffff; border: 1px solid var(--border);
       border-radius: 14px; padding: 24px;
     }
 
     .panel-card.gp-panel { border-top: 2px solid var(--blue); }
+
     .panel-card.sp-panel { border-top: 2px solid var(--green); }
 
     .panel-header {
@@ -256,12 +257,12 @@
     .notif-badge.show { opacity: 1; transform: scale(1); }
 
     .sent-card {
-      background: var(--card2); border: 1px solid var(--border);
+      background: #f5f9ff; border: 1px solid var(--border);
       border-radius: 10px; padding: 16px;
     }
 
     .case-card {
-      background: var(--card2); border: 1px solid var(--border);
+      background: #f5f9ff; border: 1px solid var(--border);
       border-radius: 10px; padding: 16px;
       transform: translateY(20px); opacity: 0;
       transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
@@ -288,11 +289,11 @@
       background: var(--green); color: white; border: none;
       font-size: 0.95rem; font-weight: 700; cursor: pointer;
       font-family: inherit; margin-bottom: 20px;
-      transition: all 0.3s; box-shadow: 0 0 20px rgba(16,185,129,0.3);
+      transition: all 0.3s; box-shadow: 0 0 20px rgba(5,150,105,0.3);
     }
 
     .calendar-container {
-      background: var(--card); border: 1px solid var(--border);
+      background: #ffffff; border: 1px solid var(--border);
       border-radius: 14px; padding: 20px;
       opacity: 0; transform: translateY(10px);
       transition: all 0.4s;
@@ -310,14 +311,14 @@
       font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
       transition: all 0.2s;
     }
-    .cal-day:hover { background: rgba(255,255,255,0.06); }
+    .cal-day:hover { background: rgba(0,0,0,0.05); }
     .cal-day.empty { opacity: 0; pointer-events: none; }
-    .cal-day.selected { background: var(--blue); color: white; font-weight: 700; box-shadow: 0 0 10px rgba(37,99,235,0.4); }
+    .cal-day.selected { background: linear-gradient(180deg, rgb(136,186,255) 0%, rgb(62,142,255) 100%); color: white; font-weight: 700; box-shadow: 0 0 10px rgba(0,153,255,0.4); }
     .cal-day.today { border: 1px solid var(--border); }
     .cal-dow { font-size: 0.68rem; color: var(--text-dim); font-weight: 600; text-align: center; }
 
     .confirm-message {
-      background: var(--green-dim); border: 1px solid rgba(16,185,129,0.2);
+      background: var(--green-dim); border: 1px solid rgba(5,150,105,0.2);
       border-radius: 10px; padding: 14px 16px;
       font-size: 0.88rem; color: var(--green); font-weight: 600;
       margin-top: 16px; opacity: 0; transition: all 0.4s; transform: translateY(8px);
@@ -337,7 +338,7 @@
     .status-chip.scheduled { background: var(--green-dim); color: var(--green); }
 
     .notification-toast {
-      background: var(--card); border: 1px solid rgba(16,185,129,0.3);
+      background: #ffffff; border: 1px solid rgba(5,150,105,0.3);
       border-radius: 12px; padding: 14px 16px;
       display: flex; align-items: flex-start; gap: 12px;
       margin-top: 16px;
@@ -360,7 +361,7 @@
       background: var(--green-dim); border: 2px solid var(--green);
       display: flex; align-items: center; justify-content: center;
       font-size: 2.5rem; margin-bottom: 28px;
-      box-shadow: 0 0 40px rgba(16,185,129,0.3);
+      box-shadow: 0 0 40px rgba(5,150,105,0.3);
       animation: popIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
     }
 
@@ -389,13 +390,13 @@
     }
 
     .start-btn {
-      background: var(--blue); color: white;
-      padding: 15px 36px; border-radius: 12px; border: none;
+      background: linear-gradient(180deg, rgb(136,186,255) 0%, rgb(62,142,255) 100%); color: white;
+      padding: 15px 36px; border-radius: 30px; border: none;
       font-size: 1rem; font-weight: 700; cursor: pointer;
       font-family: inherit; transition: all 0.2s;
-      box-shadow: 0 0 30px rgba(37,99,235,0.4);
+      box-shadow: 0 4px 24px rgba(0,153,255,0.35);
     }
-    .start-btn:hover { background: var(--blue-light); transform: translateY(-2px); }
+    .start-btn:hover { opacity: 0.9; transform: translateY(-2px); }
 
     /* AUTO-ADVANCE */
     .auto-timer {
@@ -409,7 +410,7 @@
     }
 
     .timer-bar-inner {
-      height: 100%; width: 100%; background: var(--blue);
+      height: 100%; width: 100%; background: linear-gradient(180deg, rgb(136,186,255) 0%, rgb(62,142,255) 100%);
       transform-origin: left;
       animation: countdown 2.5s linear forwards;
     }
@@ -429,10 +430,7 @@
 
 <!-- TOP BAR -->
 <div class="progress-bar">
-  <div class="progress-logo">
-    <div class="logo-icon">CL</div>
-    CaseLink Demo
-  </div>
+  <div class="progress-logo" style="display:flex;align-items:center;gap:8px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:28px;width:auto;display:inline-block;vertical-align:middle"><defs><linearGradient id="clg" x1="0" y1="0" x2="60" y2="32" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0099ff"/><stop offset="40%" stop-color="#06b6d4"/><stop offset="75%" stop-color="#06d6a0"/><stop offset="100%" stop-color="#fb923c"/></linearGradient></defs><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#clg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg><span style="font-family:'Switzer','Inter Display',sans-serif;font-weight:700;font-size:1rem;letter-spacing:-0.02em;color:var(--text)">CaseLink</span></div>
 
   <div class="steps-track">
     <div class="step-dot active" id="dot1">1</div>
@@ -500,6 +498,9 @@
       </div>
     </div>
   </div>
+
+  <!-- CONTENT AREA -->
+  <div class="content">
 
   <!-- STEP 1: GP CREATES REFERRAL -->
   <div class="step-panel active" id="step1">
@@ -755,7 +756,8 @@
     </div>
   </div>
 
-</div>
+  </div><!-- end .content -->
+</div><!-- end .demo-main -->
 
 <script>
   let currentStep = 1;
@@ -800,7 +802,6 @@
     const autoDiv = document.getElementById('autoTimer');
     if (n < totalSteps) {
       autoDiv.style.display = 'flex';
-      resetTimerBar();
       startAutoAdvance();
     } else {
       autoDiv.style.display = 'none';
@@ -820,11 +821,16 @@
   }
   function restartDemo() { goToStep(1); }
 
-  function resetTimerBar() {
+  function getStepDelay(n) {
+    // Step 1 needs ~9s for typing animation + send animation to complete
+    return n === 1 ? 9000 : 3000;
+  }
+
+  function resetTimerBar(durationMs) {
     const bar = document.getElementById('timerBar');
     bar.style.animation = 'none';
-    bar.offsetHeight; // reflow
-    bar.style.animation = 'countdown 2.5s linear forwards';
+    bar.offsetHeight; // force reflow
+    bar.style.animation = `countdown ${durationMs / 1000}s linear forwards`;
   }
 
   function clearAutoTimer() {
@@ -832,9 +838,11 @@
   }
 
   function startAutoAdvance() {
+    const delay = getStepDelay(currentStep);
+    resetTimerBar(delay);
     autoTimer = setTimeout(() => {
       if (currentStep < totalSteps) nextStep();
-    }, 2500);
+    }, delay);
   }
 
   // STEP 1: typing animation

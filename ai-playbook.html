@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CaseLink AI Playbook — March 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f0f2f6;
+      --surface: #ffffff;
+      --border: #e8eaed;
+      --text: #101011;
+      --muted: #606266;
+      --accent: #0099ff;
+      --accent-light: rgba(0,153,255,0.06);
+      --accent-mid: #0099ff;
+      --warn: #92400e;
+      --warn-light: #fef3c7;
+      --code-bg: #1c1c1e;
+      --code-text: #e2e8f0;
+      --code-border: #333;
+      --prompt-label: #90f0c5;
+      --section-num: #0099ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Inter Display', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 17px;
+    }
+
+    /* ─── TOP NAV ─── */
+    .top-bar {
+      background: var(--accent);
+      color: white;
+      padding: 10px 40px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-bar .brand { font-weight: 700; letter-spacing: 0.03em; }
+    .top-bar .meta { opacity: 0.75; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: linear-gradient(135deg, #f0f2f6 0%, rgba(0,153,255,0.07) 100%);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      padding: 56px 40px 48px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .hero .label {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-family: 'Switzer', 'Inter Display', sans-serif;
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .hero .subtitle {
+      font-size: 20px;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 28px;
+    }
+    .hero .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .hero .intro-card {
+      background: var(--accent-light);
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+    }
+    .hero .intro-card strong {
+      display: block;
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    /* ─── LAYOUT ─── */
+    .wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+      background: #ffffff;
+    }
+
+    /* ─── TABLE OF CONTENTS ─── */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 32px 36px;
+      margin: 40px 0;
+    }
+    .toc h2 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .toc ol {
+      list-style: none;
+      padding: 0;
+      columns: 2;
+      gap: 8px;
+    }
+    .toc li {
+      margin-bottom: 10px;
+      break-inside: avoid;
+    }
+    .toc a {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .toc a:hover { text-decoration: underline; }
+    .toc .toc-num {
+      color: var(--muted);
+      font-size: 13px;
+      margin-right: 6px;
+    }
+
+    /* ─── INTRO BOX ─── */
+    .intro-section {
+      background: var(--surface);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      padding: 32px 36px;
+      margin: 40px 0;
+    }
+    .intro-section p + p { margin-top: 14px; }
+
+    /* ─── SECTIONS ─── */
+    .section {
+      margin: 56px 0;
+    }
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-number {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-light);
+      border-radius: 6px;
+      padding: 4px 10px;
+      white-space: nowrap;
+      margin-top: 4px;
+    }
+    .section-header h2 {
+      font-family: 'Switzer', 'Inter Display', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text);
+    }
+    .section-header p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-top: 6px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    h3 {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 36px 0 14px;
+    }
+    h4 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 28px 0 10px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    ul, ol {
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+    li { margin-bottom: 8px; }
+    li::marker { color: var(--accent); }
+
+    /* ─── PROMPT BLOCKS ─── */
+    .prompt-block {
+      background: var(--code-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px 0 28px;
+      border: 1px solid var(--code-border);
+    }
+    .prompt-label {
+      background: #2a2a2e;
+      color: var(--prompt-label);
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--code-border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prompt-label::before {
+      content: '▸';
+      font-size: 14px;
+    }
+    .prompt-block pre {
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 13.5px;
+      color: var(--code-text);
+      line-height: 1.65;
+      padding: 20px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-x: auto;
+    }
+
+    /* ─── CALLOUT BOXES ─── */
+    .callout {
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin: 24px 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+    }
+    .callout.warn {
+      background: var(--warn-light);
+      border-left: 4px solid #d97706;
+      color: var(--warn);
+    }
+    .callout.tip {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      color: #1a4535;
+    }
+    .callout strong { font-weight: 700; }
+
+    /* ─── TOOL CARDS ─── */
+    .tool-grid {
+      display: grid;
+      gap: 20px;
+      margin: 24px 0;
+    }
+    .tool-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+    }
+    .tool-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .tool-card h3 {
+      margin: 0;
+      font-size: 18px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .tool-card .tool-cost {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .tool-card .tool-best {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+    .tool-card p {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14.5px;
+      margin-bottom: 0;
+    }
+
+    /* ─── PROMPT LIBRARY ─── */
+    .prompt-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      background: var(--surface);
+    }
+    .prompt-item-header {
+      background: var(--accent-light);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .prompt-num {
+      background: var(--accent);
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .prompt-item-header h4 {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .prompt-item .prompt-block {
+      margin: 0;
+      border-radius: 0;
+      border: none;
+      border-top: 1px solid var(--code-border);
+    }
+
+    /* ─── SAMPLE ARTICLE ─── */
+    .sample-article {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 32px 36px;
+      margin: 20px 0;
+      font-style: italic;
+    }
+    .sample-article .article-label {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-style: normal;
+      margin-bottom: 20px;
+    }
+    .sample-article p + p { margin-top: 14px; }
+
+    /* ─── CLOSING ─── */
+    .closing {
+      background: var(--accent);
+      color: white;
+      border-radius: 12px;
+      padding: 40px 44px;
+      margin: 56px 0 0;
+    }
+    .closing h2 {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+    .closing p { color: rgba(255,255,255,0.88); margin-bottom: 14px; }
+    .closing p:last-child { margin-bottom: 0; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 32px 40px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      .hero, .wrapper { padding-left: 20px; padding-right: 20px; }
+      .hero h1 { font-size: 30px; }
+      .hero .intro-grid { grid-template-columns: 1fr; }
+      .toc ol { columns: 1; }
+      .top-bar { padding: 10px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:22px;width:auto;display:inline-block;vertical-align:middle"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="rgba(255,255,255,0.9)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+  <span class="meta">Internal AI Playbook &nbsp;·&nbsp; March 2026 &nbsp;·&nbsp; Confidential</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="label">Internal Handbook</div>
+  <h1>CaseLink AI Playbook</h1>
+  <div class="subtitle">How a small team operates like a bigger one.</div>
+  <p style="color: #6b6860; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px;">This is a practical guide for using AI tools in day-to-day operations — right now. No tech background required. Every section has something you can do today.</p>
+  <div class="intro-grid">
+    <div class="intro-card">
+      <strong>Who it's for</strong>
+      Everyone on the CaseLink team — sales, onboarding, CS, ops.
+    </div>
+    <div class="intro-card">
+      <strong>What it covers</strong>
+      8 sections + 20 ready-to-use prompts you can copy today.
+    </div>
+    <div class="intro-card">
+      <strong>The rule</strong>
+      AI is a first draft. You're still the editor. Always review before sending.
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="wrapper">
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#intro"><span class="toc-num">Intro</span> Why This Matters Now</a></li>
+      <li><a href="#s1"><span class="toc-num">01</span> Sales — Getting to 100 Specialists</a></li>
+      <li><a href="#s2"><span class="toc-num">02</span> Onboarding — Cutting Time-to-Value</a></li>
+      <li><a href="#s3"><span class="toc-num">03</span> Customer Success — Keeping Specialists Active</a></li>
+      <li><a href="#s4"><span class="toc-num">04</span> Content & Marketing</a></li>
+      <li><a href="#s5"><span class="toc-num">05</span> Operations & Admin</a></li>
+      <li><a href="#s6"><span class="toc-num">06</span> Product Feedback Loop</a></li>
+      <li><a href="#s7"><span class="toc-num">07</span> AI Tool Stack</a></li>
+      <li><a href="#s8"><span class="toc-num">08</span> Prompts Library (20+ ready to use)</a></li>
+    </ol>
+  </div>
+
+  <!-- INTRO -->
+  <div id="intro" class="intro-section">
+    <h3 style="margin-top:0;">Why This Matters Now</h3>
+    <p>You don't need to be a tech company to use AI effectively. You need to be a team that's honest about where time gets wasted — and willing to change the habit.</p>
+    <p>In 2026, the teams that treat AI as a daily tool (not a novelty) are producing at the level of teams 2–3x their size. Not because they're smarter, but because they've stopped doing by hand the things a machine can do in 30 seconds.</p>
+    <p>CaseLink has a specific advantage: healthcare is one of the most AI-underserved industries. Dental practices aren't being bombarded with AI-powered outreach, AI-prepared QBRs, or AI-written study club content. That means the bar is low, and the differentiation is real. The team that runs on AI before the product goes national will have built a moat out of operational efficiency alone.</p>
+    <p><strong>A few honest notes before you start:</strong></p>
+    <ul>
+      <li><strong>AI is a first draft, not a final answer.</strong> Especially for legal, compliance, and anything patient-adjacent.</li>
+      <li><strong>You still need your judgment.</strong> AI is good at structure, speed, and synthesis. You're good at relationships and context.</li>
+      <li><strong>It gets better the more specific you are.</strong> Vague prompts get vague results. The prompts in Section 8 are designed to be specific.</li>
+    </ul>
+  </div>
+
+  <!-- ─── SECTION 1: SALES ─── -->
+  <div id="s1" class="section">
+    <div class="section-header">
+      <span class="section-number">Section 01</span>
+      <div>
+        <h2>Sales — Getting to 100 Specialists Faster</h2>
+        <p>Research, outreach, demo prep, and follow-up — all faster.</p>
+      </div>
+    </div>
+
+    <h3>Prospect Research (2 minutes per practice)</h3>
+    <p>Before any cold call or outreach, spend 2 minutes building a personalized file on the practice.</p>
+    <h4>Step 1 — Gather the basics</h4>
+    <ul>
+      <li>Go to the practice's website and Google listing</li>
+      <li>Note: specialty focus, number of providers, years in business, reviews, awards, affiliations</li>
+    </ul>
+    <h4>Step 2 — Feed it to Claude or ChatGPT</h4>
+    <p>Open <a href="https://claude.ai" style="color:var(--accent)">claude.ai</a> and paste this prompt:</p>
+    <div class="prompt-block">
+      <div class="prompt-label">Prospect Research Prompt</div>
+      <pre>I'm about to reach out to [DR. NAME] at [PRACTICE NAME] in [CITY]. Here's what I know:
+- Website: [paste key info or URL summary]
+- Google reviews: [paste 2-3 reviews or just the rating]
+- Specialty focus: [e.g., implants, oral surgery, Invisalign]
+- Practice size: [number of doctors/locations]
+
+I work for CaseLink, a dental referral coordination platform where specialists
+receive referrals from GPs digitally — with case notes, X-rays, and real-time
+status updates. Specialists pay $499/month; GPs are free.
+
+Give me:
+1. One personalized talking point for this specific practice
+2. The most likely objection they'll raise and how to respond
+3. A suggested opening line for a cold call</pre>
+    </div>
+
+    <h4>Step 3 — Build a prospect list with Perplexity + Google Maps</h4>
+    <p>Use <a href="https://perplexity.ai" style="color:var(--accent)">Perplexity</a> to find practices you haven't heard of yet:</p>
+    <div class="prompt-block">
+      <div class="prompt-label">List Building Prompt</div>
+      <pre>Find oral surgeons and orthodontists in the DC/Maryland/Virginia metro area.
+For each, list: practice name, city, website, approximate number of providers,
+any specialty focus. Focus on independent practices (not large DSO chains).</pre>
+    </div>
+
+    <h3>Hyper-Personalized Outreach</h3>
+    <p>The difference between a 2% and 15% response rate is specificity. AI makes specificity free.</p>
+
+    <h4>Cold Email Base Template</h4>
+    <div class="prompt-block">
+      <div class="prompt-label">Cold Email Template</div>
+      <pre>Subject: Digital referrals for [Practice Name] — quick question
+
+Hi Dr. [Name],
+
+I noticed [Practice Name] has built a strong reputation for [specific focus]
+in [City]. That kind of practice typically gets a significant portion of new
+patients from GP referrals.
+
+I'm reaching out because CaseLink — a referral coordination platform built
+specifically for specialists — just launched in the DMV. GPs send referrals
+digitally, with case notes and X-rays attached. You get a real-time dashboard
+showing every referral's status. No more phone tag, no more lost fax referrals.
+
+Would a 15-minute call this week make sense? I can show you exactly what it
+looks like for a [specialty] practice your size.
+
+[Your name]
+CaseLink | caselink.com</pre>
+    </div>
+
+    <h4>Personalize It in 30 Seconds</h4>
+    <div class="prompt-block">
+      <div class="prompt-label">Email Personalization Prompt</div>
+      <pre>Here's my cold email template [paste above]. Personalize it for Dr. [Name],
+an oral surgeon in Bethesda who runs a 3-provider practice, has 4.8 stars on
+Google, and mentions a focus on full-arch implant cases on their website.
+Keep it under 150 words. Sound like a person, not a sales robot.</pre>
+    </div>
+
+    <h3>Sales Prep Before a Demo</h3>
+    <div class="prompt-block">
+      <div class="prompt-label">Demo Prep Prompt</div>
+      <pre>I'm demoing CaseLink to [practice type] — a [size] practice in [city] that
+focuses on [specialty]. CaseLink is a digital referral coordination platform
+where specialists pay $499/month and GPs are free.
+
+Generate:
+1. The 5 most likely objections this type of practice will raise
+2. A one-sentence response to each objection
+3. Two questions I should ask early in the call to understand their referral
+   volume and current pain
+4. Any practice-specific context I should reference to build rapport</pre>
+    </div>
+
+    <h3>Post-Demo Follow-Up</h3>
+    <div class="prompt-block">
+      <div class="prompt-label">Follow-Up Email Prompt</div>
+      <pre>I just finished a demo with [Dr. Name] from [practice]. Here's what we covered:
+- [bullet point summary]
+- They mentioned [specific concern or interest]
+- They asked about [specific feature or question]
+- Next step we agreed on: [e.g., sending pricing info]
+
+Write a follow-up email that:
+- Thanks them for their time
+- References the specific thing they were most interested in
+- Addresses the concern they raised
+- Includes a clear next step
+- Sounds warm and direct, not corporate
+Keep it under 200 words.</pre>
+    </div>
+
+    <h3>AI-Assisted CRM from Call Notes</h3>
+    <p>After every call, paste your notes into Claude:</p>
+    <div class="prompt-block">
+      <div class="prompt-label">CRM Update Prompt</div>
+      <pre>Here are my raw notes from a call with [Dr. Name]:
+[paste notes]
+
+Extract:
+1. Key facts about the practice
+2. Their main concern or objection
+3. What they liked
+4. Agreed next step
+5. Suggested CRM stage (Prospect / Demo Done / Negotiating)
+
+Format as bullet points I can paste into Airtable.</pre>
+    </div>
+
+    <h4>Study Club Invitation Template</h4>
+    <div class="prompt-block">
+      <div class="prompt-label">Study Club Invite Email</div>
+      <pre>Subject: Potential speaker opportunity — [Your Name], CaseLink
+
+Hi [Name],
+
+I'd love to offer a short, practical presentation for your next study club on
+how digital referral coordination is changing how specialists manage their GP
+relationships in the DMV. No product pitch — just practical insights, with a
+10-minute CaseLink overview at the end.
+
+Would that be a fit for an upcoming session?
+
+[Your name]</pre>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 2: ONBOARDING ─── -->
+  <div id="s2" class="section">
+    <div class="section-header">
+      <span class="section-number">Section 02</span>
+      <div>
+        <h2>Onboarding — Cutting Time-to-Value</h2>
+        <p>Get specialists active and their GPs connected, faster.</p>
+      </div>
+    </div>
+
+    <h3>GP Invitation Drafting (2 minutes)</h3>
+    <p>When a specialist signs up, one of the first things they need is help inviting their referring GPs. Make it easy.</p>
+    <div class="prompt-block">
+      <div class="prompt-label">GP Invitation Prompt</div>
+      <pre>I'm onboarding Dr. [Specialist Name], a [specialty] in [City]. They've been
+in practice for [X] years and their top referring GPs include practices in [area].
+
+Write a short message they can send to their top referring GPs introducing
+CaseLink. The message should:
+- Come from the specialist (first person, warm tone)
+- Briefly explain what CaseLink does and why it's good for the GP
+- Make it easy for the GP to say yes (the GP platform is free)
+- Sound like the specialist wrote it themselves, not a vendor
+- Be usable as both an email and a text message (keep it short)
+
+Here's a bit about Dr. [Name]'s style/voice: [formal/casual, etc.]</pre>
+    </div>
+
+    <div class="callout tip">
+      <strong>What the result looks like:</strong><br>
+      <em>"Hey Dr. [GP Name] — wanted to share something that's been making my referral workflow a lot cleaner. I'm using CaseLink now — it lets you send me cases digitally with notes and images, and I can give you real-time updates on where things stand. It's free on your end, and setup takes about 10 minutes. Happy to walk you through it if helpful — [link]."</em>
+    </div>
+
+    <h3>Onboarding Support Without a Ticket</h3>
+    <p>Build a simple FAQ document (20 common questions) and use it as AI context.</p>
+    <ol>
+      <li>Create a Google Doc with your most common onboarding Q&amp;As</li>
+      <li>When a customer asks something complex, open Claude and run this:</li>
+    </ol>
+    <div class="prompt-block">
+      <div class="prompt-label">FAQ Support Prompt</div>
+      <pre>Here is our CaseLink onboarding FAQ:
+[paste FAQ content]
+
+A new specialist customer just asked: "[paste their question]"
+
+Write a clear, helpful response using the FAQ as your source. If the answer
+isn't covered, say so and suggest they contact the team. Keep it under 100 words.</pre>
+    </div>
+
+    <h3>Kick-Off Call Prep</h3>
+    <div class="prompt-block">
+      <div class="prompt-label">Kick-Off Prep Prompt</div>
+      <pre>I'm about to do a kick-off call with Dr. [Name], a new CaseLink customer.
+They are a [specialty] in [City]. Here's what I know about them:
+[paste any intake form responses or notes]
+
+Generate:
+1. Three personalized setup suggestions for their practice type
+2. Two questions to ask to understand their referral workflow better
+3. One thing to watch for that might slow their activation</pre>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 3: CUSTOMER SUCCESS ─── -->
+  <div id="s3" class="section">
+    <div class="section-header">
+      <span class="section-number">Section 03</span>
+      <div>
+        <h2>Customer Success — Keeping Specialists Active</h2>
+        <p>QBRs, churn early warning, and re-engagement — all faster.</p>
+      </div>
+    </div>
+
+    <h3>Quarterly Business Reviews</h3>
+    <p>QBRs feel like a lot of work. They shouldn't be. Collect the data, then run:</p>
+    <div class="prompt-block">
+      <div class="prompt-label">QBR Summary Prompt</div>
+      <pre>Here is usage data for Dr. [Name], a CaseLink customer:
+- Referrals received this quarter: [X]
+- Referral completion rate: [X]%
+- Top referring GPs: [list]
+- Average time from referral to appointment booked: [X] days
+- Estimated revenue from CaseLink referrals: $[X]
+
+Write a 1-page business review that:
+- Opens with a clear summary of the value CaseLink created this quarter
+- Highlights the top GP relationship by referral volume
+- Notes any improvement trends
+- Ends with a forward-looking statement about next quarter
+- Sounds professional but not robotic
+- Is appropriate for sharing as a PDF or reading on a call</pre>
+    </div>
+
+    <h3>Churn Early Warning</h3>
+    <h4>Data to Track (in Airtable)</h4>
+    <ul>
+      <li>Last login date</li>
+      <li>Referrals received: last 30 days vs. prior 30 days</li>
+      <li>GP connections active</li>
+      <li>Any support tickets opened</li>
+    </ul>
+    <p><strong>At-risk flag:</strong> Any specialist who hasn't logged in for 10+ days, or whose referral volume dropped &gt;50%, gets flagged for a re-engagement prompt.</p>
+
+    <h3>Re-Engagement Messages</h3>
+    <div class="prompt-block">
+      <div class="prompt-label">Re-Engagement Prompt</div>
+      <pre>Dr. [Name] hasn't logged into CaseLink in [X] days. Their last active referral
+was [referral detail — e.g., "a crown case from Dr. Smith's office on Feb 3"].
+
+Write:
+1. A warm text message from [team member name] — max 3 sentences, not salesy,
+   references that specific referral
+2. A follow-up email if no response in 3 days — slightly more formal,
+   offers a 10-minute check-in call
+3. One hypothesis for why they went quiet and what we could offer to re-engage</pre>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 4: MARKETING ─── -->
+  <div id="s4" class="section">
+    <div class="section-header">
+      <span class="section-number">Section 04</span>
+      <div>
+        <h2>Content &amp; Marketing — Punching Above Your Weight</h2>
+        <p>Study clubs, newsletter articles, social proof, and LinkedIn posts.</p>
+      </div>
+    </div>
+
+    <h3>Study Club Presentation (30 minutes)</h3>
+    <ol>
+      <li>Go to <a href="https://gamma.app" style="color:var(--accent)">Gamma.app</a> — it turns text outlines into polished slides automatically</li>
+      <li>Paste this prompt into Gamma's AI generator:</li>
+    </ol>
+    <div class="prompt-block">
+      <div class="prompt-label">Study Club Deck Prompt</div>
+      <pre>Create a 10-slide presentation for a dental study club on:
+"The Future of GP-Specialist Referrals: From Fax to Digital Coordination"
+
+Audience: Oral surgeons, orthodontists, and periodontists in private practice.
+Tone: Educational and practical, not salesy.
+
+Slides should cover:
+1. Title slide
+2. How referrals work today (and what's broken)
+3. What GPs actually want from a specialist referral relationship
+4. The cost of referral friction (lost cases, follow-up time)
+5. What digital referral coordination looks like
+6. Case example: before vs. after
+7. Key metrics that matter (completion rate, time-to-appointment)
+8. How to invite your top 10 GPs without awkwardness
+9. Q&A prompt slide
+10. CaseLink — who we are and what we're building
+
+Keep each slide to 3 bullet points max. Add speaker notes for each slide.</pre>
+    </div>
+    <p>Gamma builds the deck in under 2 minutes. Spend 10 minutes adjusting colors and branding. Done.</p>
+
+    <h3>Leave-Behind One-Pager (10 minutes)</h3>
+    <div class="prompt-block">
+      <div class="prompt-label">One-Pager Prompt</div>
+      <pre>Write a one-page leave-behind for [dental specialty, e.g., oral surgeons]
+who attended a CaseLink study club presentation.
+
+Include:
+- One headline that speaks to their specific pain
+- 3 bullet points on what CaseLink does
+- 1 simple before/after comparison
+- A clear call to action (start free trial / schedule a demo)
+- A quote or stat that's credible and specific
+
+Tone: Professional, brief, focused. Scannable in 30 seconds.</pre>
+    </div>
+
+    <h3>LinkedIn Posts (5 variations, 5 minutes)</h3>
+    <div class="prompt-block">
+      <div class="prompt-label">LinkedIn Post Variations Prompt</div>
+      <pre>Write 5 variations of a LinkedIn post about this customer win:
+[describe the win]
+
+Variations should include:
+1. A data-focused version
+2. A story-focused version
+3. A short punchy version (under 50 words)
+4. A "what we learned" version
+5. A GP-perspective version
+
+All should sound human, not like marketing copy. No hashtag spam.</pre>
+    </div>
+
+    <h3>Dental Society Newsletter Article (20 minutes)</h3>
+    <div class="prompt-block">
+      <div class="prompt-label">Newsletter Article Prompt</div>
+      <pre>Write a 600-word article for a dental society newsletter on:
+"Why GP-Specialist Communication Still Breaks Down — and What's Changing"
+
+The article should:
+- Open with a specific scenario GPs and specialists will recognize
+- Explain the referral coordination problem without being preachy
+- Offer 3 practical suggestions for improving referral workflows
+- Mention CaseLink naturally in one paragraph (not the focus, just an example)
+- End with a call to action to learn more
+- Sound like it was written by a knowledgeable practitioner or industry
+  observer, not a vendor
+- Be appropriate for a dental society newsletter</pre>
+    </div>
+
+    <div class="sample-article">
+      <div class="article-label">📄 Sample Article — Use or Adapt As-Is</div>
+      <p>Every dental professional has a version of this story: A GP refers a patient to an oral surgeon for an implant workup. The referral goes by fax. The specialist's front desk receives it — eventually. The GP's office calls to follow up two weeks later. By then, the patient has called a different specialist.</p>
+      <p>This isn't a technology failure. It's a workflow failure. And it's happening in practices that are otherwise modern, well-run, and patient-focused.</p>
+      <p>The referral relationship between GPs and specialists is one of the most important — and most poorly managed — workflows in dentistry. GPs account for the majority of new patient referrals for most specialty practices. Yet the actual mechanics of how referrals are sent, received, and tracked haven't changed meaningfully in decades.</p>
+      <p>Here are three things practices can do right now:</p>
+      <p><em>First, standardize what you send.</em> GPs and specialists often disagree on what a "complete referral" looks like. Create a one-page checklist — the information the specialist needs to accept and schedule the case — and share it proactively with your top referring partners.</p>
+      <p><em>Second, close the feedback loop.</em> One of the most common GP complaints is never hearing what happened to the patient they referred. A brief update — "patient was seen, treatment plan is X" — takes 60 seconds and dramatically strengthens the referral relationship.</p>
+      <p><em>Third, stop relying on fax and voicemail for time-sensitive cases.</em> For urgent referrals, use whatever communication channel guarantees a same-day response. Increasingly, practices are turning to platforms like CaseLink, which allow GPs to send referrals digitally with case notes and images, and let specialists respond and update status in real time.</p>
+      <p>The practices that figure out referral coordination will retain their referral relationships. The ones that don't will lose cases to competitors who make it easier to refer.</p>
+    </div>
+
+    <h3>Social Proof Generation</h3>
+    <div class="prompt-block">
+      <div class="prompt-label">Testimonial → Case Study Prompt</div>
+      <pre>A CaseLink customer just said this during a call:
+"[paste exact quote or close paraphrase]"
+
+Turn this into:
+1. A 3-sentence polished testimonial in first person, attributable to
+   "[Dr. Name], [Specialty], [City]"
+2. A 150-word case study with: the problem, what they did, the result
+3. A LinkedIn post we could share with their permission
+
+Don't add claims they didn't make. Keep it authentic and specific.</pre>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 5: OPERATIONS ─── -->
+  <div id="s5" class="section">
+    <div class="section-header">
+      <span class="section-number">Section 05</span>
+      <div>
+        <h2>Operations &amp; Admin — Getting Time Back</h2>
+        <p>Meetings, investor updates, hiring, and compliance — faster.</p>
+      </div>
+    </div>
+
+    <h3>Meeting Summaries</h3>
+    <p><strong>Setup:</strong> Use <a href="https://otter.ai" style="color:var(--accent)">Otter.ai</a> or <a href="https://fireflies.ai" style="color:var(--accent)">Fireflies.ai</a> to auto-record and transcribe every call. Both integrate with Zoom and Google Meet. (~$10/month)</p>
+    <p>After every call, paste the transcript into Claude:</p>
+    <div class="prompt-block">
+      <div class="prompt-label">Call Notes → Action Items Prompt</div>
+      <pre>Here is the transcript from a [call type] with [name/company]:
+[paste transcript]
+
+Extract:
+1. Summary (3 sentences)
+2. Key decisions made
+3. Action items (with owner if mentioned)
+4. Any objections or concerns raised
+5. Any product feedback or feature requests mentioned
+6. Recommended next step
+
+Format as clean bullet points I can paste into Notion.</pre>
+    </div>
+
+    <h3>Monthly Investor Update (15 minutes)</h3>
+    <h4>Template Structure</h4>
+    <div class="prompt-block">
+      <div class="prompt-label">Investor Update Structure</div>
+      <pre>📊 [Month] Update — CaseLink
+
+Metrics:
+- Paying specialists: [X] (+/- from last month)
+- Active GPs: [X]
+- Referrals processed: [X]
+- MRR: $[X]
+- Churn: [X]
+
+Highlights:
+- [1-2 key wins]
+
+Challenges:
+- [1 honest challenge you're working through]
+
+Focus next 30 days:
+- [top 2-3 priorities]
+
+Ask:
+- [specific ask from investors if any]</pre>
+    </div>
+    <div class="prompt-block">
+      <div class="prompt-label">Investor Update Writing Prompt</div>
+      <pre>Here are my bullet points for this month's investor update:
+[paste your raw metrics and notes]
+
+Write a monthly investor update using the standard structure:
+- Opening (1 sentence on overall trajectory)
+- Key metrics
+- Highlights (2-3 wins)
+- Challenges (honest, 1-2 sentences)
+- Next 30 days
+- Any specific ask
+
+Tone: Direct, confident, transparent. We're early stage. Don't oversell
+the wins or soften the challenges. Investors want honesty.
+Keep it under 400 words.</pre>
+    </div>
+
+    <h3>Job Descriptions</h3>
+    <div class="prompt-block">
+      <div class="prompt-label">Job Description Prompt</div>
+      <pre>Write a job description for a [ROLE TITLE] at CaseLink.
+
+About us: CaseLink is an early-stage dental SaaS startup building a
+HIPAA-compliant referral coordination platform. We're 5-10 people, live
+in the DMV, pre-Series A, and growing fast.
+
+This role will: [describe in plain English what the person will do]
+
+The JD should:
+- Be honest about our stage (early, high ownership, scrappy)
+- Attract mission-driven people who want to build, not just maintain
+- List real requirements (not a wishlist)
+- Sound human, not like corporate HR copy
+- Include one sentence about who thrives here vs. who won't
+
+Compensation: [range or "competitive + equity"]
+Location: [DMV / Remote / Hybrid]</pre>
+    </div>
+
+    <h3>Legal &amp; Compliance Drafting</h3>
+    <div class="callout warn">
+      <strong>⚠️ Important:</strong> AI is useful for first drafts and plain-English summaries of legal and compliance content. It is <em>not</em> a substitute for legal review. Always have a qualified attorney review anything before sharing with customers or using operationally.
+    </div>
+    <div class="prompt-block">
+      <div class="prompt-label">BAA Summary Prompt</div>
+      <pre>Here is a Business Associate Agreement (BAA):
+[paste BAA text]
+
+Summarize this in plain English for a non-lawyer. Cover:
+1. What each party is agreeing to
+2. The key obligations for each side
+3. What happens if there's a breach
+4. Any unusual or notable clauses
+
+This is for internal use only — not for sharing with customers.</pre>
+    </div>
+    <div class="prompt-block">
+      <div class="prompt-label">HIPAA FAQ Response Prompt</div>
+      <pre>A potential customer asked: "[paste their HIPAA-related question]"
+
+Draft a response that:
+- Answers the question accurately at a high level
+- Notes that we take HIPAA compliance seriously and have a BAA in place
+- Avoids making specific legal claims
+- Suggests they consult their compliance officer for practice-specific questions
+- Sounds reassuring and professional
+
+Flag any part of this response that should be reviewed by our legal counsel.</pre>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 6: PRODUCT FEEDBACK ─── -->
+  <div id="s6" class="section">
+    <div class="section-header">
+      <span class="section-number">Section 06</span>
+      <div>
+        <h2>Product Feedback Loop</h2>
+        <p>Turn scattered customer conversations into structured product input.</p>
+      </div>
+    </div>
+
+    <h3>Synthesizing User Feedback</h3>
+    <p>After every 5–10 customer calls, consolidate your notes and run:</p>
+    <div class="prompt-block">
+      <div class="prompt-label">Feedback Synthesis Prompt</div>
+      <pre>Here are notes from [X] customer calls over the past [time period]:
+[paste all notes]
+
+Analyze these and tell me:
+1. The 5 most common friction points customers mention
+2. The feature or improvement that comes up most often
+3. The exact language customers use to describe the main problem
+   (quote them directly when possible)
+4. Any patterns by practice type or specialty
+5. One insight that might be easy to miss
+
+Format as a product team briefing I can share internally.</pre>
+    </div>
+
+    <h3>Feature Prioritization</h3>
+    <div class="prompt-block">
+      <div class="prompt-label">Feature Priority Prompt</div>
+      <pre>Here are [X] pieces of customer feedback we've collected:
+[paste feedback themes or full notes]
+
+Create a prioritized list of product improvements. For each item include:
+1. The feature or fix
+2. How many customers mentioned it (or estimate frequency)
+3. Business impact if we build it (retention / acquisition / efficiency)
+4. Rough complexity (low / medium / high)
+5. Recommended priority (P1 / P2 / P3)
+
+Present this as a table I can share with the engineering team.</pre>
+    </div>
+
+    <h3>Writing Product Specs</h3>
+    <div class="prompt-block">
+      <div class="prompt-label">Product Spec Prompt</div>
+      <pre>Here's a feature I want to build, in plain English:
+[describe the feature in 2-5 sentences]
+
+Write a product spec that includes:
+1. Problem statement — what user pain does this solve?
+2. User story — "As a [user type], I want [action] so that [outcome]"
+3. Acceptance criteria — specific, testable conditions for "done"
+4. Edge cases — what could go wrong or behave unexpectedly?
+5. Out of scope — what are we NOT building in v1?
+
+Write it clearly enough that an engineer unfamiliar with CaseLink
+could understand exactly what to build.</pre>
+    </div>
+  </div>
+
+  <!-- ─── SECTION 7: TOOL STACK ─── -->
+  <div id="s7" class="section">
+    <div class="section-header">
+      <span class="section-number">Section 07</span>
+      <div>
+        <h2>AI Tool Stack</h2>
+        <p>What we recommend, what it costs, and how to get started in 10 minutes.</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>HIPAA reminder:</strong> Do not paste real patient data into any of these tools unless you have confirmed HIPAA-compliant data processing agreements in place. Use anonymized examples in all prompts.
+    </div>
+
+    <div class="tool-grid">
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <h3>Claude (claude.ai)</h3>
+          <span class="tool-cost">Free / $20/mo</span>
+        </div>
+        <div class="tool-best">Best for: Long documents, nuanced writing, synthesizing feedback, strategic thinking</div>
+        <p><strong>Get started in 10 minutes:</strong> Go to claude.ai, create an account, and try any prompt from Section 8. Claude handles long pasted content better than most tools — paste a full call transcript, a competitor's website, or 10 pages of notes and it won't blink. Claude Pro ($20/month) is worth it for heavy daily use.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <h3>Perplexity (perplexity.ai)</h3>
+          <span class="tool-cost">Free / $20/mo</span>
+        </div>
+        <div class="tool-best">Best for: Real-time research with citations, building prospect lists, quick market research</div>
+        <p><strong>Get started in 10 minutes:</strong> Go to perplexity.ai and type a research question as if you're asking a colleague. Unlike Google, it synthesizes results — you get an answer, not a list of links. Great for: "What are the most common complaints oral surgeons have about their referral workflow?"</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <h3>Otter.ai (otter.ai)</h3>
+          <span class="tool-cost">Free / $10/mo</span>
+        </div>
+        <div class="tool-best">Best for: Auto-transcription of calls, meeting summaries, extracting action items</div>
+        <p><strong>Get started in 10 minutes:</strong> Connect to Zoom or Google Meet. It joins every meeting as a bot and sends you a transcript and AI summary after. Paste the transcript into Claude for deeper analysis. Free tier covers 300 minutes/month.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <h3>Fireflies (fireflies.ai)</h3>
+          <span class="tool-cost">Free / $10/mo per seat</span>
+        </div>
+        <div class="tool-best">Best for: Same as Otter, with stronger CRM integrations and transcript search</div>
+        <p><strong>Get started in 10 minutes:</strong> Connect your calendar and Fireflies automatically joins and records scheduled calls. Better for searching across past transcripts than Otter — useful once you have 50+ recorded calls.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <h3>Clay (clay.com)</h3>
+          <span class="tool-cost">From $149/mo</span>
+        </div>
+        <div class="tool-best">Best for: Building targeted prospect lists with AI enrichment — LinkedIn, website, and contact data automatically</div>
+        <p><strong>Get started in 10 minutes:</strong> Create a list of "oral surgeons in DC Metro" and Clay will find contact info, LinkedIn profiles, and website data automatically. Saves 5–10 hours of manual research per week at active sales scale. Worth the cost when you're running outreach at volume.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <h3>Apollo (apollo.io)</h3>
+          <span class="tool-cost">Free / From $49/mo</span>
+        </div>
+        <div class="tool-best">Best for: Finding contact info for dental specialists, email sequences, prospect database</div>
+        <p><strong>Get started in 10 minutes:</strong> Search by job title ("oral surgeon") + location ("Washington DC"). Export a list of contacts. Use their email sequencing feature to automate follow-ups. Good alternative to Clay at lower volume.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <h3>Gamma (gamma.app)</h3>
+          <span class="tool-cost">Free / $10/mo</span>
+        </div>
+        <div class="tool-best">Best for: Turning bullet points into polished presentations in minutes</div>
+        <p><strong>Get started in 10 minutes:</strong> Go to gamma.app, click "Generate," paste the study club prompt from Section 8, and watch it build a presentation. Edit colors and content to match your brand. Produces better-looking decks faster than PowerPoint for most use cases.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <h3>Notion AI (notion.so)</h3>
+          <span class="tool-cost">$8/mo per member add-on</span>
+        </div>
+        <div class="tool-best">Best for: AI-assisted note-taking, document drafting, and CRM if your team uses Notion</div>
+        <p><strong>Get started in 10 minutes:</strong> In any Notion page, press the spacebar to open the AI assistant. Ask it to draft, summarize, or improve whatever you're working on. If the team already lives in Notion, this is the lowest-friction AI addition.</p>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <h3>Superhuman (superhuman.com)</h3>
+          <span class="tool-cost">$25/mo per person</span>
+        </div>
+        <div class="tool-best">Best for: Email with AI — AI-assisted replies, instant thread summaries, keyboard-first workflow</div>
+        <p><strong>Get started in 10 minutes:</strong> Request access at superhuman.com. Once set up, use their AI reply feature to draft responses to any inbound email in one click. The fastest email workflow available. Worth the cost for anyone on the team who lives in email.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── SECTION 8: PROMPTS LIBRARY ─── -->
+  <div id="s8" class="section">
+    <div class="section-header">
+      <span class="section-number">Section 08</span>
+      <div>
+        <h2>Prompts Library</h2>
+        <p>20 ready-to-use prompts. Copy, fill in the brackets, run.</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>How to use these:</strong> Open Claude (claude.ai) or ChatGPT. Copy the prompt. Fill in everything in [BRACKETS]. Hit enter. The more specific you fill in the brackets, the better the output.
+    </div>
+
+    <!-- PROMPTS 1-20 -->
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">1</div>
+        <h4>Prospect Research</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>I'm about to reach out to [DR. NAME] at [PRACTICE NAME] in [CITY, STATE].
+Here's what I know about them:
+- Website highlights: [KEY INFO FROM THEIR SITE]
+- Google rating: [RATING] with [NUMBER] reviews
+- Specialty focus: [E.G., IMPLANTS, FULL-ARCH, PEDIATRIC ORTHO]
+- Practice size: [NUMBER OF PROVIDERS / LOCATIONS]
+
+I work for CaseLink, a HIPAA-compliant dental referral coordination platform.
+Specialists pay $499/month. GPs are free. We're live in the DMV.
+
+Give me:
+1. One personalized talking point for this specific practice
+2. Their most likely objection and a one-sentence response
+3. An opening line for a cold call
+4. One question to ask early that will reveal their referral pain</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">2</div>
+        <h4>Cold Email</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>Write a cold email to [DR. NAME], a [SPECIALTY] in [CITY] who runs a
+[NUMBER]-provider practice. They have [RATING] stars on Google and their
+website emphasizes [KEY FOCUS/DIFFERENTIATOR].
+
+The email is from [YOUR NAME] at CaseLink — a digital referral coordination
+platform for dental specialists. Specialists pay $499/month; GPs are free.
+
+The email should:
+- Be under 150 words
+- Reference something specific about their practice
+- Clearly explain what CaseLink does in one sentence
+- End with a low-commitment ask (15-minute call)
+- Sound like a person wrote it, not a marketing department</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">3</div>
+        <h4>LinkedIn Outreach</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>Write a LinkedIn connection message to [DR. NAME], a [SPECIALTY] in [CITY].
+
+I'm reaching out from CaseLink, a digital referral platform for dental
+specialists in the DMV. [INCLUDE ANY MUTUAL CONNECTION OR SPECIFIC HOOK
+IF AVAILABLE.]
+
+Keep it under 100 words. Warm, not salesy. End with a soft ask — would
+they be open to a brief conversation?</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">4</div>
+        <h4>Demo Prep / Objection Anticipation</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>I'm demoing CaseLink to [PRACTICE TYPE] — a [SIZE]-provider [SPECIALTY]
+practice in [CITY]. CaseLink is a HIPAA-compliant digital referral platform
+for dental specialists ($499/month for specialists; free for GPs).
+
+Generate:
+1. The 5 most likely objections this practice type will raise
+2. A concise, confident response to each objection
+3. Two discovery questions to ask early in the call
+4. One thing to lead with that will resonate most for their specialty</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">5</div>
+        <h4>Post-Demo Follow-Up</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>I just finished a demo with [DR. NAME] at [PRACTICE NAME]. Here's what happened:
+- Topics covered: [LIST KEY DEMO POINTS]
+- Their main interest: [WHAT GOT THEM EXCITED]
+- Their concern or objection: [WHAT THEY PUSHED BACK ON]
+- Agreed next step: [E.G., SEND PRICING, SCHEDULE FOLLOW-UP]
+
+Write a follow-up email that:
+- Thanks them specifically (references something from the call)
+- Addresses their concern directly
+- Restates the value most relevant to their situation
+- Includes a clear next step
+- Is under 200 words and sounds like a human wrote it</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">6</div>
+        <h4>GP Invitation Draft</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>I'm onboarding Dr. [SPECIALIST NAME], a [SPECIALTY] in [CITY]. They want
+to invite their referring GPs to connect on CaseLink.
+
+Write a message they can send to their GPs that:
+- Comes from the specialist (first person, their voice)
+- Explains what CaseLink does in one sentence (GPs send digital referrals
+  with case notes, specialists respond and update in real time)
+- Notes that the GP platform is completely free
+- Feels like a colleague reaching out, not a vendor pitch
+- Works as both an email and a text message
+
+Here's any context about their tone/style: [FORMAL/CASUAL/ANYTHING YOU KNOW]</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">7</div>
+        <h4>Onboarding Kick-Off Prep</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>I'm about to do an onboarding kick-off call with Dr. [NAME], a new CaseLink
+customer. They are a [SPECIALTY] in [CITY].
+
+Here's what I know about their practice:
+[PASTE ANY INTAKE FORM RESPONSES OR NOTES]
+
+Generate:
+1. Three personalized setup suggestions for their practice type
+2. Two questions to ask that will reveal how they currently manage referrals
+3. One potential activation blocker to watch for
+4. A recommended first 30-day success plan (3 bullet points)</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">8</div>
+        <h4>QBR Summary</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>Here is usage data for Dr. [NAME], a CaseLink customer ([SPECIALTY], [CITY]):
+- Referrals received this quarter: [X]
+- Referral completion rate: [X]%
+- Top referring GPs: [LIST]
+- Average time from referral to appointment booked: [X] days
+- Estimated revenue impact: $[X]
+- Prior quarter comparison: [BETTER / WORSE / FLAT + DETAILS]
+
+Write a 1-page quarterly business review that:
+- Opens with a clear ROI statement
+- Highlights the most impressive metric
+- Shows the top GP relationship by volume
+- Notes any trend (positive or negative)
+- Ends with a forward-looking recommendation
+- Is appropriate to share as a PDF or read on a call</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">9</div>
+        <h4>Churn Re-Engagement</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>Dr. [NAME] ([SPECIALTY], [CITY]) hasn't logged into CaseLink in [X] days.
+Their last active referral was [DESCRIBE LAST REFERRAL].
+Prior to going quiet, they had [DESCRIBE USAGE — e.g., "5-7 referrals/month"].
+
+Write:
+1. A text message from [TEAM MEMBER NAME] — warm, not salesy, max 3 sentences,
+   references the last active referral specifically
+2. A follow-up email if no response in 3 days — slightly more formal,
+   offers a 10-minute check-in call
+3. One hypothesis for why they went quiet and what we could offer to re-engage</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">10</div>
+        <h4>Study Club Presentation Outline</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>Create a detailed outline for a 10-slide study club presentation titled:
+"[PRESENTATION TITLE]"
+
+Audience: [SPECIALTY] practitioners in private practice in the DMV.
+Tone: Educational, practical — not a sales pitch.
+CaseLink appears on slides 8-10 as an example, not the focus.
+
+For each slide:
+- Suggested headline
+- 3 bullet points of content
+- One speaker note suggestion
+
+The presentation should educate first, and let CaseLink speak for itself
+through case examples.</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">11</div>
+        <h4>Dental Society Newsletter Article</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>Write a 600-word article for a dental society newsletter on:
+"[TOPIC]"
+
+The article should:
+- Open with a scenario GPs and specialists both recognize
+- Explain the problem without being preachy
+- Offer 3 actionable suggestions
+- Mention CaseLink naturally in one paragraph (as an example, not the point)
+- End with a call to action for readers who want to learn more
+- Sound like an informed industry voice, not a vendor
+
+Audience: [GPs / specialists / both]
+Publication: [DENTAL SOCIETY NAME] newsletter</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">12</div>
+        <h4>Customer Testimonial → Case Study</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>A CaseLink customer said this during a [CALL / EMAIL / CONVERSATION]:
+"[PASTE EXACT QUOTE OR CLOSE PARAPHRASE]"
+
+Turn this into:
+1. A 3-sentence polished testimonial in first person, attributable to
+   "[DR. NAME], [SPECIALTY], [CITY]"
+2. A 150-word case study with: the problem, what they did, the result
+3. A LinkedIn post we could share (with their permission) —
+   conversational, no hashtag spam
+
+Don't add claims they didn't make. Keep it authentic and specific.</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">13</div>
+        <h4>Call Notes → Action Items</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>Here are my notes / transcript from a [CALL TYPE] with [NAME / COMPANY]:
+[PASTE NOTES OR TRANSCRIPT]
+
+Extract and organize:
+1. Summary (3 sentences)
+2. Key decisions made
+3. Action items (with owner if mentioned, and due date if discussed)
+4. Objections or concerns raised
+5. Product feedback or feature requests mentioned
+6. Recommended next step
+
+Format as clean bullet points I can paste into Notion/Airtable.</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">14</div>
+        <h4>Monthly Investor Update</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>Here are my raw notes and metrics for this month's investor update:
+[PASTE BULLET POINTS — e.g., MRR, new customers, churn, key wins, challenges]
+
+Write a monthly investor update using this structure:
+1. Opening (1-sentence on overall momentum)
+2. Key metrics
+3. Highlights (2-3 wins)
+4. Challenges (honest, 1-2 sentences)
+5. Focus for next 30 days
+6. Ask (if any)
+
+Tone: Direct, confident, transparent. We're early stage.
+Don't oversell wins or hide challenges. Investors want honesty.
+Keep it under 400 words.</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">15</div>
+        <h4>Product Feedback Synthesis</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>Here are notes from [X] customer conversations over the past [TIME PERIOD]:
+[PASTE ALL NOTES]
+
+Analyze and tell me:
+1. The 5 most common friction points mentioned
+2. The feature or improvement that comes up most frequently
+3. The exact words customers use to describe the core problem
+   (quote them when possible)
+4. Any patterns by practice type or specialty
+5. One insight that might be easy to miss but worth flagging
+
+Format as a product team briefing I can share internally.</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">16</div>
+        <h4>Feature Spec Writing</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>Here's a feature I want to build, in plain English:
+[DESCRIBE THE FEATURE IN 2-5 SENTENCES]
+
+Write a product spec that includes:
+1. Problem statement — what user pain does this solve?
+2. User story — "As a [user type], I want [action] so that [outcome]"
+3. Acceptance criteria — specific, testable conditions for "done"
+4. Edge cases — what could go wrong or behave unexpectedly?
+5. Out of scope — what are we NOT building in v1?
+
+Write it clearly enough that an engineer unfamiliar with CaseLink
+could understand exactly what to build.</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">17</div>
+        <h4>Job Description</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>Write a job description for a [ROLE TITLE] at CaseLink.
+
+About us: CaseLink is an early-stage dental SaaS startup building a
+HIPAA-compliant referral coordination platform for dental specialists.
+We're 5-10 people, live in the DMV, pre-Series A, growing fast.
+Specialists pay $499/month; GPs are free.
+
+This role will: [DESCRIBE IN PLAIN ENGLISH WHAT THE PERSON WILL DO]
+
+The JD should:
+- Be honest about our stage (early, high ownership, scrappy)
+- Attract mission-driven people who want to build, not just maintain
+- List real requirements (not a wishlist)
+- Sound human, not like corporate HR copy
+- Include one sentence about who thrives here vs. who won't
+
+Compensation range: [RANGE OR "competitive + equity"]
+Location: [DMV / Remote / Hybrid]</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">18</div>
+        <h4>Objection Handling Script</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>A [SPECIALTY] practice just raised this objection during a CaseLink demo:
+"[PASTE EXACT OBJECTION]"
+
+Write:
+1. An empathetic acknowledgment (1 sentence)
+2. A direct response that addresses the real concern behind the objection
+3. A follow-up question to confirm we've resolved it
+4. A transition back to the demo
+
+Keep it conversational. Don't be defensive. The goal is to understand
+their concern and address it honestly — not to "win" the objection.</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">19</div>
+        <h4>Pricing Conversation Prep</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>I'm about to have a pricing conversation with [DR. NAME] at [PRACTICE NAME].
+Context:
+- They are a [SPECIALTY] with approximately [X] active GP referral sources
+- Their current referral volume: [ESTIMATE IF KNOWN]
+- Their main value driver from CaseLink: [E.G., REDUCING LOST REFERRALS /
+  FASTER CASE ACCEPTANCE / BETTER GP RELATIONSHIPS]
+- Their likely concern: [PRICE / ROI / SWITCHING COST / OTHER]
+
+Help me prepare:
+1. A simple ROI framing for the $499/month cost
+   (what's one accepted referral worth to them?)
+2. A response if they say "it's too expensive"
+3. A response if they ask for a discount
+4. The best time to introduce pricing in the conversation</pre>
+      </div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="prompt-item-header">
+        <div class="prompt-num">20</div>
+        <h4>Referral Flywheel Explainer (for GPs)</h4>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-label">Copy this prompt</div>
+        <pre>Write a 3-paragraph explanation of why a GP should connect their practice
+to CaseLink — aimed at a general dentist who is skeptical and hasn't heard of us.
+
+Key points to cover:
+- It's completely free for GPs
+- They can send referrals digitally with case notes and X-rays in under 2 minutes
+- They get real-time status updates on every referred patient
+- It improves their relationship with the specialist (less phone tag)
+- Their patients have a better experience (faster appointments, less friction)
+
+Tone: Colleague to colleague, not salesy. Like a friend explaining why they
+switched to something and liked it. No jargon. Max 200 words.</pre>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <h2>The Point of All This</h2>
+    <p>The tools and prompts in this playbook aren't magic — they're leverage. The team member who uses them will do in 20 minutes what used to take two hours. Over a week, that's an extra day of capacity per person.</p>
+    <p>Start small. Pick one section this week — probably Sales or Onboarding — and run two or three prompts before your next call. See what comes out. Adjust. Use what helps, ignore what doesn't.</p>
+    <p>The goal isn't to use AI for everything. It's to stop letting low-leverage work crowd out the high-leverage work: building relationships, closing deals, improving the product, and serving your customers.</p>
+    <p>You're building something genuinely useful in a space that needs it. Run fast.</p>
+  </div>
+
+</div>
+
+<footer>
+  CaseLink Internal Document &nbsp;·&nbsp; Not for external distribution &nbsp;·&nbsp; Last updated March 2026
+</footer>
+
+</body>
+</html>

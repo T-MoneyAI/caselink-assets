@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CaseLink — Ad Creatives</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Inter+Display:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800,900&display=swap" rel="stylesheet"/>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: #e8eaee; padding: 48px 40px; color: #101011; }
+
+/* PAGE HEADER */
+.page-header { max-width: 1300px; margin: 0 auto 40px; display: flex; align-items: center; justify-content: space-between; }
+.page-title { font-family: 'Switzer', sans-serif; font-size: 20px; font-weight: 700; }
+.page-sub { font-size: 12px; color: #606266; margin-top: 3px; }
+.badge { font-size: 11px; font-weight: 700; background: #0099ff; color: white; padding: 5px 14px; border-radius: 20px; }
+
+/* SECTION LABEL */
+.section-label { max-width: 1300px; margin: 40px auto 16px; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #a7a7a7; }
+
+/* AD GRID */
+.ads-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+
+/* AD CARD */
+.ad-card { display: flex; flex-direction: column; gap: 10px; }
+.ad-meta { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #606266; }
+.ad-meta span { color: #a7a7a7; font-weight: 400; margin-left: 6px; }
+
+/* THE AD UNIT */
+.ad { width: 100%; aspect-ratio: 1; border-radius: 20px; overflow: hidden; position: relative; box-shadow: 0 12px 48px rgba(0,0,0,0.15); }
+.ad-story { aspect-ratio: 9/16; }
+
+/* ─── AD 1: FAX IS DEAD ─── */
+.ad-1 {
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  padding: 36px;
+}
+.ad-1 .logo-row { display: flex; align-items: center; gap: 8px; margin-bottom: auto; }
+.ad-1 .logo-icon { width: 28px; height: 28px; }
+.ad-1 .logo-text { font-family: 'Switzer', sans-serif; font-size: 16px; font-weight: 700; color: white; }
+.ad-1 .headline-group { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.strikethrough-word {
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(52px, 8vw, 80px);
+  font-weight: 900;
+  color: rgba(255,255,255,0.15);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+.strikethrough-word::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: 4px;
+  background: #ff4444;
+  transform: rotate(-3deg);
+}
+.big-answer {
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(52px, 8vw, 80px);
+  font-weight: 900;
+  background: linear-gradient(135deg, #89c4f4 0%, #ffffff 50%, #f5c18a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+.ad-1 .sub { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 16px; }
+.ad-1 .cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  color: #0a0a0a;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 30px;
+  margin-top: 20px;
+  width: fit-content;
+}
+/* Noise texture overlay */
+.ad-1::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* ─── AD 2: SPLIT STATS ─── */
+.ad-2 {
+  background: radial-gradient(ellipse at 15% 15%, #89c4f4 0%, #ffffff 55%, #f5c18a 100%);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 32px;
+}
+.ad-2 .logo-row { display: flex; align-items: center; gap: 8px; }
+.ad-2 .logo-text { font-family: 'Switzer', sans-serif; font-size: 16px; font-weight: 700; color: #101011; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-self: center; margin: 20px 0; }
+.stat-card {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.stat-card.accent { background: #0099ff; }
+.stat-card.accent .stat-num { color: white; }
+.stat-card.accent .stat-label { color: rgba(255,255,255,0.7); }
+.stat-num {
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 900;
+  color: #0099ff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.stat-label { font-size: 11px; color: #606266; margin-top: 4px; font-weight: 500; line-height: 1.4; }
+.ad-2 .bottom-line {
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(14px, 2vw, 18px);
+  font-weight: 800;
+  color: #101011;
+  line-height: 1.2;
+}
+.ad-2 .cta-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #0099ff;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 30px;
+  margin-top: 12px;
+  width: fit-content;
+}
+
+/* ─── AD 3: STACKED COPY ─── */
+.ad-3 {
+  background: radial-gradient(ellipse at 85% 15%, #89c4f4 0%, #f0f8ff 40%, #fef0e0 100%);
+  display: flex;
+  flex-direction: column;
+  padding: 36px;
+  justify-content: space-between;
+}
+.ad-3 .tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(0,153,255,0.12);
+  color: #0077cc;
+  padding: 4px 12px;
+  border-radius: 20px;
+  width: fit-content;
+}
+.stacked-headline {
+  font-family: 'Switzer', sans-serif;
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+}
+.stacked-headline .line-lg { font-size: clamp(34px, 5vw, 52px); color: #101011; display: block; }
+.stacked-headline .line-sm { font-size: clamp(22px, 3.5vw, 36px); color: #606266; display: block; }
+.stacked-headline .line-accent { font-size: clamp(34px, 5vw, 52px); color: #0099ff; display: block; }
+.ad-3 .logo-row { display: flex; align-items: center; gap: 8px; }
+.ad-3 .logo-text { font-family: 'Switzer', sans-serif; font-size: 14px; font-weight: 700; color: #101011; }
+.ad-3 .cta-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #0099ff;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 11px 22px;
+  border-radius: 30px;
+  width: fit-content;
+}
+
+/* ─── AD 4: THE FAX PROBLEM (Story) ─── */
+.ad-4 {
+  background: #f0f2f6;
+  display: flex;
+  flex-direction: column;
+  padding: 44px 36px;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.ad-4::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(137,196,244,0.4) 0%, transparent 70%);
+}
+.ad-4::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -80px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,193,138,0.4) 0%, transparent 70%);
+}
+.fax-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-self: center;
+  width: 100%;
+}
+.fax-card {
+  background: white;
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  position: relative;
+}
+.fax-card.lost { opacity: 0.3; transform: rotate(-2deg); }
+.fax-card.lost-2 { opacity: 0.15; transform: rotate(1.5deg); }
+.fax-icon { width: 28px; height: 28px; background: #fee2e2; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.fax-icon.ok { background: rgba(0,153,255,0.1); }
+.fax-text { font-size: 11px; }
+.fax-text strong { display: block; font-weight: 600; color: #101011; }
+.fax-text span { color: #a7a7a7; font-size: 10px; }
+.fax-x { margin-left: auto; color: #ff4444; font-weight: 800; font-size: 14px; }
+.fax-check { margin-left: auto; color: #0099ff; font-weight: 800; font-size: 14px; }
+
+/* ─── AD 5: MINIMAL BOLD (Story) ─── */
+.ad-5 {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  padding: 44px 36px;
+  justify-content: space-between;
+  position: relative;
+}
+.ad-5 .accent-line {
+  width: 48px; height: 5px;
+  background: linear-gradient(90deg, #89c4f4, #f5c18a);
+  border-radius: 3px;
+}
+.ad-5 .mega-word {
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(72px, 12vw, 120px);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: #101011;
+}
+.ad-5 .mega-word .ghost { color: rgba(0,0,0,0.06); }
+.ad-5 .question { font-size: 18px; font-weight: 400; color: #606266; margin-top: 16px; line-height: 1.4; }
+
+/* ─── AD 6: GRADIENT HERO (Story) ─── */
+.ad-6 {
+  background: radial-gradient(ellipse at 15% 15%, #89c4f4 0%, #ffffff 55%, #f5c18a 100%);
+  display: flex;
+  flex-direction: column;
+  padding: 52px 40px;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.ad-6 .logo-block { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ad-6 .logo-text { font-family: 'Switzer', sans-serif; font-size: 22px; font-weight: 700; color: #101011; }
+.ad-6 .hero-copy { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.ad-6 .line-a {
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(40px, 7vw, 64px);
+  font-weight: 900;
+  color: #101011;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+}
+.ad-6 .line-fade {
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(40px, 7vw, 64px);
+  font-weight: 900;
+  background: linear-gradient(180deg, #2b2b2c 0%, rgba(43,43,44,0.35) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+}
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #0099ff; margin-bottom: 2px; }
+.ad-6 .cta-pill {
+  background: #0099ff;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 30px;
+  white-space: nowrap;
+}
+
+/* ─── AD SQ4: TESTIMONIAL ─── */
+.ad-sq4 {
+  background: radial-gradient(ellipse at 15% 15%, #89c4f4 0%, #ffffff 55%, #f5c18a 100%);
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  position: relative;
+}
+.ad-sq4 .logo-row { display: flex; align-items: center; gap: 8px; }
+.ad-sq4 .logo-text { font-family: 'Switzer', sans-serif; font-size: 16px; font-weight: 700; color: #101011; }
+.big-open-quote {
+  font-family: Georgia, serif;
+  font-size: 130px;
+  color: rgba(0,153,255,0.18);
+  line-height: 0.7;
+  position: absolute;
+  top: 56px;
+  left: 20px;
+  pointer-events: none;
+  user-select: none;
+}
+.testimonial-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  margin: 16px 0 12px;
+}
+.testimonial-quote {
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(13px, 1.9vw, 16px);
+  font-weight: 600;
+  color: #101011;
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+.testimonial-footer {}
+.stars { color: #0099ff; font-size: 15px; letter-spacing: 1px; margin-bottom: 5px; }
+.testimonial-attr { font-size: 11px; color: #606266; font-style: italic; }
+.ad-sq4 .cta-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #0099ff;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 30px;
+  margin-top: 14px;
+  width: fit-content;
+}
+
+/* ─── AD SQ5: PHONE TAG PAIN ─── */
+.ad-sq5 {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.ad-sq5::before {
+  content: '';
+  position: absolute;
+  top: -70px; left: -70px;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,153,255,0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+.sq5-top { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.sq5-logo-text { font-family: 'Switzer', sans-serif; font-size: 15px; font-weight: 700; color: #101011; }
+.phone-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 30px;
+  margin: 14px 0 10px;
+}
+.phone-cycle { font-size: 22px; color: #c0c8d4; font-weight: 300; }
+.sq5-headline {
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 900;
+  color: #101011;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 9px;
+}
+.sq5-sub { font-size: 12px; color: #606266; line-height: 1.55; margin-bottom: 13px; }
+.feature-list { list-style: none; padding: 0; margin: 0 0 18px; }
+.feature-list li { font-size: 11px; color: #444; padding: 3px 0; font-weight: 500; }
+.feature-list li::before { content: ''; }
+.ad-sq5 .cta-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #0099ff;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 30px;
+  width: fit-content;
+}
+
+/* ─── AD SQ6: 25% STAT DARK ─── */
+.ad-sq6 {
+  background: #0a1628;
+  display: flex;
+  flex-direction: column;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.ad-sq6::before {
+  content: '';
+  position: absolute;
+  top: -110px; left: -110px;
+  width: 380px; height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,153,255,0.16) 0%, transparent 65%);
+  pointer-events: none;
+}
+.big-stat {
+  font-family: 'Switzer', sans-serif;
+  font-size: 8rem;
+  font-weight: 900;
+  color: white;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  position: relative;
+  z-index: 1;
+}
+.stat-label-dark { font-size: 14px; color: rgba(255,255,255,0.45); margin-top: 6px; font-weight: 500; position: relative; z-index: 1; }
+.stat-line2 { font-family: 'Switzer', sans-serif; font-size: clamp(15px, 2.2vw, 19px); font-weight: 800; color: white; margin-top: 6px; position: relative; z-index: 1; }
+.dark-divider { width: 44px; height: 3px; background: rgba(255,255,255,0.18); border-radius: 2px; margin: 16px 0; position: relative; z-index: 1; }
+.stat-subtext { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; position: relative; z-index: 1; }
+.ad-sq6 .cta-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #0099ff;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 30px;
+  width: fit-content;
+  margin-top: 18px;
+  position: relative;
+  z-index: 1;
+}
+.sq6-logo-row { display: flex; align-items: center; gap: 8px; margin-top: auto; justify-content: flex-end; position: relative; z-index: 1; }
+.sq6-logo-text { font-family: 'Switzer', sans-serif; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.65); }
+
+/* ─── AD SQ7: NETWORK FOMO ─── */
+.ad-sq7 {
+  background: radial-gradient(ellipse at 15% 15%, #89c4f4 0%, #ffffff 55%, #f5c18a 100%);
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+}
+.ad-sq7 .logo-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.ad-sq7 .logo-text { font-family: 'Switzer', sans-serif; font-size: 16px; font-weight: 700; color: #101011; }
+.specialist-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(0,153,255,0.12);
+  color: #0077cc;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 13px;
+  border-radius: 20px;
+  width: fit-content;
+  margin-bottom: 14px;
+  letter-spacing: 0.04em;
+}
+.fomo-headline {
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(20px, 3vw, 27px);
+  font-weight: 900;
+  color: #101011;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.fomo-sub { font-size: 12px; color: #606266; line-height: 1.55; margin-bottom: 16px; flex: 1; }
+.mini-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+.mini-stat-box {
+  background: white;
+  border-radius: 10px;
+  padding: 10px 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.mini-stat-num { font-family: 'Switzer', sans-serif; font-size: 18px; font-weight: 900; color: #0099ff; line-height: 1.1; }
+.mini-stat-lbl { font-size: 10px; color: #606266; margin-top: 2px; }
+.ad-sq7 .cta-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #0099ff;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 30px;
+  width: fit-content;
+}
+.cta-note { font-size: 10px; color: #a7a7a7; margin-top: 6px; }
+
+/* ─── STORY 4: THREE-STEP FLOW ─── */
+.ad-st4 {
+  background: radial-gradient(ellipse at 15% 15%, #89c4f4 0%, #ffffff 55%, #f5c18a 100%);
+  display: flex;
+  flex-direction: column;
+  padding: 44px 36px;
+  align-items: center;
+}
+.st4-logo-top { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+.st4-logo-text { font-family: 'Switzer', sans-serif; font-size: 18px; font-weight: 700; color: #101011; }
+.flow-headline {
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(30px, 5vw, 46px);
+  font-weight: 900;
+  color: #101011;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  text-align: center;
+  margin-bottom: 24px;
+}
+.step-cards { display: flex; flex-direction: column; gap: 12px; width: 100%; flex: 1; justify-content: center; }
+.step-card {
+  background: white;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.step-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: #0099ff;
+  color: white;
+  font-family: 'Switzer', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.step-body { flex: 1; }
+.step-title { font-family: 'Switzer', sans-serif; font-size: 15px; font-weight: 800; color: #101011; margin-bottom: 3px; }
+.step-desc { font-size: 11px; color: #606266; line-height: 1.45; }
+.st4-pricing { font-size: 11px; color: #606266; text-align: center; margin: 16px 0 12px; }
+.ad-st4 .cta-pill {
+  background: #0099ff;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 13px 28px;
+  border-radius: 30px;
+  white-space: nowrap;
+}
+
+/* ─── STORY 5: QUOTE / EMOTIONAL DARK ─── */
+.ad-st5 {
+  background: #0a1628;
+  display: flex;
+  flex-direction: column;
+  padding: 52px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.big-deco-quote {
+  font-family: Georgia, serif;
+  font-size: 260px;
+  color: rgba(0,153,255,0.07);
+  position: absolute;
+  top: -30px;
+  left: 5px;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.st5-quote-main {
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 800;
+  color: white;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  margin-bottom: 18px;
+}
+.st5-attr { font-size: 13px; color: rgba(255,255,255,0.45); font-style: italic; position: relative; z-index: 1; }
+.dark-divider-story { width: 48px; height: 3px; background: rgba(0,153,255,0.4); border-radius: 2px; margin: 24px 0; position: relative; z-index: 1; }
+.st5-loop-close { font-family: 'Switzer', sans-serif; font-size: 18px; font-weight: 700; color: white; position: relative; z-index: 1; margin-bottom: auto; }
+.st5-logo-bottom { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: auto; text-align: center; position: relative; z-index: 1; }
+.st5-logo-text { font-family: 'Switzer', sans-serif; font-size: 17px; font-weight: 700; color: rgba(255,255,255,0.8); }
+.ad-st5 .cta-pill {
+  background: #0099ff;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 13px 28px;
+  border-radius: 30px;
+  margin-top: 14px;
+  white-space: nowrap;
+}
+
+/* NOTES */
+.ad-note { background: white; border-radius: 10px; padding: 12px 16px; border: 1px solid rgba(0,0,0,0.07); }
+.ad-note-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #a7a7a7; margin-bottom: 5px; }
+.ad-note ul { padding-left: 14px; }
+.ad-note li { font-size: 11px; color: #606266; line-height: 1.7; }
+
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+</style>
+</head>
+<body>
+
+<!-- SHARED SVG GRADIENT DEFS — referenced as url(#adclg) throughout -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true">
+  <defs>
+    <linearGradient id="adclg" x1="0" y1="0" x2="60" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0099ff"/>
+      <stop offset="40%" stop-color="#06b6d4"/>
+      <stop offset="75%" stop-color="#06d6a0"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="page-header">
+  <div>
+    <div class="page-title">CaseLink — Ad Creatives</div>
+    <div class="page-sub">Phase 1 · 6 creatives · Square + Story formats</div>
+  </div>
+  <span class="badge">Ready to Produce</span>
+</div>
+
+<!-- SQUARE ADS -->
+<div class="section-label">Square Format — 1080 × 1080 — Feed</div>
+<div class="ads-grid">
+
+  <!-- AD 1: FAX IS DEAD -->
+  <div class="ad-card">
+    <div class="ad-meta">Ad 1 — Awareness <span>Pain/Provocation · Cold</span></div>
+    <div class="ad ad-1">
+      <div class="logo-row">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:28px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span class="logo-text">CaseLink</span>
+      </div>
+      <div class="headline-group">
+        <div class="strikethrough-word">FAX.</div>
+        <div class="big-answer">DONE.</div>
+        <p class="sub">Digital referrals. Real-time tracking. Zero paperwork.</p>
+        <div class="cta-pill">See how it works →</div>
+      </div>
+    </div>
+    <div class="ad-note">
+      <div class="ad-note-title">Notes</div>
+      <ul><li>Bold provocation — names the enemy</li><li>Dark contrast stands out in feed</li><li>Cold awareness — Instagram + Facebook</li></ul>
+    </div>
+  </div>
+
+  <!-- AD 2: STATS -->
+  <div class="ad-card">
+    <div class="ad-meta">Ad 2 — Consideration <span>Specialist ROI · Warm</span></div>
+    <div class="ad ad-2">
+      <div class="logo-row">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:22px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span class="logo-text">CaseLink</span>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card accent">
+          <div class="stat-num">+23</div>
+          <div class="stat-label">New referrals per month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">85%</div>
+          <div class="stat-label">Referral conversion rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3 days</div>
+          <div class="stat-label">Saved per referral</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Lost referrals reported</div>
+        </div>
+      </div>
+      <div>
+        <div class="bottom-line">Your referral pipeline, finally visible.</div>
+        <div class="cta-pill">Join free →</div>
+      </div>
+    </div>
+    <div class="ad-note">
+      <div class="ad-note-title">Notes</div>
+      <ul><li>Data-forward — specialists respond to numbers</li><li>LinkedIn primary · retargeting secondary</li><li>Swap stats with real data once available</li></ul>
+    </div>
+  </div>
+
+  <!-- AD 3: STACKED COPY -->
+  <div class="ad-card">
+    <div class="ad-meta">Ad 3 — Acquisition <span>GP Funnel · Free CTA</span></div>
+    <div class="ad ad-3">
+      <div class="tag">For General Practitioners</div>
+      <div class="stacked-headline">
+        <span class="line-lg">Send it.</span>
+        <span class="line-sm">Know it landed.</span>
+        <span class="line-accent">Free.</span>
+      </div>
+      <div>
+        <div class="logo-row" style="margin-bottom:12px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:20px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+          <span class="logo-text">CaseLink</span>
+        </div>
+        <div class="cta-pill">Free for GPs. Always. →</div>
+      </div>
+    </div>
+    <div class="ad-note">
+      <div class="ad-note-title">Notes</div>
+      <ul><li>Mixed scale typography — eye-catching in feed</li><li>"Free" as visual anchor — largest word after brand</li><li>Instagram + Facebook · GP targeting</li></ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- STORY ADS -->
+<div class="section-label" style="margin-top:48px;">Story Format — 1080 × 1920 — Stories / Reels</div>
+<div class="ads-grid">
+
+  <!-- STORY 1: FAX PROBLEM VISUAL -->
+  <div class="ad-card">
+    <div class="ad-meta">Story 1 — Before/After <span>Problem Visual · Awareness</span></div>
+    <div class="ad ad-story ad-4">
+      <div style="position:relative;z-index:1;display:flex;align-items:center;gap:8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:24px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span style="font-family:'Switzer',sans-serif;font-size:16px;font-weight:700;">CaseLink</span>
+      </div>
+      <div style="position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:center;gap:24px;">
+        <div>
+          <div style="font-size:10px;font-weight:700;color:#ff4444;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Before CaseLink</div>
+          <div class="fax-visual">
+            <div class="fax-card lost-2">
+              <div class="fax-icon">📠</div>
+              <div class="fax-text"><strong>Referral sent</strong><span>Implant consult · Oct 3</span></div>
+              <div class="fax-x">✕</div>
+            </div>
+            <div class="fax-card lost">
+              <div class="fax-icon">📠</div>
+              <div class="fax-text"><strong>Referral sent</strong><span>Perio eval · Oct 7</span></div>
+              <div class="fax-x">✕</div>
+            </div>
+            <div class="fax-card">
+              <div class="fax-icon">📠</div>
+              <div class="fax-text"><strong>Referral sent</strong><span>Extraction · Oct 9</span></div>
+              <div class="fax-x">✕</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:700;color:#0099ff;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">With CaseLink</div>
+          <div class="fax-visual">
+            <div class="fax-card">
+              <div class="fax-icon ok">✓</div>
+              <div class="fax-text"><strong>Referral confirmed</strong><span>Specialist accepted · 12 min ago</span></div>
+              <div class="fax-check">✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="position:relative;z-index:1;">
+        <div style="font-family:'Switzer',sans-serif;font-size:22px;font-weight:800;line-height:1.1;margin-bottom:14px;">Referrals don't<br/>have to disappear.</div>
+        <div style="display:inline-block;background:#0099ff;color:white;font-size:13px;font-weight:700;padding:12px 24px;border-radius:30px;">www.caselink.net ↗</div>
+      </div>
+    </div>
+    <div class="ad-note">
+      <div class="ad-note-title">Notes</div>
+      <ul><li>Visual before/after — highest engagement format</li><li>Real scenario dentists recognize immediately</li><li>Instagram Story + Facebook Story</li></ul>
+    </div>
+  </div>
+
+  <!-- STORY 2: MINIMAL BOLD -->
+  <div class="ad-card">
+    <div class="ad-meta">Story 2 — Minimal Bold <span>Brand · Organic + Paid</span></div>
+    <div class="ad ad-story ad-5">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:24px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span style="font-family:'Switzer',sans-serif;font-size:16px;font-weight:700;">CaseLink</span>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+        <div class="accent-line" style="margin-bottom:24px;"></div>
+        <div class="mega-word">
+          <span style="display:block;">Every</span>
+          <span style="display:block;">Refer-</span>
+          <span style="display:block;">ral.</span>
+        </div>
+        <div class="question">Tracked. Confirmed.<br/>Closed. <span style="color:#0099ff;">Finally.</span></div>
+      </div>
+      <div>
+        <div style="display:inline-block;background:#0099ff;color:white;font-size:13px;font-weight:700;padding:12px 24px;border-radius:30px;">www.caselink.net ↗</div>
+      </div>
+    </div>
+    <div class="ad-note">
+      <div class="ad-note-title">Notes</div>
+      <ul><li>Bold kinetic typography — highest visual impact</li><li>Works as organic post AND paid story</li><li>"Finally." adds emotional punch</li></ul>
+    </div>
+  </div>
+
+  <!-- STORY 3: GRADIENT HERO -->
+  <div class="ad-card">
+    <div class="ad-meta">Story 3 — Gradient Hero <span>Brand Launch · Awareness</span></div>
+    <div class="ad ad-story ad-6">
+      <div class="logo-block">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:40px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span class="logo-text">CaseLink</span>
+      </div>
+      <div class="hero-copy">
+        <div class="line-a">Every Referral.</div>
+        <div class="line-fade">Tracked.</div>
+        <div class="line-fade">Confirmed.</div>
+        <div class="line-fade">Closed.</div>
+        <div style="width:48px;height:3px;background:linear-gradient(90deg,#89c4f4,#f5c18a);border-radius:2px;margin:24px auto 0;"></div>
+      </div>
+      <div class="cta-pill">www.caselink.net ↗</div>
+    </div>
+    <div class="ad-note">
+      <div class="ad-note-title">Notes</div>
+      <ul><li>Faithful to existing organic post — proven format</li><li>Strongest brand statement, CaseLink gradient</li><li>Use for launch, retargeting, brand awareness</li></ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- NEW SQUARE ADS — ADDITIONAL VARIANTS -->
+<div class="section-label" style="margin-top:48px;">Square Format — 1080 × 1080 — Additional Variants</div>
+<div class="ads-grid">
+
+  <!-- AD SQ4: TESTIMONIAL / SOCIAL PROOF -->
+  <div class="ad-card">
+    <div class="ad-meta">Ad 4 — Testimonial <span>Social Proof · Consideration</span></div>
+    <div class="ad ad-sq4">
+      <div class="logo-row">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:22px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span class="logo-text">CaseLink</span>
+      </div>
+      <div class="big-open-quote">"</div>
+      <div class="testimonial-body">
+        <div class="testimonial-quote">"I haven't lost a single referral since switching to CaseLink. My front desk coordinator said it's the biggest time-saver we've added in 5 years."</div>
+        <div class="testimonial-footer">
+          <div class="stars">★★★★★</div>
+          <div class="testimonial-attr">— Dr. Sarah K., Orthodontist · Bethesda, MD</div>
+        </div>
+      </div>
+      <div class="cta-pill">Join free as a GP →</div>
+    </div>
+    <div class="ad-note">
+      <div class="ad-note-title">Notes</div>
+      <ul>
+        <li>Doctor testimonial builds instant credibility with cold GP audiences</li>
+        <li>5-star row increases perceived trust without explicit claims</li>
+        <li>Instagram + Facebook Feed · Consideration & retargeting sequences</li>
+        <li>Swap with real verified testimonial when available</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- AD SQ5: PHONE TAG PAIN -->
+  <div class="ad-card">
+    <div class="ad-meta">Ad 5 — Phone Tag Pain <span>Pain Point · Awareness</span></div>
+    <div class="ad ad-sq5">
+      <div class="sq5-top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:22px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span class="sq5-logo-text">CaseLink</span>
+      </div>
+      <div class="phone-visual">
+        <span>📞</span>
+        <span class="phone-cycle">↻</span>
+        <span>📞</span>
+      </div>
+      <div class="sq5-headline">Stop playing<br/>phone tag.</div>
+      <div class="sq5-sub">CaseLink notifies your specialist automatically. They confirm. You move on.</div>
+      <ul class="feature-list">
+        <li>✓&nbsp; Referral delivered instantly</li>
+        <li>✓&nbsp; Specialist confirms in-app</li>
+        <li>✓&nbsp; You're notified automatically</li>
+      </ul>
+      <div class="cta-pill">See how it works →</div>
+    </div>
+    <div class="ad-note">
+      <div class="ad-note-title">Notes</div>
+      <ul>
+        <li>Phone tag is a universally despised pain point — instant resonance</li>
+        <li>Three-point checklist reinforces the solution simply and memorably</li>
+        <li>Instagram + Facebook cold GP audience · A/B against Ad 1</li>
+        <li>White background stands out between dark and gradient feed ads</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- AD SQ6: 25% STAT DARK -->
+  <div class="ad-card">
+    <div class="ad-meta">Ad 6 — Dark Stat <span>Awareness · Retargeting</span></div>
+    <div class="ad ad-sq6">
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+        <div class="big-stat">25%</div>
+        <div class="stat-label-dark">of dental referrals</div>
+        <div class="stat-line2">never become an appointment.</div>
+        <div class="dark-divider"></div>
+        <div class="stat-subtext">Yours don't have to be<br/>part of that number.</div>
+        <div class="cta-pill">Fix it free →</div>
+      </div>
+      <div class="sq6-logo-row">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:22px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span class="sq6-logo-text">CaseLink</span>
+      </div>
+    </div>
+    <div class="ad-note">
+      <div class="ad-note-title">Notes</div>
+      <ul>
+        <li>Only dark ad in the full set — stops the scroll in a bright feed</li>
+        <li>Industry stat creates urgency; cite source in ad copy when available</li>
+        <li>Retargeting + LinkedIn Professional · all audience segments</li>
+        <li>Works as a standalone cold awareness play or retargeting finisher</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- AD SQ7: NETWORK FOMO (SPECIALIST) -->
+  <div class="ad-card">
+    <div class="ad-meta">Ad 7 — Network FOMO <span>Specialist Acquisition · Warm</span></div>
+    <div class="ad ad-sq7">
+      <div class="logo-row">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:22px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span class="logo-text">CaseLink</span>
+      </div>
+      <div class="specialist-badge">For Specialists</div>
+      <div class="fomo-headline">Your next 20 referrals are already in the network.</div>
+      <div class="fomo-sub">GPs in DC, MD, and VA are already sending referrals through CaseLink. Join the network and they'll find you.</div>
+      <div class="mini-stats">
+        <div class="mini-stat-box">
+          <div class="mini-stat-num">1,200+</div>
+          <div class="mini-stat-lbl">GPs · Growing</div>
+        </div>
+        <div class="mini-stat-box">
+          <div class="mini-stat-num">DMV</div>
+          <div class="mini-stat-lbl">Region · Expanding</div>
+        </div>
+      </div>
+      <div class="cta-pill">Join as a specialist →</div>
+      <div class="cta-note">(from $499/mo)</div>
+    </div>
+    <div class="ad-note">
+      <div class="ad-note-title">Notes</div>
+      <ul>
+        <li>FOMO angle — specialists fear missing referral volume going to competitors</li>
+        <li>Geographic specificity (DMV) dramatically increases perceived relevance</li>
+        <li>LinkedIn primary — specialist dentist targeting · warm &amp; retargeting</li>
+        <li>Update GP count as network grows; keep "Growing" qualifier honest</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- NEW STORY ADS — ADDITIONAL VARIANTS -->
+<div class="section-label" style="margin-top:48px;">Story Format — 1080 × 1920 — Additional Variants</div>
+<div class="ads-grid">
+
+  <!-- STORY 4: THREE-STEP FLOW -->
+  <div class="ad-card">
+    <div class="ad-meta">Story 4 — Three-Step Flow <span>Product Explanation · Consideration</span></div>
+    <div class="ad ad-story ad-st4">
+      <div class="st4-logo-top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:24px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span class="st4-logo-text">CaseLink</span>
+      </div>
+      <div class="flow-headline">Referrals.<br/>Reimagined.</div>
+      <div class="step-cards">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Send</div>
+            <div class="step-desc">Create a referral in 60 seconds. No paper. No fax.</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Track</div>
+            <div class="step-desc">Real-time updates. Know when the appointment is confirmed.</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Close</div>
+            <div class="step-desc">Treatment notes come back automatically. Loop closed.</div>
+          </div>
+        </div>
+      </div>
+      <div class="st4-pricing">Free for GPs. Specialists from $499/mo.</div>
+      <div class="cta-pill">www.caselink.net ↗</div>
+    </div>
+    <div class="ad-note">
+      <div class="ad-note-title">Notes</div>
+      <ul>
+        <li>Educational format — teaches the product in 3 clear numbered steps</li>
+        <li>Best deployed mid-funnel after awareness ads have warmed the audience</li>
+        <li>Instagram + TikTok Story · Consideration sequences</li>
+        <li>Card layout also adaptable to a carousel post</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- STORY 5: QUOTE / EMOTIONAL (DARK) -->
+  <div class="ad-card">
+    <div class="ad-meta">Story 5 — Quote / Emotional <span>Trust · Retargeting</span></div>
+    <div class="ad ad-story ad-st5">
+      <div class="big-deco-quote">"</div>
+      <div class="st5-quote-main">"For the first time, I actually know what happens to my referrals."</div>
+      <div class="st5-attr">— GP, Capitol Hill Dental · Washington, DC</div>
+      <div class="dark-divider-story"></div>
+      <div class="st5-loop-close">CaseLink closes the loop.</div>
+      <div class="st5-logo-bottom">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:26px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span class="st5-logo-text">CaseLink</span>
+        <div class="cta-pill">www.caselink.net ↗</div>
+      </div>
+    </div>
+    <div class="ad-note">
+      <div class="ad-note-title">Notes</div>
+      <ul>
+        <li>Emotional quote resonates viscerally with GPs who have lost referrals</li>
+        <li>Dark navy matches the retargeting mindset — felt, not sold</li>
+        <li>Pairs with dark square Ad 6 for a cohesive dark retargeting set</li>
+        <li>Instagram + Facebook Story · Warm retargeting audiences only</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- NEW SQUARE BATCH 2 -->
+<div class="section-label" style="margin-top:48px;">Square Format — 1080 × 1080 — Batch 3</div>
+<div class="ads-grid">
+
+  <!-- AD 8: LOST REFERRAL -->
+  <div class="ad-card">
+    <div class="ad-meta">Ad 8 — Fear/Loss <span>Dark Awareness · Cold</span></div>
+    <div class="ad" style="background:#0a1628;padding:40px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:20px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="rgba(255,255,255,0.7)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span style="font-family:'Switzer',sans-serif;font-size:15px;font-weight:700;color:white;">CaseLink</span>
+      </div>
+      <div>
+        <div style="font-family:'Switzer',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:16px;">That referral you sent 3 weeks ago?</div>
+        <div style="font-family:'Switzer',sans-serif;font-size:52px;font-weight:900;color:white;line-height:1;letter-spacing:-0.03em;margin-bottom:20px;">It disappeared.</div>
+        <div style="width:48px;height:3px;background:rgba(239,68,68,0.7);border-radius:2px;margin-bottom:20px;"></div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.55);line-height:1.5;">1 in 4 dental referrals never becomes an appointment. Your patients shouldn't be part of that statistic.</div>
+      </div>
+      <div style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;font-size:13px;font-weight:700;padding:12px 22px;border-radius:30px;width:fit-content;">Close the loop →</div>
+    </div>
+    <div class="ad-note"><div class="ad-note-title">Notes</div><ul><li>Fear/loss framing — high scroll-stop power</li><li>Dark aesthetic contrasts sharply in light feeds</li><li>Retargeting after someone visits caselink.net</li></ul></div>
+  </div>
+
+  <!-- AD 9: BEFORE / AFTER SPLIT -->
+  <div class="ad-card">
+    <div class="ad-meta">Ad 9 — Before/After <span>Comparison · Mid-Funnel</span></div>
+    <div class="ad" style="background:white;padding:0;display:flex;flex-direction:column;">
+      <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;">
+        <div style="padding:28px;background:#fff5f5;display:flex;flex-direction:column;gap:10px;border-right:1px solid #ffe0e0;">
+          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#ef4444;">Without CaseLink</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+            <div style="font-size:12px;color:#606266;display:flex;align-items:center;gap:6px;"><span style="color:#ef4444;font-weight:700;">✕</span> Fax machine</div>
+            <div style="font-size:12px;color:#606266;display:flex;align-items:center;gap:6px;"><span style="color:#ef4444;font-weight:700;">✕</span> Phone tag</div>
+            <div style="font-size:12px;color:#606266;display:flex;align-items:center;gap:6px;"><span style="color:#ef4444;font-weight:700;">✕</span> No status updates</div>
+            <div style="font-size:12px;color:#606266;display:flex;align-items:center;gap:6px;"><span style="color:#ef4444;font-weight:700;">✕</span> Lost referrals</div>
+            <div style="font-size:12px;color:#606266;display:flex;align-items:center;gap:6px;"><span style="color:#ef4444;font-weight:700;">✕</span> Frustrated GPs</div>
+          </div>
+        </div>
+        <div style="padding:28px;background:#f0fff8;display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#059669;">With CaseLink</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+            <div style="font-size:12px;color:#606266;display:flex;align-items:center;gap:6px;"><span style="color:#059669;font-weight:700;">✓</span> Digital referrals</div>
+            <div style="font-size:12px;color:#606266;display:flex;align-items:center;gap:6px;"><span style="color:#059669;font-weight:700;">✓</span> Instant notifications</div>
+            <div style="font-size:12px;color:#606266;display:flex;align-items:center;gap:6px;"><span style="color:#059669;font-weight:700;">✓</span> Real-time tracking</div>
+            <div style="font-size:12px;color:#606266;display:flex;align-items:center;gap:6px;"><span style="color:#059669;font-weight:700;">✓</span> 100% audit trail</div>
+            <div style="font-size:12px;color:#606266;display:flex;align-items:center;gap:6px;"><span style="color:#059669;font-weight:700;">✓</span> GPs come back</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:20px 28px;border-top:1px solid #f0f2f6;display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:7px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:18px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+          <span style="font-family:'Switzer',sans-serif;font-size:14px;font-weight:700;color:#101011;">CaseLink</span>
+        </div>
+        <div style="background:linear-gradient(180deg,rgb(136,186,255),rgb(62,142,255));color:white;font-size:12px;font-weight:700;padding:9px 18px;border-radius:30px;">Switch today →</div>
+      </div>
+    </div>
+    <div class="ad-note"><div class="ad-note-title">Notes</div><ul><li>Clear visual comparison — instant comprehension</li><li>Works in feed and as a carousel slide</li><li>High shareability among dental office managers</li></ul></div>
+  </div>
+
+  <!-- AD 10: ROI STAT -->
+  <div class="ad-card">
+    <div class="ad-meta">Ad 10 — ROI Attack <span>Specialist · Conversion</span></div>
+    <div class="ad" style="background:radial-gradient(ellipse at 85% 15%, #89c4f4 0%, #ffffff 50%, #f5c18a 100%);padding:40px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:20px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span style="font-family:'Switzer',sans-serif;font-size:15px;font-weight:700;color:#101011;">CaseLink</span>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#606266;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:8px;">Per specialist practice</div>
+        <div style="font-family:'Switzer',sans-serif;font-size:72px;font-weight:900;color:#101011;line-height:1;letter-spacing:-0.04em;">$12,000</div>
+        <div style="font-family:'Switzer',sans-serif;font-size:16px;font-weight:600;color:#606266;margin-top:8px;line-height:1.4;">in referral revenue<br/>lost every month.</div>
+        <div style="margin-top:20px;font-size:13px;color:#101011;font-weight:600;background:rgba(0,153,255,0.1);border-left:3px solid #0099ff;padding:10px 14px;border-radius:0 8px 8px 0;">CaseLink pays for itself with one recovered referral.</div>
+      </div>
+      <div style="display:inline-flex;background:linear-gradient(180deg,rgb(136,186,255),rgb(62,142,255));color:white;font-size:13px;font-weight:700;padding:12px 22px;border-radius:30px;width:fit-content;">Start recovering it →</div>
+    </div>
+    <div class="ad-note"><div class="ad-note-title">Notes</div><ul><li>Anchors value immediately with a hard number</li><li>ROI objection-handled in the ad itself</li><li>Specialist acquisition — LinkedIn + Google Display</li></ul></div>
+  </div>
+
+  <!-- AD 11: STUDY CLUB -->
+  <div class="ad-card">
+    <div class="ad-meta">Ad 11 — Study Club <span>GP Community · Referral</span></div>
+    <div class="ad" style="background:#f0f8ff;padding:40px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid rgba(0,153,255,0.15);">
+      <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,153,255,0.1);border:1px solid rgba(0,153,255,0.25);padding:6px 14px;border-radius:30px;width:fit-content;">
+        <span style="width:6px;height:6px;background:#0099ff;border-radius:50%;display:inline-block;"></span>
+        <span style="font-size:11px;font-weight:700;color:#0099ff;letter-spacing:0.04em;">For Study Clubs</span>
+      </div>
+      <div>
+        <div style="font-family:'Switzer',sans-serif;font-size:36px;font-weight:900;color:#101011;line-height:1.1;letter-spacing:-0.02em;margin-bottom:16px;">Your next 20 specialists are in this room.</div>
+        <div style="font-size:13px;color:#606266;line-height:1.6;margin-bottom:20px;">Show your study club how CaseLink closes the referral loop. Takes 3 minutes. Bring one specialist home connected.</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:12px;color:#101011;display:flex;align-items:center;gap:8px;"><span style="color:#059669;font-weight:700;font-size:14px;">✓</span> Share your link in the group chat</div>
+          <div style="font-size:12px;color:#101011;display:flex;align-items:center;gap:8px;"><span style="color:#059669;font-weight:700;font-size:14px;">✓</span> Free for all GPs in the room</div>
+          <div style="font-size:12px;color:#101011;display:flex;align-items:center;gap:8px;"><span style="color:#059669;font-weight:700;font-size:14px;">✓</span> Specialists from $499/mo</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:7px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:18px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+          <span style="font-family:'Switzer',sans-serif;font-size:13px;font-weight:700;color:#101011;">CaseLink</span>
+        </div>
+        <div style="background:linear-gradient(180deg,rgb(136,186,255),rgb(62,142,255));color:white;font-size:12px;font-weight:700;padding:9px 18px;border-radius:30px;">Get your link →</div>
+      </div>
+    </div>
+    <div class="ad-note"><div class="ad-note-title">Notes</div><ul><li>Targets GP study club organizers — high trust vector</li><li>Word-of-mouth activation built into the ad</li><li>LinkedIn Groups + Facebook Dental Groups</li></ul></div>
+  </div>
+
+  <!-- AD 12: ULTRA MINIMAL -->
+  <div class="ad-card">
+    <div class="ad-meta">Ad 12 — Minimal <span>Brand · Awareness</span></div>
+    <div class="ad" style="background:white;padding:40px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid #f0f2f6;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:20px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span style="font-family:'Switzer',sans-serif;font-size:15px;font-weight:700;color:#101011;">CaseLink</span>
+      </div>
+      <div>
+        <div style="font-family:'Switzer',sans-serif;font-size:96px;font-weight:900;color:#0099ff;line-height:0.9;letter-spacing:-0.04em;">Free</div>
+        <div style="font-family:'Switzer',sans-serif;font-size:44px;font-weight:700;color:#101011;letter-spacing:-0.02em;margin-top:8px;">for GPs.</div>
+        <div style="font-family:'Switzer',sans-serif;font-size:44px;font-weight:700;color:#a7a7a7;letter-spacing:-0.02em;">Always.</div>
+      </div>
+      <div style="display:inline-flex;background:linear-gradient(180deg,rgb(136,186,255),rgb(62,142,255));color:white;font-size:13px;font-weight:700;padding:12px 22px;border-radius:30px;width:fit-content;">Create your free account →</div>
+    </div>
+    <div class="ad-note"><div class="ad-note-title">Notes</div><ul><li>Ultra-clean — zero cognitive load</li><li>"Free" does all the work</li><li>GP acquisition — Instagram feed + Stories</li></ul></div>
+  </div>
+
+</div>
+
+<!-- NEW STORY BATCH 2 -->
+<div class="section-label" style="margin-top:48px;">Story Format — 1080 × 1920 — Batch 3</div>
+<div class="ads-grid">
+
+  <!-- STORY 6: CHECKLIST -->
+  <div class="ad-card">
+    <div class="ad-meta">Story 6 — Checklist <span>Pain Diagnosis · Awareness</span></div>
+    <div class="ad ad-story" style="background:radial-gradient(ellipse at 15% 15%, #89c4f4 0%, #ffffff 55%, #f5c18a 100%);padding:40px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:22px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#adclg)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span style="font-family:'Switzer',sans-serif;font-size:16px;font-weight:700;color:#101011;">CaseLink</span>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px;">
+        <div style="font-family:'Switzer',sans-serif;font-size:30px;font-weight:900;color:#101011;line-height:1.1;letter-spacing:-0.02em;">Is your referral workflow broken?</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(239,68,68,0.06);border-radius:10px;padding:12px 14px;border:1px solid rgba(239,68,68,0.15);">
+            <span style="color:#ef4444;font-weight:800;font-size:16px;flex-shrink:0;">✕</span>
+            <span style="font-size:13px;color:#606266;line-height:1.4;">You call the specialist to confirm the referral landed</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(239,68,68,0.06);border-radius:10px;padding:12px 14px;border:1px solid rgba(239,68,68,0.15);">
+            <span style="color:#ef4444;font-weight:800;font-size:16px;flex-shrink:0;">✕</span>
+            <span style="font-size:13px;color:#606266;line-height:1.4;">Patients ask: "Did you send my referral?" and you're not sure</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(239,68,68,0.06);border-radius:10px;padding:12px 14px;border:1px solid rgba(239,68,68,0.15);">
+            <span style="color:#ef4444;font-weight:800;font-size:16px;flex-shrink:0;">✕</span>
+            <span style="font-size:13px;color:#606266;line-height:1.4;">Referrals disappear into fax queues or voicemail</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(5,150,105,0.06);border-radius:10px;padding:12px 14px;border:1px solid rgba(5,150,105,0.25);">
+            <span style="color:#059669;font-weight:800;font-size:16px;flex-shrink:0;">✓</span>
+            <span style="font-size:13px;color:#101011;font-weight:600;line-height:1.4;">CaseLink tracks every referral automatically. Always.</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Switzer',sans-serif;font-size:20px;font-weight:800;color:#101011;margin-bottom:14px;">Fix it free for GPs.</div>
+        <div style="display:inline-block;background:linear-gradient(180deg,rgb(136,186,255),rgb(62,142,255));color:white;font-size:13px;font-weight:700;padding:14px 28px;border-radius:30px;">www.caselink.net ↗</div>
+      </div>
+    </div>
+    <div class="ad-note"><div class="ad-note-title">Notes</div><ul><li>Diagnostic format — viewer self-selects as having the problem</li><li>Strong GP angle — "Free" closes it</li><li>Instagram + Facebook Story</li></ul></div>
+  </div>
+
+  <!-- STORY 7: THE COST -->
+  <div class="ad-card">
+    <div class="ad-meta">Story 7 — Cost Escalation <span>Specialist ROI · Conversion</span></div>
+    <div class="ad ad-story" style="background:#0a1628;padding:40px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:22px;width:auto"><path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="rgba(255,255,255,0.7)" stroke-width="4" stroke-linejoin="round" fill="none"/></svg>
+        <span style="font-family:'Switzer',sans-serif;font-size:16px;font-weight:700;color:white;">CaseLink</span>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:24px;">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="border-left:3px solid rgba(255,255,255,0.15);padding-left:20px;">
+            <div style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">Average lost referral</div>
+            <div style="font-family:'Switzer',sans-serif;font-size:48px;font-weight:900;color:white;letter-spacing:-0.03em;">$800</div>
+          </div>
+          <div style="border-left:3px solid rgba(239,68,68,0.4);padding-left:20px;">
+            <div style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">Lost referrals per month</div>
+            <div style="font-family:'Switzer',sans-serif;font-size:48px;font-weight:900;color:#fca5a5;letter-spacing:-0.03em;">× 15</div>
+          </div>
+          <div style="border-left:3px solid #ef4444;padding-left:20px;">
+            <div style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">That's</div>
+            <div style="font-family:'Switzer',sans-serif;font-size:56px;font-weight:900;color:#ef4444;letter-spacing:-0.03em;">$12,000</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;">every single month.</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.06);border-radius:12px;padding:16px 18px;">
+          <div style="font-family:'Switzer',sans-serif;font-size:16px;font-weight:700;color:white;line-height:1.4;">CaseLink pays for itself with one recovered referral.</div>
+        </div>
+      </div>
+      <div style="display:inline-block;background:linear-gradient(180deg,rgb(136,186,255),rgb(62,142,255));color:white;font-size:13px;font-weight:700;padding:14px 28px;border-radius:30px;">www.caselink.net ↗</div>
+    </div>
+    <div class="ad-note"><div class="ad-note-title">Notes</div><ul><li>Escalating cost visual — builds anxiety then resolves it</li><li>Hard numbers make the ROI undeniable</li><li>Specialist acquisition — Instagram + LinkedIn Story</li></ul></div>
+  </div>
+
+  <!-- STORY 8: OLD WAY vs NEW WAY -->
+  <div class="ad-card">
+    <div class="ad-meta">Story 8 — Old vs New <span>Comparison · Awareness</span></div>
+    <div class="ad ad-story" style="background:white;padding:0;display:flex;flex-direction:column;overflow:hidden;">
+      <div style="flex:1;background:#1a1a2e;padding:36px 32px;display:flex;flex-direction:column;justify-content:flex-end;">
+        <div style="font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:12px;">The old way</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.05);border-radius:8px;padding:10px 14px;">
+            <span style="font-size:18px;">📠</span><span style="font-size:12px;color:rgba(255,255,255,0.55);">Fax the referral. Hope it arrives.</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.05);border-radius:8px;padding:10px 14px;">
+            <span style="font-size:18px;">📞</span><span style="font-size:12px;color:rgba(255,255,255,0.55);">Call to confirm. Leave voicemail.</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.05);border-radius:8px;padding:10px 14px;">
+            <span style="font-size:18px;">🤷</span><span style="font-size:12px;color:rgba(255,255,255,0.55);">Never know if patient was seen.</span>
+          </div>
+        </div>
+      </div>
+      <div style="height:4px;background:linear-gradient(90deg,#89c4f4,#f5c18a);"></div>
+      <div style="flex:1;background:#f0f8ff;padding:36px 32px;display:flex;flex-direction:column;justify-content:flex-start;">
+        <div style="font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#0099ff;margin-bottom:12px;">The CaseLink way</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:10px;background:white;border-radius:8px;padding:10px 14px;border:1px solid rgba(0,153,255,0.15);">
+            <span style="font-size:18px;">⚡</span><span style="font-size:12px;color:#101011;font-weight:500;">Send referral in 60 seconds.</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:white;border-radius:8px;padding:10px 14px;border:1px solid rgba(0,153,255,0.15);">
+            <span style="font-size:18px;">🔔</span><span style="font-size:12px;color:#101011;font-weight:500;">Specialist notified instantly.</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:white;border-radius:8px;padding:10px 14px;border:1px solid rgba(5,150,105,0.25);">
+            <span style="font-size:18px;">✅</span><span style="font-size:12px;color:#059669;font-weight:600;">Loop closed. Every time.</span>
+          </div>
+        </div>
+        <div style="margin-top:20px;display:inline-block;background:linear-gradient(180deg,rgb(136,186,255),rgb(62,142,255));color:white;font-size:12px;font-weight:700;padding:12px 24px;border-radius:30px;">www.caselink.net ↗</div>
+      </div>
+    </div>
+    <div class="ad-note"><div class="ad-note-title">Notes</div><ul><li>Visual metaphor — darkness vs light</li><li>Gradient divider ties to CaseLink brand</li><li>Universally understood format for dental staff</li></ul></div>
+  </div>
+
+</div>
+
+<!-- COPY BANK -->
+<div class="section-label" style="margin-top:48px;">Copy Bank</div>
+<div class="ads-grid" style="grid-template-columns:repeat(3,1fr);">
+  <div class="ad-note">
+    <div class="ad-note-title">Headlines — Awareness</div>
+    <ul style="list-style:none;padding:0;">
+      <li style="font-size:12px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.05);color:#333;">FAX. DONE.</li>
+      <li style="font-size:12px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.05);color:#333;">Your referral is sitting in a fax queue.</li>
+      <li style="font-size:12px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.05);color:#333;">And that's where the story ends. It shouldn't.</li>
+      <li style="font-size:12px;padding:5px 0;color:#333;">Still faxing referrals in 2026?</li>
+    </ul>
+  </div>
+  <div class="ad-note">
+    <div class="ad-note-title">Headlines — Conversion</div>
+    <ul style="list-style:none;padding:0;">
+      <li style="font-size:12px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.05);color:#333;">Every Referral. Tracked. Confirmed. Closed.</li>
+      <li style="font-size:12px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.05);color:#333;">Send it. Know it landed. Free.</li>
+      <li style="font-size:12px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.05);color:#333;">Your next referrals are already waiting.</li>
+      <li style="font-size:12px;padding:5px 0;color:#333;">Referrals don't have to disappear.</li>
+    </ul>
+  </div>
+  <div class="ad-note">
+    <div class="ad-note-title">CTAs</div>
+    <ul style="list-style:none;padding:0;">
+      <li style="font-size:12px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.05);color:#333;">Free for GPs. Always. →</li>
+      <li style="font-size:12px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.05);color:#333;">www.caselink.net ↗</li>
+      <li style="font-size:12px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.05);color:#333;">See how it works →</li>
+      <li style="font-size:12px;padding:5px 0;color:#333;">Join free →</li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>
