@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CaseLink — Competitive Analysis</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f0f2f6;
+    color: #1a1a2e;
+    line-height: 1.7;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 48px auto;
+    padding: 0 24px 80px;
+  }
+
+  /* Header */
+  .doc-header {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 40px 48px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    border: 1px solid #e8edf4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .doc-header-left h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #0a0a1a;
+    letter-spacing: -0.5px;
+  }
+
+  .doc-header-left p {
+    font-size: 14px;
+    color: #6b7280;
+    margin-top: 4px;
+  }
+
+  .logo-mark {
+    flex-shrink: 0;
+  }
+
+  /* Section */
+  .section {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 36px 48px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    border: 1px solid #e8edf4;
+  }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #0099ff;
+    margin-bottom: 16px;
+  }
+
+  .section p {
+    color: #374151;
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  .section p:last-child { margin-bottom: 0; }
+
+  /* Competitor cards */
+  .competitor {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 32px 48px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    border: 1px solid #e8edf4;
+  }
+
+  .competitor-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 24px;
+  }
+
+  .competitor-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0a0a1a;
+  }
+
+  .competitor-url {
+    font-size: 13px;
+    color: #0099ff;
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: 2px;
+    display: block;
+  }
+
+  .competitor-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: #f0f6ff;
+    color: #0077dd;
+    border: 1px solid #d0e8ff;
+  }
+
+  .badge.green {
+    background: #f0faf4;
+    color: #059669;
+    border-color: #bbf0d8;
+  }
+
+  .badge.gray {
+    background: #f5f5f8;
+    color: #6b7280;
+    border-color: #e0e0e8;
+  }
+
+  .positioning {
+    background: #f8faff;
+    border-left: 3px solid #0099ff;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-size: 14px;
+    color: #374151;
+    font-style: italic;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 16px;
+  }
+
+  .col-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #9ca3af;
+    margin-bottom: 10px;
+  }
+
+  ul.feature-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  ul.feature-list li {
+    font-size: 14px;
+    color: #374151;
+    padding: 5px 0;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  ul.feature-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #0099ff;
+    font-size: 12px;
+  }
+
+  ul.feature-list.gaps li::before {
+    content: '×';
+    color: #ef4444;
+  }
+
+  /* Capability section */
+  .cap-group {
+    margin-bottom: 28px;
+  }
+
+  .cap-group-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0a0a1a;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e8edf4;
+  }
+
+  .cap-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f4f6;
+    gap: 16px;
+  }
+
+  .cap-row:last-child { border-bottom: none; }
+
+  .cap-feature {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    min-width: 220px;
+    flex-shrink: 0;
+  }
+
+  .cap-detail {
+    font-size: 13px;
+    color: #6b7280;
+  }
+
+  .cap-detail strong {
+    color: #0099ff;
+    font-weight: 600;
+  }
+
+  /* Learnings */
+  .learning {
+    padding: 24px 0;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .learning:last-child { border-bottom: none; }
+
+  .learning-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .learning-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, rgb(136,186,255) 0%, rgb(62,142,255) 100%);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .learning-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0a0a1a;
+  }
+
+  .learning-source {
+    font-size: 11px;
+    font-weight: 600;
+    color: #0099ff;
+    background: #f0f6ff;
+    padding: 2px 8px;
+    border-radius: 20px;
+    border: 1px solid #d0e8ff;
+  }
+
+  .learning p {
+    font-size: 14px;
+    color: #4b5563;
+    line-height: 1.7;
+    margin-left: 40px;
+  }
+
+  /* Footer */
+  .doc-footer {
+    text-align: center;
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 640px) {
+    .page { padding: 0 16px 60px; }
+    .section, .competitor { padding: 24px; }
+    .doc-header { padding: 28px 24px; flex-direction: column; gap: 20px; }
+    .two-col { grid-template-columns: 1fr; }
+    .cap-feature { min-width: 160px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="doc-header">
+    <div class="doc-header-left">
+      <h1>Competitive Analysis</h1>
+      <p>Dental Referral Platform Landscape &nbsp;·&nbsp; March 2026</p>
+    </div>
+    <div class="logo-mark">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:32px;width:auto">
+        <defs>
+          <linearGradient id="clg" x1="0" y1="0" x2="60" y2="32" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#0099ff"/>
+            <stop offset="40%" stop-color="#06b6d4"/>
+            <stop offset="75%" stop-color="#06d6a0"/>
+            <stop offset="100%" stop-color="#fb923c"/>
+          </linearGradient>
+        </defs>
+        <path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z" stroke="url(#clg)" stroke-width="4" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Overview -->
+  <div class="section">
+    <div class="section-title">Market Overview</div>
+    <p>The dental referral management market is active and growing fast. Every player is solving the same core problem: the referral workflow between GPs and specialists is broken — slow, lossy, and non-compliant. The competitive landscape ranges from lightweight form tools to full communication and virtual care platforms.</p>
+    <p>One thing all serious competitors share: GPs get in free, specialists pay. The logic is consistent — specialists depend on referral volume, so they absorb the cost. GPs need zero friction to adopt. Whoever wins the GP side first wins the network.</p>
+  </div>
+
+  <!-- Competitors -->
+  <div class="section-title" style="padding: 0 0 12px 4px; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#0099ff;">Competitor Profiles</div>
+
+  <!-- Sindi -->
+  <div class="competitor">
+    <div class="competitor-header">
+      <div>
+        <div class="competitor-name">Sindi</div>
+        <a class="competitor-url" href="https://sindireferrals.com" target="_blank">sindireferrals.com</a>
+        <div class="competitor-meta">
+          <span class="badge green">Live</span>
+          <span class="badge">GP Free · $49/mo Specialist</span>
+          <span class="badge gray">8 employees · Nationwide</span>
+        </div>
+      </div>
+    </div>
+    <div class="positioning">"Built by a dentist who lived the problem." Clinical credibility is the center of their brand. They speak to the front desk, not the software buyer.</div>
+    <div class="two-col">
+      <div>
+        <div class="col-label">Capabilities</div>
+        <ul class="feature-list">
+          <li>Digital referral sending and receiving</li>
+          <li>Live doctor-to-doctor chat</li>
+          <li>Real-time tracking and status updates</li>
+          <li>Patient SMS at time of referral</li>
+          <li>Post-op notes back to referring GP</li>
+          <li>Custom referral forms per practice</li>
+          <li>Referral analytics and partner tracking</li>
+          <li>HIPAA-compliant file and imaging sharing</li>
+          <li>Referrals sendable to any office via email</li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-label">Gaps</div>
+        <ul class="feature-list gaps">
+          <li>No telehealth or virtual care</li>
+          <li>No DSO or multi-location support</li>
+          <li>No study club features</li>
+          <li>No website referral widget</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Refera -->
+  <div class="competitor">
+    <div class="competitor-header">
+      <div>
+        <div class="competitor-name">Refera</div>
+        <a class="competitor-url" href="https://refera.com" target="_blank">refera.com</a>
+        <div class="competitor-meta">
+          <span class="badge green">Live</span>
+          <span class="badge">GP Free–$29/mo · Specialist Free–$99/mo</span>
+          <span class="badge gray">No contracts · Nationwide</span>
+        </div>
+      </div>
+    </div>
+    <div class="positioning">"80% of digital referrals result in scheduled appointments vs. 50% with paper." Revenue-first framing — they sell outcomes, not features.</div>
+    <div class="two-col">
+      <div>
+        <div class="col-label">Capabilities</div>
+        <ul class="feature-list">
+          <li>OneSlip — GP referrals with no login required</li>
+          <li>Custom referral link for specialist website</li>
+          <li>Full referral dashboard and analytics</li>
+          <li>Automated follow-ups and patient engagement</li>
+          <li>Built-in revenue calculator</li>
+          <li>Study Club toolkit and digital seminar</li>
+          <li>DSO and multi-location support</li>
+          <li>HIPAA-compliant</li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-label">Gaps</div>
+        <ul class="feature-list gaps">
+          <li>No provider-to-provider messaging</li>
+          <li>No telehealth or virtual care</li>
+          <li>No patient SMS notifications</li>
+          <li>No post-op notes workflow</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PepCare -->
+  <div class="competitor">
+    <div class="competitor-header">
+      <div>
+        <div class="competitor-name">PepCare</div>
+        <a class="competitor-url" href="https://pepcare.com" target="_blank">pepcare.com</a>
+        <div class="competitor-meta">
+          <span class="badge green">Live</span>
+          <span class="badge">Free + Pro (unlisted)</span>
+          <span class="badge gray">Most mature platform · Nationwide</span>
+        </div>
+      </div>
+    </div>
+    <div class="positioning">"Bridging the gap between dental care providers and patients." The broadest platform in the segment — referrals plus full virtual care.</div>
+    <div class="two-col">
+      <div>
+        <div class="col-label">Capabilities</div>
+        <ul class="feature-list">
+          <li>Digital referral management and tracking</li>
+          <li>HIPAA-compliant provider messaging</li>
+          <li>Virtual Care Suite — remote evaluations</li>
+          <li>Embeddable widget on practice website</li>
+          <li>Patient education hub</li>
+          <li>Care team collaboration across specialties</li>
+          <li>Searchable provider directory</li>
+          <li>Workflow and document management</li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-label">Gaps</div>
+        <ul class="feature-list gaps">
+          <li>Pricing not transparent</li>
+          <li>Less specialist-specific</li>
+          <li>Complex for smaller practices</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- BrightReferral -->
+  <div class="competitor">
+    <div class="competitor-header">
+      <div>
+        <div class="competitor-name">BrightReferral</div>
+        <a class="competitor-url" href="https://brightreferral.co" target="_blank">brightreferral.co</a>
+        <div class="competitor-meta">
+          <span class="badge green">Live</span>
+          <span class="badge">Pricing unlisted</span>
+          <span class="badge gray">Niche · Offline-to-digital</span>
+        </div>
+      </div>
+    </div>
+    <div class="positioning">"Ditch the referral pads for custom Bright Cards." Physical-to-digital referral capture — a different category focused on analytics, not coordination.</div>
+    <div class="two-col">
+      <div>
+        <div class="col-label">Capabilities</div>
+        <ul class="feature-list">
+          <li>Custom-branded physical referral cards</li>
+          <li>Real-time digital capture (no app needed)</li>
+          <li>Referral analytics and pattern tracking</li>
+          <li>Business growth insights</li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-label">Gaps</div>
+        <ul class="feature-list gaps">
+          <li>Not HIPAA-compliant</li>
+          <li>No provider communication</li>
+          <li>Not a full coordination platform</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Capability Comparison -->
+  <div class="section">
+    <div class="section-title">Capability Comparison</div>
+
+    <div class="cap-group">
+      <div class="cap-group-title">Table Stakes — Every Serious Competitor Has These</div>
+      <div class="cap-row"><span class="cap-feature">Digital referral sending</span><span class="cap-detail">Sindi, Refera, PepCare, BrightReferral</span></div>
+      <div class="cap-row"><span class="cap-feature">Real-time tracking</span><span class="cap-detail">Sindi, Refera, PepCare, BrightReferral</span></div>
+      <div class="cap-row"><span class="cap-feature">HIPAA compliance</span><span class="cap-detail">Sindi, Refera, PepCare</span></div>
+      <div class="cap-row"><span class="cap-feature">GP free / specialist pays</span><span class="cap-detail">Sindi, Refera, PepCare</span></div>
+    </div>
+
+    <div class="cap-group">
+      <div class="cap-group-title">Features to Confirm or Close</div>
+      <div class="cap-row"><span class="cap-feature">Patient SMS at referral send</span><span class="cap-detail"><strong>Sindi, Refera, PepCare</strong></span></div>
+      <div class="cap-row"><span class="cap-feature">Referral analytics</span><span class="cap-detail"><strong>Sindi, Refera, PepCare, BrightReferral</strong></span></div>
+      <div class="cap-row"><span class="cap-feature">Custom referral forms</span><span class="cap-detail"><strong>Sindi, Refera, PepCare</strong></span></div>
+      <div class="cap-row"><span class="cap-feature">Provider-to-provider messaging</span><span class="cap-detail"><strong>Sindi, PepCare</strong></span></div>
+      <div class="cap-row"><span class="cap-feature">Post-op notes to referring GP</span><span class="cap-detail"><strong>Sindi, PepCare</strong></span></div>
+      <div class="cap-row"><span class="cap-feature">No-login GP referral entry</span><span class="cap-detail"><strong>Refera (OneSlip), BrightReferral</strong> · Sindi partial</span></div>
+      <div class="cap-row"><span class="cap-feature">Website referral widget</span><span class="cap-detail"><strong>Refera, PepCare</strong></span></div>
+      <div class="cap-row"><span class="cap-feature">Multi-location / DSO support</span><span class="cap-detail"><strong>Refera, PepCare</strong></span></div>
+    </div>
+
+    <div class="cap-group">
+      <div class="cap-group-title">White Space — No Competitor Has Fully Built These</div>
+      <div class="cap-row"><span class="cap-feature">Virtual pre-referral screening</span><span class="cap-detail">PepCare has an early version — no one has built it well</span></div>
+      <div class="cap-row"><span class="cap-feature">Patient education content</span><span class="cap-detail">PepCare only — underdeveloped</span></div>
+      <div class="cap-row"><span class="cap-feature">Provider directory</span><span class="cap-detail">PepCare only — limited</span></div>
+    </div>
+  </div>
+
+  <!-- What to Learn -->
+  <div class="section">
+    <div class="section-title">What to Learn and Replicate</div>
+
+    <div class="learning">
+      <div class="learning-header">
+        <div class="learning-num">1</div>
+        <div class="learning-title">Patient SMS at Referral Send</div>
+        <span class="learning-source">from Sindi</span>
+      </div>
+      <p>Every competitor with active, satisfied customers has this. The moment a referral is submitted, the patient receives a text with next steps. Patients move faster, front desks field fewer calls, and scheduling accelerates. For specialists, faster scheduling means faster revenue. For GPs, it signals a professional handoff. This is table stakes in 2026 — not a differentiator.</p>
+    </div>
+
+    <div class="learning">
+      <div class="learning-header">
+        <div class="learning-num">2</div>
+        <div class="learning-title">No-Login GP Referral Entry</div>
+        <span class="learning-source">from Refera</span>
+      </div>
+      <p>The single biggest barrier to GP adoption is account creation. Refera's OneSlip eliminates it: a GP visits a URL, fills out a form in 60 seconds, submits — no account, no download. Sindi handles it via email. Both remove the friction that sends GPs back to fax and phone. A specialist should be able to hand a GP a link or QR code, and that GP refers a patient the same day. Network growth depends on this.</p>
+    </div>
+
+    <div class="learning">
+      <div class="learning-header">
+        <div class="learning-num">3</div>
+        <div class="learning-title">Post-Op Notes Back to the Referring GP</div>
+        <span class="learning-source">from Sindi</span>
+      </div>
+      <p>When a specialist completes treatment, Sindi prompts a brief summary back to the referring GP — procedure, outcome, follow-up plan. GPs consistently say this is what they want and rarely get. It also sticks in their memory: the specialists who keep them informed are the ones who keep getting referrals. High relationship value, low implementation effort.</p>
+    </div>
+
+    <div class="learning">
+      <div class="learning-header">
+        <div class="learning-num">4</div>
+        <div class="learning-title">Website Referral Widget</div>
+        <span class="learning-source">from Refera + PepCare</span>
+      </div>
+      <p>A custom referral link or embeddable widget on the specialist's website. GPs searching for a referral process find it immediately. Patients can self-refer. The specialist looks organized and modern. Inbound referrals happen passively, without the specialist doing outreach. One widget — permanent distribution.</p>
+    </div>
+
+    <div class="learning">
+      <div class="learning-header">
+        <div class="learning-num">5</div>
+        <div class="learning-title">Revenue and ROI Framing</div>
+        <span class="learning-source">from Refera</span>
+      </div>
+      <p>Refera leads with a number: "80% of digital referrals result in scheduled appointments vs. 50% with paper." They back it up with a live revenue calculator. The sale becomes about showing a dollar figure, not explaining a feature. CaseLink should publish outcome data from the DMV pilot — conversion rates, referrals completed, revenue recovered. Real numbers from real practices beat hypothetical calculators every time.</p>
+    </div>
+
+    <div class="learning">
+      <div class="learning-header">
+        <div class="learning-num">6</div>
+        <div class="learning-title">Study Clubs as a Distribution Channel</div>
+        <span class="learning-source">from Refera</span>
+      </div>
+      <p>Refera targets dental study clubs directly with a toolkit and seminar. Study clubs are organized groups of 10–30 GPs who meet regularly, share cases, and maintain active referral relationships. One presentation can onboard a dozen GPs in an afternoon. In the DMV, the right study club relationships represent one of the highest-leverage distribution moves available.</p>
+    </div>
+
+    <div class="learning">
+      <div class="learning-header">
+        <div class="learning-num">7</div>
+        <div class="learning-title">Referral Analytics and Relationship Intelligence</div>
+        <span class="learning-source">from Sindi + Refera</span>
+      </div>
+      <p>Both platforms show specialists which GPs send the most referrals, how volume trends over time, and where patients drop off before scheduling. This turns the platform into a relationship management system. A specialist who sees a top-referring GP has gone quiet in 60 days has a reason to reach out. The more actionable the data, the harder the platform is to leave.</p>
+    </div>
+
+    <div class="learning">
+      <div class="learning-header">
+        <div class="learning-num">8</div>
+        <div class="learning-title">Virtual Consult and Pre-Referral Screening</div>
+        <span class="learning-source">from PepCare</span>
+      </div>
+      <p>PepCare lets specialists screen patients remotely before the referral is formalized — patients submit photos, the specialist reviews and responds. This compresses the referral cycle, reduces unnecessary in-person consults, and gives specialists early visibility into case complexity. No dental-specific referral platform has built this well yet. A lightweight pre-referral intake would be a genuine differentiator.</p>
+    </div>
+
+  </div>
+
+  <div class="doc-footer">
+    Prepared for CaseLink &nbsp;·&nbsp; March 2026 &nbsp;·&nbsp; Confidential
+  </div>
+
+</div>
+</body>
+</html>
