@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CaseLink | DMV Sales Territory Hotspots</title>
+<style>
+  :root {
+    --blue:#0099ff; --bg:#f0f2f6; --card:#fff;
+    --navy:#0a1628; --text:#1a2035; --muted:#6b7280;
+    --border:#e5e7eb; --radius:12px;
+    --grad:linear-gradient(135deg,rgb(136,186,255) 0%,rgb(62,142,255) 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+  header{background:var(--navy);padding:16px 24px;display:flex;align-items:center;gap:12px;}
+  header svg{flex-shrink:0;}
+  header .brand{color:#fff;font-weight:700;font-size:18px;letter-spacing:-.3px;}
+  header .brand span{color:var(--blue);}
+  header .tagline{color:rgba(255,255,255,.45);font-size:12px;margin-top:1px;}
+  .hero{background:var(--navy);padding:0 24px 24px;}
+  .hero h1{color:#fff;font-size:28px;font-weight:700;letter-spacing:-.5px;}
+  .hero p{color:rgba(255,255,255,.55);font-size:14px;margin-top:4px;}
+  .hero .stats{display:flex;gap:16px;margin-top:16px;flex-wrap:wrap;}
+  .hero .stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 20px;}
+  .hero .stat .num{color:#fff;font-size:22px;font-weight:700;}
+  .hero .stat .lbl{color:rgba(255,255,255,.45);font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}
+  .tabs{background:var(--navy);padding:0 24px;display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.08);}
+  .tab{color:rgba(255,255,255,.45);font-size:14px;font-weight:500;padding:12px 20px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;user-select:none;}
+  .tab:hover{color:rgba(255,255,255,.8);}
+  .tab.active{color:#fff;border-bottom-color:var(--blue);}
+  .controls{padding:20px 24px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;background:var(--card);border-bottom:1px solid var(--border);}
+  .search-wrap{position:relative;flex:1;min-width:200px;}
+  .search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);}
+  input[type=search]{width:100%;padding:9px 12px 9px 38px;border:1px solid var(--border);border-radius:8px;font-size:14px;outline:none;background:#fafafa;}
+  input[type=search]:focus{border-color:var(--blue);background:#fff;}
+  select{padding:9px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;background:#fafafa;cursor:pointer;}
+  select:focus{border-color:var(--blue);}
+  .count-badge{margin-left:auto;background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:13px;color:var(--muted);white-space:nowrap;}
+  .table-wrap{overflow-x:auto;padding:0 24px 24px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:16px;}
+  th{background:#f8f9fb;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);padding:10px 14px;text-align:left;border-bottom:2px solid var(--border);cursor:pointer;user-select:none;white-space:nowrap;}
+  th:hover{color:var(--blue);}
+  th.sorted .sort-icon{opacity:1;color:var(--blue);}
+  th .sort-icon{margin-left:4px;opacity:.4;}
+  td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle;}
+  tr:hover td{background:#f0f7ff;}
+  .rank{font-weight:700;color:var(--muted);font-size:12px;width:36px;}
+  .rank.top3{color:var(--blue);font-size:14px;}
+  .addr-cell{font-weight:600;color:var(--navy);}
+  .maps-link{font-size:11px;color:var(--blue);text-decoration:none;display:inline-flex;align-items:center;gap:3px;margin-top:2px;}
+  .maps-link:hover{text-decoration:underline;}
+  .bar-wrap{display:flex;align-items:center;gap:8px;}
+  .bar{height:6px;border-radius:3px;background:var(--grad);min-width:4px;}
+  .pill{display:inline-flex;align-items:center;justify-content:center;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;}
+  .pill-gp{background:#dbeafe;color:#1d4ed8;}
+  .pill-spec{background:#f0fdf4;color:#15803d;}
+  .pill-bld{background:#fef3c7;color:#b45309;}
+  .empty{text-align:center;padding:48px;color:var(--muted);font-size:14px;}
+  .pagination{display:flex;align-items:center;gap:8px;padding:16px 24px;border-top:1px solid var(--border);background:var(--card);flex-wrap:wrap;}
+  .pagination button{padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:#fff;font-size:13px;cursor:pointer;}
+  .pagination button:hover{background:var(--bg);}
+  .pagination button.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+  .pagination .info{margin-left:auto;font-size:13px;color:var(--muted);}
+  .panel{display:none;}.panel.active{display:block;}
+  .insight{background:linear-gradient(135deg,#0a1628 0%,#1a2d4a 100%);color:#fff;padding:16px 24px;font-size:13px;line-height:1.6;}
+  .insight strong{color:var(--blue);}
+</style>
+</head>
+<body>
+
+<header>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32" fill="none" style="height:28px;width:auto">
+    <defs><linearGradient id="clg" x1="0" y1="0" x2="60" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0099ff"/><stop offset="40%" stop-color="#06b6d4"/>
+      <stop offset="75%" stop-color="#06d6a0"/><stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient></defs>
+    <path d="M30,16 C26,4 4,4 4,16 C4,28 26,28 30,16 C34,4 56,4 56,16 C56,28 34,28 30,16Z"
+          stroke="url(#clg)" stroke-width="4" stroke-linejoin="round" fill="none"/>
+  </svg>
+  <div>
+    <div class="brand">Case<span>Link</span></div>
+    <div class="tagline">Sales Territory Hotspots</div>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>DMV Sales Territory Hotspots</h1>
+  <p>Ranked by density of co-located GPs and specialists — where referrals are already flowing</p>
+  <div class="stats">
+    <div class="stat"><div class="num">100</div><div class="lbl">Hot Buildings</div></div>
+    <div class="stat"><div class="num">100</div><div class="lbl">Hot ZIP Codes</div></div>
+    <div class="stat"><div class="num">647+</div><div class="lbl">GPs in Top 10 Buildings</div></div>
+    <div class="stat"><div class="num">137+</div><div class="lbl">Specialists in Top 10 Buildings</div></div>
+  </div>
+</div>
+
+<div class="insight">
+  <strong>How to use this:</strong> Buildings = walk in, these are the highest-density co-locations in the DMV — referrals are definitely already happening by paper/phone. ZIP codes = territory planning, route your outreach here first. Data sourced from NPPES federal NPI registry.
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('buildings',this)">🏢 Top Buildings</div>
+  <div class="tab" onclick="switchTab('zips',this)">📍 Top ZIP Codes</div>
+</div>
+
+<!-- ── BUILDINGS ──────────────────────────────────────────────────────────── -->
+<div class="panel active" id="panel-buildings">
+  <div class="controls">
+    <div class="search-wrap">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="search" id="b-search" placeholder="Search address or city…" oninput="renderBuildings()">
+    </div>
+    <select id="b-state" onchange="renderBuildings()">
+      <option value="">All States</option>
+      <option value="DC">DC</option>
+      <option value="MD">Maryland</option>
+      <option value="VA">Virginia</option>
+    </select>
+    <div class="count-badge" id="b-count">Loading…</div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:36px">#</th>
+          <th onclick="sortB('address')">Address <span class="sort-icon">↕</span></th>
+          <th onclick="sortB('city')">City <span class="sort-icon">↕</span></th>
+          <th>State</th>
+          <th onclick="sortB('gps')" class="sorted">GPs <span class="sort-icon">↓</span></th>
+          <th onclick="sortB('specs')">Specialists <span class="sort-icon">↕</span></th>
+          <th onclick="sortB('specialties')">Spec Types <span class="sort-icon">↕</span></th>
+          <th onclick="sortB('score')">Score <span class="sort-icon">↕</span></th>
+        </tr>
+      </thead>
+      <tbody id="b-tbody"></tbody>
+    </table>
+    <div id="b-empty" class="empty" style="display:none">No results found.</div>
+  </div>
+  <div class="pagination" id="b-pagination"></div>
+</div>
+
+<!-- ── ZIPS ───────────────────────────────────────────────────────────────── -->
+<div class="panel" id="panel-zips">
+  <div class="controls">
+    <div class="search-wrap">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="search" id="z-search" placeholder="Search ZIP or city…" oninput="renderZips()">
+    </div>
+    <select id="z-state" onchange="renderZips()">
+      <option value="">All States</option>
+      <option value="DC">DC</option>
+      <option value="MD">Maryland</option>
+      <option value="VA">Virginia</option>
+    </select>
+    <div class="count-badge" id="z-count">Loading…</div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:36px">#</th>
+          <th onclick="sortZ('zip')">ZIP <span class="sort-icon">↕</span></th>
+          <th onclick="sortZ('city')">City <span class="sort-icon">↕</span></th>
+          <th>State</th>
+          <th onclick="sortZ('gps')">GPs <span class="sort-icon">↕</span></th>
+          <th onclick="sortZ('specs')">Specialists <span class="sort-icon">↕</span></th>
+          <th onclick="sortZ('building_pairs')" class="sorted">Building Co-Locations <span class="sort-icon">↕</span></th>
+          <th onclick="sortZ('total_pairs')">Total Pairs <span class="sort-icon">↓</span></th>
+        </tr>
+      </thead>
+      <tbody id="z-tbody"></tbody>
+    </table>
+    <div id="z-empty" class="empty" style="display:none">No results found.</div>
+  </div>
+  <div class="pagination" id="z-pagination"></div>
+</div>
+
+<script>
+const BUILDINGS = [{"address": "8901 Wisconsin Ave", "city": "Bethesda", "state": "MD", "zip": "20889", "gps": 122, "specs": 14, "specialties": 4, "score": 6832, "maps": "https://www.google.com/maps/search/?api=1&query=8901+WISCONSIN+AVE,+Bethesda,+MD"}, {"address": "8955 Wood Rd", "city": "Bethesda", "state": "MD", "zip": "20889", "gps": 121, "specs": 11, "specialties": 4, "score": 5324, "maps": "https://www.google.com/maps/search/?api=1&query=8955+WOOD+RD,+Bethesda,+MD"}, {"address": "650 W Baltimore St", "city": "Baltimore", "state": "MD", "zip": "21201", "gps": 16, "specs": 39, "specialties": 6, "score": 3744, "maps": "https://www.google.com/maps/search/?api=1&query=650+W+BALTIMORE+ST,+Baltimore,+MD"}, {"address": "5530 Wisconsin Ave", "city": "Chevy Chase", "state": "MD", "zip": "20815", "gps": 45, "specs": 9, "specialties": 5, "score": 2025, "maps": "https://www.google.com/maps/search/?api=1&query=5530+WISCONSIN+AVE,+Chevy+Chase,+MD"}, {"address": "8901 Rockville Pike", "city": "Bethesda", "state": "MD", "zip": "20889", "gps": 121, "specs": 5, "specialties": 3, "score": 1815, "maps": "https://www.google.com/maps/search/?api=1&query=8901+ROCKVILLE+PIKE,+Bethesda,+MD"}, {"address": "520 N 12Th St", "city": "Richmond", "state": "VA", "zip": "23298", "gps": 7, "specs": 32, "specialties": 6, "score": 1344, "maps": "https://www.google.com/maps/search/?api=1&query=520+N+12TH+ST,+Richmond,+VA"}, {"address": "5454 Wisconsin Ave", "city": "Chevy Chase", "state": "MD", "zip": "20815", "gps": 45, "specs": 9, "specialties": 3, "score": 1215, "maps": "https://www.google.com/maps/search/?api=1&query=5454+WISCONSIN+AVE,+Chevy+Chase,+MD"}, {"address": "2021 K St Nw", "city": "Washington", "state": "DC", "zip": "20006", "gps": 80, "specs": 5, "specialties": 3, "score": 1200, "maps": "https://www.google.com/maps/search/?api=1&query=2021+K+ST+NW,+Washington,+DC"}, {"address": "600 W St Nw", "city": "Washington", "state": "DC", "zip": "20059", "gps": 22, "specs": 8, "specialties": 6, "score": 1056, "maps": "https://www.google.com/maps/search/?api=1&query=600+W+ST+NW,+Washington,+DC"}, {"address": "10401 Old Georgetown Rd", "city": "Bethesda", "state": "MD", "zip": "20814", "gps": 68, "specs": 5, "specialties": 3, "score": 1020, "maps": "https://www.google.com/maps/search/?api=1&query=10401+OLD+GEORGETOWN+RD,+Bethesda,+MD"}, {"address": "1234 19Th St Nw", "city": "Washington", "state": "DC", "zip": "20036", "gps": 53, "specs": 4, "specialties": 4, "score": 848, "maps": "https://www.google.com/maps/search/?api=1&query=1234+19TH+ST+NW,+Washington,+DC"}, {"address": "4660 Kenmore Ave", "city": "Alexandria", "state": "VA", "zip": "22304", "gps": 40, "specs": 7, "specialties": 3, "score": 840, "maps": "https://www.google.com/maps/search/?api=1&query=4660+KENMORE+AVE,+Alexandria,+VA"}, {"address": "8901 Wisconsin Ave.", "city": "Bethesda", "state": "MD", "zip": "20889", "gps": 122, "specs": 3, "specialties": 2, "score": 732, "maps": "https://www.google.com/maps/search/?api=1&query=8901+WISCONSIN+AVE.,+Bethesda,+MD"}, {"address": "Naval Postgraduate Dental School", "city": "Bethesda", "state": "MD", "zip": "20889", "gps": 121, "specs": 3, "specialties": 2, "score": 726, "maps": "https://www.google.com/maps/search/?api=1&query=NAVAL+POSTGRADUATE+DENTAL+SCHOOL,+Bethesda,+MD"}, {"address": "8363 Cherry Ln", "city": "Laurel", "state": "MD", "zip": "20707", "gps": 57, "specs": 4, "specialties": 3, "score": 684, "maps": "https://www.google.com/maps/search/?api=1&query=8363+CHERRY+LN,+Laurel,+MD"}, {"address": "11921 Rockville Pike", "city": "Rockville", "state": "MD", "zip": "20852", "gps": 114, "specs": 3, "specialties": 2, "score": 684, "maps": "https://www.google.com/maps/search/?api=1&query=11921+ROCKVILLE+PIKE,+Rockville,+MD"}, {"address": "1010 Amherst St", "city": "Winchester", "state": "VA", "zip": "22601", "gps": 57, "specs": 6, "specialties": 2, "score": 684, "maps": "https://www.google.com/maps/search/?api=1&query=1010+AMHERST+ST,+Winchester,+VA"}, {"address": "10630 Little Patuxent Pkwy", "city": "Columbia", "state": "MD", "zip": "21044", "gps": 42, "specs": 4, "specialties": 4, "score": 672, "maps": "https://www.google.com/maps/search/?api=1&query=10630+LITTLE+PATUXENT+PKWY,+Columbia,+MD"}, {"address": "9661 Main St", "city": "Fairfax", "state": "VA", "zip": "22031", "gps": 71, "specs": 3, "specialties": 3, "score": 639, "maps": "https://www.google.com/maps/search/?api=1&query=9661+MAIN+ST,+Fairfax,+VA"}, {"address": "521 N 11Th St", "city": "Richmond", "state": "VA", "zip": "23298", "gps": 6, "specs": 26, "specialties": 4, "score": 624, "maps": "https://www.google.com/maps/search/?api=1&query=521+N+11TH+ST,+Richmond,+VA"}, {"address": "313 Park Ave", "city": "Falls Church", "state": "VA", "zip": "22046", "gps": 40, "specs": 5, "specialties": 3, "score": 600, "maps": "https://www.google.com/maps/search/?api=1&query=313+PARK+AVE,+Falls+Church,+VA"}, {"address": "119 University Blvd", "city": "Harrisonburg", "state": "VA", "zip": "22801", "gps": 49, "specs": 4, "specialties": 3, "score": 588, "maps": "https://www.google.com/maps/search/?api=1&query=119+UNIVERSITY+BLVD,+Harrisonburg,+VA"}, {"address": "10530 Rosehaven St", "city": "Fairfax", "state": "VA", "zip": "22030", "gps": 82, "specs": 7, "specialties": 1, "score": 574, "maps": "https://www.google.com/maps/search/?api=1&query=10530+ROSEHAVEN+ST,+Fairfax,+VA"}, {"address": "9901 Fairfax Blvd", "city": "Fairfax", "state": "VA", "zip": "22030", "gps": 82, "specs": 3, "specialties": 2, "score": 492, "maps": "https://www.google.com/maps/search/?api=1&query=9901+FAIRFAX+BLVD,+Fairfax,+VA"}, {"address": "Walter Reed National Military Medical Center", "city": "Bethesda", "state": "MD", "zip": "20889", "gps": 121, "specs": 2, "specialties": 2, "score": 484, "maps": "https://www.google.com/maps/search/?api=1&query=WALTER+REED+NATIONAL+MILITARY+MEDICAL+CENTER,+Bethesda,+MD"}, {"address": "8901 Wisconsin Avenue", "city": "Bethesda", "state": "MD", "zip": "20889", "gps": 121, "specs": 2, "specialties": 2, "score": 484, "maps": "https://www.google.com/maps/search/?api=1&query=8901+WISCONSIN+AVENUE,+Bethesda,+MD"}, {"address": "8930 Brown Dr Bldg 9", "city": "Bethesda", "state": "MD", "zip": "20889", "gps": 121, "specs": 2, "specialties": 2, "score": 484, "maps": "https://www.google.com/maps/search/?api=1&query=8930+BROWN+DR+BLDG+9,+Bethesda,+MD"}, {"address": "8955 Wood Road", "city": "Bethesda", "state": "MD", "zip": "20889", "gps": 121, "specs": 2, "specialties": 2, "score": 484, "maps": "https://www.google.com/maps/search/?api=1&query=8955+WOOD+ROAD,+Bethesda,+MD"}, {"address": "11404 Old Georgetown Rd", "city": "Rockville", "state": "MD", "zip": "20852", "gps": 114, "specs": 2, "specialties": 2, "score": 456, "maps": "https://www.google.com/maps/search/?api=1&query=11404+OLD+GEORGETOWN+RD,+Rockville,+MD"}, {"address": "4701 Randolph Rd", "city": "Rockville", "state": "MD", "zip": "20852", "gps": 114, "specs": 2, "specialties": 2, "score": 456, "maps": "https://www.google.com/maps/search/?api=1&query=4701+RANDOLPH+RD,+Rockville,+MD"}, {"address": "244 Hydraulic Ridge Rd", "city": "Charlottesville", "state": "VA", "zip": "22901", "gps": 61, "specs": 7, "specialties": 1, "score": 427, "maps": "https://www.google.com/maps/search/?api=1&query=244+HYDRAULIC+RIDGE+RD,+Charlottesville,+VA"}, {"address": "15200 Shady Grove Rd", "city": "Rockville", "state": "MD", "zip": "20850", "gps": 71, "specs": 3, "specialties": 2, "score": 426, "maps": "https://www.google.com/maps/search/?api=1&query=15200+SHADY+GROVE+RD,+Rockville,+MD"}, {"address": "5550 Friendship Blvd", "city": "Chevy Chase", "state": "MD", "zip": "20815", "gps": 45, "specs": 3, "specialties": 3, "score": 405, "maps": "https://www.google.com/maps/search/?api=1&query=5550+FRIENDSHIP+BLVD,+Chevy+Chase,+MD"}, {"address": "311 Park Ave", "city": "Falls Church", "state": "VA", "zip": "22046", "gps": 40, "specs": 5, "specialties": 2, "score": 400, "maps": "https://www.google.com/maps/search/?api=1&query=311+PARK+AVE,+Falls+Church,+VA"}, {"address": "3801 Fairfax Dr", "city": "Arlington", "state": "VA", "zip": "22203", "gps": 44, "specs": 3, "specialties": 3, "score": 396, "maps": "https://www.google.com/maps/search/?api=1&query=3801+FAIRFAX+DR,+Arlington,+VA"}, {"address": "2415 Musgrove Rd", "city": "Silver Spring", "state": "MD", "zip": "20904", "gps": 36, "specs": 5, "specialties": 2, "score": 360, "maps": "https://www.google.com/maps/search/?api=1&query=2415+MUSGROVE+RD,+Silver+Spring,+MD"}, {"address": "11125 Rockville Pike", "city": "Rockville", "state": "MD", "zip": "20852", "gps": 114, "specs": 3, "specialties": 1, "score": 342, "maps": "https://www.google.com/maps/search/?api=1&query=11125+ROCKVILLE+PIKE,+Rockville,+MD"}, {"address": "8380 Colesville Rd", "city": "Silver Spring", "state": "MD", "zip": "20910", "gps": 82, "specs": 2, "specialties": 2, "score": 328, "maps": "https://www.google.com/maps/search/?api=1&query=8380+COLESVILLE+RD,+Silver+Spring,+MD"}, {"address": "3224 Cambridge Ct", "city": "Fairfax", "state": "VA", "zip": "22030", "gps": 82, "specs": 2, "specialties": 2, "score": 328, "maps": "https://www.google.com/maps/search/?api=1&query=3224+CAMBRIDGE+CT,+Fairfax,+VA"}, {"address": "1990 K St Nw", "city": "Washington", "state": "DC", "zip": "20006", "gps": 80, "specs": 2, "specialties": 2, "score": 320, "maps": "https://www.google.com/maps/search/?api=1&query=1990+K+ST+NW,+Washington,+DC"}, {"address": "4600 John Marr Dr", "city": "Annandale", "state": "VA", "zip": "22003", "gps": 53, "specs": 3, "specialties": 2, "score": 318, "maps": "https://www.google.com/maps/search/?api=1&query=4600+JOHN+MARR+DR,+Annandale,+VA"}, {"address": "1145 19Th St Nw", "city": "Washington", "state": "DC", "zip": "20036", "gps": 53, "specs": 3, "specialties": 2, "score": 318, "maps": "https://www.google.com/maps/search/?api=1&query=1145+19TH+ST+NW,+Washington,+DC"}, {"address": "3460 Old Washington Rd", "city": "Waldorf", "state": "MD", "zip": "20602", "gps": 35, "specs": 3, "specialties": 3, "score": 315, "maps": "https://www.google.com/maps/search/?api=1&query=3460+OLD+WASHINGTON+RD,+Waldorf,+MD"}, {"address": "11503 Sunrise Valley Dr", "city": "Reston", "state": "VA", "zip": "20191", "gps": 33, "specs": 3, "specialties": 3, "score": 297, "maps": "https://www.google.com/maps/search/?api=1&query=11503+SUNRISE+VALLEY+DR,+Reston,+VA"}, {"address": "301 Maple Ave W", "city": "Vienna", "state": "VA", "zip": "22180", "gps": 46, "specs": 3, "specialties": 2, "score": 276, "maps": "https://www.google.com/maps/search/?api=1&query=301+MAPLE+AVE+W,+Vienna,+VA"}, {"address": "8218 Wisconsin Avenue", "city": "Bethesda", "state": "MD", "zip": "20814", "gps": 68, "specs": 4, "specialties": 1, "score": 272, "maps": "https://www.google.com/maps/search/?api=1&query=8218+WISCONSIN+AVENUE,+Bethesda,+MD"}, {"address": "620 John Paul Jones Cir", "city": "Portsmouth", "state": "VA", "zip": "23708", "gps": 2, "specs": 27, "specialties": 5, "score": 270, "maps": "https://www.google.com/maps/search/?api=1&query=620+JOHN+PAUL+JONES+CIR,+Portsmouth,+VA"}, {"address": "275 West St", "city": "Annapolis", "state": "MD", "zip": "21401", "gps": 67, "specs": 4, "specialties": 1, "score": 268, "maps": "https://www.google.com/maps/search/?api=1&query=275+WEST+ST,+Annapolis,+MD"}, {"address": "3060 Mitchellville Rd", "city": "Bowie", "state": "MD", "zip": "20716", "gps": 29, "specs": 3, "specialties": 3, "score": 261, "maps": "https://www.google.com/maps/search/?api=1&query=3060+MITCHELLVILLE+RD,+Bowie,+MD"}, {"address": "9001 Digges Rd", "city": "Manassas", "state": "VA", "zip": "20110", "gps": 43, "specs": 3, "specialties": 2, "score": 258, "maps": "https://www.google.com/maps/search/?api=1&query=9001+DIGGES+RD,+Manassas,+VA"}, {"address": "650 West Baltimore Street", "city": "Baltimore", "state": "MD", "zip": "21045", "gps": 64, "specs": 2, "specialties": 2, "score": 256, "maps": "https://www.google.com/maps/search/?api=1&query=650+WEST+BALTIMORE+STREET,+Baltimore,+MD"}, {"address": "1420 Central Park Blvd", "city": "Fredericksburg", "state": "VA", "zip": "22401", "gps": 42, "specs": 3, "specialties": 2, "score": 252, "maps": "https://www.google.com/maps/search/?api=1&query=1420+CENTRAL+PARK+BLVD,+Fredericksburg,+VA"}, {"address": "3 Washington Cir Nw", "city": "Washington", "state": "DC", "zip": "20037", "gps": 41, "specs": 3, "specialties": 2, "score": 246, "maps": "https://www.google.com/maps/search/?api=1&query=3+WASHINGTON+CIR+NW,+Washington,+DC"}, {"address": "2311 M St Nw", "city": "Washington", "state": "DC", "zip": "20037", "gps": 41, "specs": 3, "specialties": 2, "score": 246, "maps": "https://www.google.com/maps/search/?api=1&query=2311+M+ST+NW,+Washington,+DC"}, {"address": "10530 Rosehaven St Ste 111", "city": "Fairfax", "state": "VA", "zip": "22030", "gps": 82, "specs": 3, "specialties": 1, "score": 246, "maps": "https://www.google.com/maps/search/?api=1&query=10530+ROSEHAVEN+ST+STE+111,+Fairfax,+VA"}, {"address": "10550 Warwick Ave", "city": "Fairfax", "state": "VA", "zip": "22030", "gps": 82, "specs": 3, "specialties": 1, "score": 246, "maps": "https://www.google.com/maps/search/?api=1&query=10550+WARWICK+AVE,+Fairfax,+VA"}, {"address": "240 Hydraulic Ridge Rd", "city": "Charlottesville", "state": "VA", "zip": "22901", "gps": 61, "specs": 2, "specialties": 2, "score": 244, "maps": "https://www.google.com/maps/search/?api=1&query=240+HYDRAULIC+RIDGE+RD,+Charlottesville,+VA"}, {"address": "905 Rio East Court", "city": "Charlottesville", "state": "VA", "zip": "22901", "gps": 61, "specs": 2, "specialties": 2, "score": 244, "maps": "https://www.google.com/maps/search/?api=1&query=905+RIO+EAST+COURT,+Charlottesville,+VA"}, {"address": "8955 Wood Rd Bldg 1", "city": "Bethesda", "state": "MD", "zip": "20889", "gps": 121, "specs": 2, "specialties": 1, "score": 242, "maps": "https://www.google.com/maps/search/?api=1&query=8955+WOOD+RD+BLDG+1,+Bethesda,+MD"}, {"address": "1500 Cornerside Blvd", "city": "Vienna", "state": "VA", "zip": "22182", "gps": 60, "specs": 2, "specialties": 2, "score": 240, "maps": "https://www.google.com/maps/search/?api=1&query=1500+CORNERSIDE+BLVD,+Vienna,+VA"}, {"address": "11400 Rockville Pike Ste 805", "city": "Rockville", "state": "MD", "zip": "20852", "gps": 114, "specs": 2, "specialties": 1, "score": 228, "maps": "https://www.google.com/maps/search/?api=1&query=11400+ROCKVILLE+PIKE+STE+805,+Rockville,+MD"}, {"address": "19735 Germantown Rd", "city": "Germantown", "state": "MD", "zip": "20874", "gps": 57, "specs": 2, "specialties": 2, "score": 228, "maps": "https://www.google.com/maps/search/?api=1&query=19735+GERMANTOWN+RD,+Germantown,+MD"}, {"address": "11125 Rockville Pike Ste 103", "city": "Rockville", "state": "MD", "zip": "20852", "gps": 114, "specs": 2, "specialties": 1, "score": 228, "maps": "https://www.google.com/maps/search/?api=1&query=11125+ROCKVILLE+PIKE+STE+103,+Rockville,+MD"}, {"address": "11810 Parklawn Dr Ste 101", "city": "Rockville", "state": "MD", "zip": "20852", "gps": 114, "specs": 2, "specialties": 1, "score": 228, "maps": "https://www.google.com/maps/search/?api=1&query=11810+PARKLAWN+DR+STE+101,+Rockville,+MD"}, {"address": "14333 Laurel Bowie Rd", "city": "Laurel", "state": "MD", "zip": "20708", "gps": 14, "specs": 4, "specialties": 4, "score": 224, "maps": "https://www.google.com/maps/search/?api=1&query=14333+LAUREL+BOWIE+RD,+Laurel,+MD"}, {"address": "6120 Brandon Ave", "city": "Springfield", "state": "VA", "zip": "22150", "gps": 37, "specs": 3, "specialties": 2, "score": 222, "maps": "https://www.google.com/maps/search/?api=1&query=6120+BRANDON+AVE,+Springfield,+VA"}, {"address": "14955 Shady Grove Rd", "city": "Rockville", "state": "MD", "zip": "20850", "gps": 71, "specs": 3, "specialties": 1, "score": 213, "maps": "https://www.google.com/maps/search/?api=1&query=14955+SHADY+GROVE+RD,+Rockville,+MD"}, {"address": "1325 18Th St Nw Ste 203", "city": "Washington", "state": "DC", "zip": "20036", "gps": 53, "specs": 2, "specialties": 2, "score": 212, "maps": "https://www.google.com/maps/search/?api=1&query=1325+18TH+ST+NW+STE+203,+Washington,+DC"}, {"address": "1350 Connecticut Ave Nw", "city": "Washington", "state": "DC", "zip": "20036", "gps": 53, "specs": 2, "specialties": 2, "score": 212, "maps": "https://www.google.com/maps/search/?api=1&query=1350+CONNECTICUT+AVE+NW,+Washington,+DC"}, {"address": "6845 Elm St", "city": "Mc Lean", "state": "VA", "zip": "22101", "gps": 23, "specs": 3, "specialties": 3, "score": 207, "maps": "https://www.google.com/maps/search/?api=1&query=6845+ELM+ST,+Mc+Lean,+VA"}, {"address": "4910 Massachusetts Ave Nw", "city": "Washington", "state": "DC", "zip": "20016", "gps": 51, "specs": 2, "specialties": 2, "score": 204, "maps": "https://www.google.com/maps/search/?api=1&query=4910+MASSACHUSETTS+AVE+NW,+Washington,+DC"}, {"address": "21785 Filigree Ct", "city": "Ashburn", "state": "VA", "zip": "20147", "gps": 51, "specs": 2, "specialties": 2, "score": 204, "maps": "https://www.google.com/maps/search/?api=1&query=21785+FILIGREE+CT,+Ashburn,+VA"}, {"address": "114 Forbes St", "city": "Annapolis", "state": "MD", "zip": "21401", "gps": 67, "specs": 3, "specialties": 1, "score": 201, "maps": "https://www.google.com/maps/search/?api=1&query=114+FORBES+ST,+Annapolis,+MD"}, {"address": "2448 Holly Ave", "city": "Annapolis", "state": "MD", "zip": "21401", "gps": 67, "specs": 3, "specialties": 1, "score": 201, "maps": "https://www.google.com/maps/search/?api=1&query=2448+HOLLY+AVE,+Annapolis,+MD"}, {"address": "200 Westgate Cir Ste 104", "city": "Annapolis", "state": "MD", "zip": "21401", "gps": 67, "specs": 3, "specialties": 1, "score": 201, "maps": "https://www.google.com/maps/search/?api=1&query=200+WESTGATE+CIR+STE+104,+Annapolis,+MD"}, {"address": "201 West St", "city": "Annapolis", "state": "MD", "zip": "21401", "gps": 67, "specs": 3, "specialties": 1, "score": 201, "maps": "https://www.google.com/maps/search/?api=1&query=201+WEST+ST,+Annapolis,+MD"}, {"address": "200 Westgate Circle", "city": "Annapolis", "state": "MD", "zip": "21401", "gps": 67, "specs": 3, "specialties": 1, "score": 201, "maps": "https://www.google.com/maps/search/?api=1&query=200+WESTGATE+CIRCLE,+Annapolis,+MD"}, {"address": "11239 Lockwood Dr", "city": "Silver Spring", "state": "MD", "zip": "20901", "gps": 33, "specs": 3, "specialties": 2, "score": 198, "maps": "https://www.google.com/maps/search/?api=1&query=11239+LOCKWOOD+DR,+Silver+Spring,+MD"}, {"address": "129 University Blvd", "city": "Harrisonburg", "state": "VA", "zip": "22801", "gps": 49, "specs": 2, "specialties": 2, "score": 196, "maps": "https://www.google.com/maps/search/?api=1&query=129+UNIVERSITY+BLVD,+Harrisonburg,+VA"}, {"address": "3344 Emmaus Rd", "city": "Rockingham", "state": "VA", "zip": "22801", "gps": 49, "specs": 2, "specialties": 2, "score": 196, "maps": "https://www.google.com/maps/search/?api=1&query=3344+EMMAUS+RD,+Rockingham,+VA"}, {"address": "131 Elden St", "city": "Herndon", "state": "VA", "zip": "20170", "gps": 48, "specs": 2, "specialties": 2, "score": 192, "maps": "https://www.google.com/maps/search/?api=1&query=131+ELDEN+ST,+Herndon,+VA"}, {"address": "438 N Frederick Ave", "city": "Gaithersburg", "state": "MD", "zip": "20877", "gps": 47, "specs": 2, "specialties": 2, "score": 188, "maps": "https://www.google.com/maps/search/?api=1&query=438+N+FREDERICK+AVE,+Gaithersburg,+MD"}, {"address": "7915 Lake Manassas Drive", "city": "Gainesville", "state": "VA", "zip": "20155", "gps": 46, "specs": 2, "specialties": 2, "score": 184, "maps": "https://www.google.com/maps/search/?api=1&query=7915+LAKE+MANASSAS+DRIVE,+Gainesville,+VA"}, {"address": "244 Hydraulic Ridge Road", "city": "Charlottesville", "state": "VA", "zip": "22901", "gps": 61, "specs": 3, "specialties": 1, "score": 183, "maps": "https://www.google.com/maps/search/?api=1&query=244+HYDRAULIC+RIDGE+ROAD,+Charlottesville,+VA"}, {"address": "111 Michigan Ave Nw", "city": "Washington", "state": "DC", "zip": "20010", "gps": 20, "specs": 9, "specialties": 1, "score": 180, "maps": "https://www.google.com/maps/search/?api=1&query=111+MICHIGAN+AVE+NW,+Washington,+DC"}, {"address": "12520 Prosperity Dr Ste 300", "city": "Silver Spring", "state": "MD", "zip": "20904", "gps": 36, "specs": 5, "specialties": 1, "score": 180, "maps": "https://www.google.com/maps/search/?api=1&query=12520+PROSPERITY+DR+STE+300,+Silver+Spring,+MD"}, {"address": "1470 Pantops Mountain Pl", "city": "Charlottesville", "state": "VA", "zip": "22911", "gps": 22, "specs": 4, "specialties": 2, "score": 176, "maps": "https://www.google.com/maps/search/?api=1&query=1470+PANTOPS+MOUNTAIN+PL,+Charlottesville,+VA"}, {"address": "10632 Little Patuxent Pkwy", "city": "Columbia", "state": "MD", "zip": "21044", "gps": 42, "specs": 2, "specialties": 2, "score": 168, "maps": "https://www.google.com/maps/search/?api=1&query=10632+LITTLE+PATUXENT+PKWY,+Columbia,+MD"}, {"address": "10682 Crestwood Dr Ste C", "city": "Manassas", "state": "VA", "zip": "20109", "gps": 42, "specs": 4, "specialties": 1, "score": 168, "maps": "https://www.google.com/maps/search/?api=1&query=10682+CRESTWOOD+DR+STE+C,+Manassas,+VA"}, {"address": "7525 Greenway Center Dr", "city": "Greenbelt", "state": "MD", "zip": "20770", "gps": 41, "specs": 2, "specialties": 2, "score": 164, "maps": "https://www.google.com/maps/search/?api=1&query=7525+GREENWAY+CENTER+DR,+Greenbelt,+MD"}, {"address": "11150 Fairfax Blvd", "city": "Fairfax", "state": "VA", "zip": "22030", "gps": 82, "specs": 2, "specialties": 1, "score": 164, "maps": "https://www.google.com/maps/search/?api=1&query=11150+FAIRFAX+BLVD,+Fairfax,+VA"}, {"address": "804 Pershing Dr Ste 102", "city": "Silver Spring", "state": "MD", "zip": "20910", "gps": 82, "specs": 2, "specialties": 1, "score": 164, "maps": "https://www.google.com/maps/search/?api=1&query=804+PERSHING+DR+STE+102,+Silver+Spring,+MD"}, {"address": "3554 Chain Bridge Rd", "city": "Fairfax", "state": "VA", "zip": "22030", "gps": 82, "specs": 2, "specialties": 1, "score": 164, "maps": "https://www.google.com/maps/search/?api=1&query=3554+CHAIN+BRIDGE+RD,+Fairfax,+VA"}, {"address": "3401 Georgia Ave Nw", "city": "Washington", "state": "DC", "zip": "20010", "gps": 20, "specs": 4, "specialties": 2, "score": 160, "maps": "https://www.google.com/maps/search/?api=1&query=3401+GEORGIA+AVE+NW,+Washington,+DC"}, {"address": "1712 Eye St Nw", "city": "Washington", "state": "DC", "zip": "20006", "gps": 80, "specs": 2, "specialties": 1, "score": 160, "maps": "https://www.google.com/maps/search/?api=1&query=1712+EYE+ST+NW,+Washington,+DC"}, {"address": "2021 K St Nw Ste 522", "city": "Washington", "state": "DC", "zip": "20006", "gps": 80, "specs": 2, "specialties": 1, "score": 160, "maps": "https://www.google.com/maps/search/?api=1&query=2021+K+ST+NW+STE+522,+Washington,+DC"}, {"address": "2730 University Blvd W Ste 1010", "city": "Silver Spring", "state": "MD", "zip": "20902", "gps": 40, "specs": 4, "specialties": 1, "score": 160, "maps": "https://www.google.com/maps/search/?api=1&query=2730+UNIVERSITY+BLVD+W+STE+1010,+Silver+Spring,+MD"}, {"address": "7611 Little River Tpke Ste 101E", "city": "Annandale", "state": "VA", "zip": "22003", "gps": 53, "specs": 3, "specialties": 1, "score": 159, "maps": "https://www.google.com/maps/search/?api=1&query=7611+LITTLE+RIVER+TPKE+STE+101E,+Annandale,+VA"}, {"address": "4600 John Marr Dr Ste 401", "city": "Annandale", "state": "VA", "zip": "22003", "gps": 53, "specs": 3, "specialties": 1, "score": 159, "maps": "https://www.google.com/maps/search/?api=1&query=4600+JOHN+MARR+DR+STE+401,+Annandale,+VA"}, {"address": "12602 Lake Ridge Dr", "city": "Woodbridge", "state": "VA", "zip": "22192", "gps": 78, "specs": 2, "specialties": 1, "score": 156, "maps": "https://www.google.com/maps/search/?api=1&query=12602+LAKE+RIDGE+DR,+Woodbridge,+VA"}];
+const ZIPS = [{"zip": "20889", "city": "Bethesda", "state": "MD", "gps": 122, "specs": 60, "building_pairs": 1107, "total_pairs": 7320, "maps": "https://www.google.com/maps/search/?api=1&query=Bethesda,+MD+20889"}, {"zip": "20852", "city": "Rockville", "state": "MD", "gps": 114, "specs": 46, "building_pairs": 160, "total_pairs": 5244, "maps": "https://www.google.com/maps/search/?api=1&query=Rockville,+MD+20852"}, {"zip": "22030", "city": "Fairfax", "state": "VA", "gps": 82, "specs": 37, "building_pairs": 24, "total_pairs": 3034, "maps": "https://www.google.com/maps/search/?api=1&query=Fairfax,+VA+22030"}, {"zip": "21401", "city": "Annapolis", "state": "MD", "gps": 67, "specs": 35, "building_pairs": 25, "total_pairs": 2345, "maps": "https://www.google.com/maps/search/?api=1&query=Annapolis,+MD+21401"}, {"zip": "20850", "city": "Rockville", "state": "MD", "gps": 71, "specs": 26, "building_pairs": 67, "total_pairs": 1846, "maps": "https://www.google.com/maps/search/?api=1&query=Rockville,+MD+20850"}, {"zip": "20815", "city": "Chevy Chase", "state": "MD", "gps": 45, "specs": 34, "building_pairs": 291, "total_pairs": 1530, "maps": "https://www.google.com/maps/search/?api=1&query=Chevy+Chase,+MD+20815"}, {"zip": "22901", "city": "Charlottesville", "state": "VA", "gps": 61, "specs": 25, "building_pairs": 44, "total_pairs": 1525, "maps": "https://www.google.com/maps/search/?api=1&query=Charlottesville,+VA+22901"}, {"zip": "20006", "city": "Washington", "state": "DC", "gps": 80, "specs": 19, "building_pairs": 158, "total_pairs": 1520, "maps": "https://www.google.com/maps/search/?api=1&query=Washington,+DC+20006"}, {"zip": "22182", "city": "Tysons", "state": "VA", "gps": 60, "specs": 25, "building_pairs": 48, "total_pairs": 1500, "maps": "https://www.google.com/maps/search/?api=1&query=Tysons,+VA+22182"}, {"zip": "20036", "city": "Washington", "state": "DC", "gps": 53, "specs": 27, "building_pairs": 213, "total_pairs": 1431, "maps": "https://www.google.com/maps/search/?api=1&query=Washington,+DC+20036"}, {"zip": "22192", "city": "Woodbridge", "state": "VA", "gps": 78, "specs": 15, "building_pairs": 8, "total_pairs": 1170, "maps": "https://www.google.com/maps/search/?api=1&query=Woodbridge,+VA+22192"}, {"zip": "20814", "city": "Bethesda", "state": "MD", "gps": 68, "specs": 17, "building_pairs": 47, "total_pairs": 1156, "maps": "https://www.google.com/maps/search/?api=1&query=Bethesda,+MD+20814"}, {"zip": "20910", "city": "Silver Spring", "state": "MD", "gps": 82, "specs": 14, "building_pairs": 47, "total_pairs": 1148, "maps": "https://www.google.com/maps/search/?api=1&query=Silver+Spring,+MD+20910"}, {"zip": "22003", "city": "Annandale", "state": "VA", "gps": 53, "specs": 21, "building_pairs": 30, "total_pairs": 1113, "maps": "https://www.google.com/maps/search/?api=1&query=Annandale,+VA+22003"}, {"zip": "22601", "city": "Winchester", "state": "VA", "gps": 57, "specs": 19, "building_pairs": 19, "total_pairs": 1083, "maps": "https://www.google.com/maps/search/?api=1&query=Winchester,+VA+22601"}, {"zip": "20016", "city": "Washington", "state": "DC", "gps": 51, "specs": 21, "building_pairs": 54, "total_pairs": 1071, "maps": "https://www.google.com/maps/search/?api=1&query=Washington,+DC+20016"}, {"zip": "22801", "city": "Harrisonburg", "state": "VA", "gps": 49, "specs": 20, "building_pairs": 20, "total_pairs": 980, "maps": "https://www.google.com/maps/search/?api=1&query=Harrisonburg,+VA+22801"}, {"zip": "21201", "city": "Baltimore", "state": "MD", "gps": 16, "specs": 61, "building_pairs": 600, "total_pairs": 976, "maps": "https://www.google.com/maps/search/?api=1&query=Baltimore,+MD+21201"}, {"zip": "21045", "city": "Baltimore", "state": "MD", "gps": 48, "specs": 20, "building_pairs": 38, "total_pairs": 960, "maps": "https://www.google.com/maps/search/?api=1&query=Baltimore,+MD+21045"}, {"zip": "22031", "city": "Fairfax", "state": "VA", "gps": 71, "specs": 13, "building_pairs": 22, "total_pairs": 923, "maps": "https://www.google.com/maps/search/?api=1&query=Fairfax,+VA+22031"}, {"zip": "22180", "city": "Vienna", "state": "VA", "gps": 46, "specs": 20, "building_pairs": 19, "total_pairs": 920, "maps": "https://www.google.com/maps/search/?api=1&query=Vienna,+VA+22180"}, {"zip": "22015", "city": "Burke", "state": "VA", "gps": 51, "specs": 17, "building_pairs": 7, "total_pairs": 867, "maps": "https://www.google.com/maps/search/?api=1&query=Burke,+VA+22015"}, {"zip": "20904", "city": "Silver Spring", "state": "MD", "gps": 36, "specs": 24, "building_pairs": 45, "total_pairs": 864, "maps": "https://www.google.com/maps/search/?api=1&query=Silver+Spring,+MD+20904"}, {"zip": "20155", "city": "Gainesville", "state": "VA", "gps": 46, "specs": 18, "building_pairs": 36, "total_pairs": 828, "maps": "https://www.google.com/maps/search/?api=1&query=Gainesville,+VA+20155"}, {"zip": "20878", "city": "North Potomac", "state": "MD", "gps": 39, "specs": 21, "building_pairs": 17, "total_pairs": 819, "maps": "https://www.google.com/maps/search/?api=1&query=North+Potomac,+MD+20878"}, {"zip": "21044", "city": "Columbia", "state": "MD", "gps": 42, "specs": 18, "building_pairs": 49, "total_pairs": 756, "maps": "https://www.google.com/maps/search/?api=1&query=Columbia,+MD+21044"}, {"zip": "20165", "city": "Sterling", "state": "VA", "gps": 49, "specs": 15, "building_pairs": 32, "total_pairs": 735, "maps": "https://www.google.com/maps/search/?api=1&query=Sterling,+VA+20165"}, {"zip": "22046", "city": "Falls Church", "state": "VA", "gps": 40, "specs": 18, "building_pairs": 64, "total_pairs": 720, "maps": "https://www.google.com/maps/search/?api=1&query=Falls+Church,+VA+22046"}, {"zip": "20147", "city": "Ashburn", "state": "VA", "gps": 51, "specs": 14, "building_pairs": 14, "total_pairs": 714, "maps": "https://www.google.com/maps/search/?api=1&query=Ashburn,+VA+20147"}, {"zip": "20707", "city": "Laurel", "state": "MD", "gps": 57, "specs": 11, "building_pairs": 55, "total_pairs": 627, "maps": "https://www.google.com/maps/search/?api=1&query=Laurel,+MD+20707"}, {"zip": "22203", "city": "Arlington", "state": "VA", "gps": 44, "specs": 14, "building_pairs": 60, "total_pairs": 616, "maps": "https://www.google.com/maps/search/?api=1&query=Arlington,+VA+22203"}, {"zip": "22304", "city": "Alexandria", "state": "VA", "gps": 40, "specs": 15, "building_pairs": 38, "total_pairs": 600, "maps": "https://www.google.com/maps/search/?api=1&query=Alexandria,+VA+22304"}, {"zip": "22401", "city": "Fredericksburg", "state": "VA", "gps": 42, "specs": 14, "building_pairs": 12, "total_pairs": 588, "maps": "https://www.google.com/maps/search/?api=1&query=Fredericksburg,+VA+22401"}, {"zip": "20874", "city": "Germantown", "state": "MD", "gps": 57, "specs": 10, "building_pairs": 9, "total_pairs": 570, "maps": "https://www.google.com/maps/search/?api=1&query=Germantown,+MD+20874"}, {"zip": "20854", "city": "Potomac", "state": "MD", "gps": 35, "specs": 16, "building_pairs": 8, "total_pairs": 560, "maps": "https://www.google.com/maps/search/?api=1&query=Potomac,+MD+20854"}, {"zip": "22101", "city": "Mclean", "state": "VA", "gps": 23, "specs": 24, "building_pairs": 39, "total_pairs": 552, "maps": "https://www.google.com/maps/search/?api=1&query=Mclean,+VA+22101"}, {"zip": "20109", "city": "Manassas", "state": "VA", "gps": 42, "specs": 13, "building_pairs": 9, "total_pairs": 546, "maps": "https://www.google.com/maps/search/?api=1&query=Manassas,+VA+20109"}, {"zip": "20190", "city": "Reston", "state": "VA", "gps": 47, "specs": 11, "building_pairs": 14, "total_pairs": 517, "maps": "https://www.google.com/maps/search/?api=1&query=Reston,+VA+20190"}, {"zip": "20110", "city": "Manassas", "state": "VA", "gps": 43, "specs": 12, "building_pairs": 7, "total_pairs": 516, "maps": "https://www.google.com/maps/search/?api=1&query=Manassas,+VA+20110"}, {"zip": "22314", "city": "Alexandria", "state": "VA", "gps": 44, "specs": 11, "building_pairs": 10, "total_pairs": 484, "maps": "https://www.google.com/maps/search/?api=1&query=Alexandria,+VA+22314"}, {"zip": "20037", "city": "Washington", "state": "DC", "gps": 42, "specs": 11, "building_pairs": 36, "total_pairs": 462, "maps": "https://www.google.com/maps/search/?api=1&query=Washington,+DC+20037"}, {"zip": "23298", "city": "Richmond", "state": "VA", "gps": 6, "specs": 77, "building_pairs": 162, "total_pairs": 462, "maps": "https://www.google.com/maps/search/?api=1&query=Richmond,+VA+23298"}, {"zip": "22407", "city": "Fredericksburg", "state": "VA", "gps": 45, "specs": 10, "building_pairs": 10, "total_pairs": 450, "maps": "https://www.google.com/maps/search/?api=1&query=Fredericksburg,+VA+22407"}, {"zip": "20176", "city": "Lansdowne", "state": "VA", "gps": 34, "specs": 13, "building_pairs": 3, "total_pairs": 442, "maps": "https://www.google.com/maps/search/?api=1&query=Lansdowne,+VA+20176"}, {"zip": "22150", "city": "Springfield", "state": "VA", "gps": 37, "specs": 11, "building_pairs": 40, "total_pairs": 407, "maps": "https://www.google.com/maps/search/?api=1&query=Springfield,+VA+22150"}, {"zip": "20906", "city": "Silver Spring", "state": "MD", "gps": 30, "specs": 13, "building_pairs": 57, "total_pairs": 390, "maps": "https://www.google.com/maps/search/?api=1&query=Silver+Spring,+MD+20906"}, {"zip": "20010", "city": "Washington", "state": "DC", "gps": 20, "specs": 19, "building_pairs": 55, "total_pairs": 380, "maps": "https://www.google.com/maps/search/?api=1&query=Washington,+DC+20010"}, {"zip": "20877", "city": "Gaithersburg", "state": "MD", "gps": 47, "specs": 8, "building_pairs": 1, "total_pairs": 376, "maps": "https://www.google.com/maps/search/?api=1&query=Gaithersburg,+MD+20877"}, {"zip": "20879", "city": "Gaithersburg", "state": "MD", "gps": 28, "specs": 13, "building_pairs": 13, "total_pairs": 364, "maps": "https://www.google.com/maps/search/?api=1&query=Gaithersburg,+MD+20879"}, {"zip": "20715", "city": "Bowie", "state": "MD", "gps": 28, "specs": 12, "building_pairs": 15, "total_pairs": 336, "maps": "https://www.google.com/maps/search/?api=1&query=Bowie,+MD+20715"}, {"zip": "20170", "city": "Herndon", "state": "VA", "gps": 48, "specs": 7, "building_pairs": 19, "total_pairs": 336, "maps": "https://www.google.com/maps/search/?api=1&query=Herndon,+VA+20170"}, {"zip": "20059", "city": "Washington", "state": "DC", "gps": 22, "specs": 15, "building_pairs": 129, "total_pairs": 330, "maps": "https://www.google.com/maps/search/?api=1&query=Washington,+DC+20059"}, {"zip": "20191", "city": "Reston", "state": "VA", "gps": 33, "specs": 10, "building_pairs": 33, "total_pairs": 330, "maps": "https://www.google.com/maps/search/?api=1&query=Reston,+VA+20191"}, {"zip": "20121", "city": "Centreville", "state": "VA", "gps": 30, "specs": 11, "building_pairs": 34, "total_pairs": 330, "maps": "https://www.google.com/maps/search/?api=1&query=Centreville,+VA+20121"}, {"zip": "20901", "city": "Silver Spring", "state": "MD", "gps": 33, "specs": 10, "building_pairs": 15, "total_pairs": 330, "maps": "https://www.google.com/maps/search/?api=1&query=Silver+Spring,+MD+20901"}, {"zip": "20902", "city": "Silver Spring", "state": "MD", "gps": 40, "specs": 8, "building_pairs": 19, "total_pairs": 320, "maps": "https://www.google.com/maps/search/?api=1&query=Silver+Spring,+MD+20902"}, {"zip": "20817", "city": "Bethesda", "state": "MD", "gps": 24, "specs": 13, "building_pairs": 19, "total_pairs": 312, "maps": "https://www.google.com/maps/search/?api=1&query=Bethesda,+MD+20817"}, {"zip": "20186", "city": "Warrenton", "state": "VA", "gps": 28, "specs": 11, "building_pairs": 10, "total_pairs": 308, "maps": "https://www.google.com/maps/search/?api=1&query=Warrenton,+VA+20186"}, {"zip": "22911", "city": "Charlottesville", "state": "VA", "gps": 22, "specs": 14, "building_pairs": 40, "total_pairs": 308, "maps": "https://www.google.com/maps/search/?api=1&query=Charlottesville,+VA+22911"}, {"zip": "20716", "city": "Mitchellville", "state": "MD", "gps": 29, "specs": 10, "building_pairs": 35, "total_pairs": 290, "maps": "https://www.google.com/maps/search/?api=1&query=Mitchellville,+MD+20716"}, {"zip": "20175", "city": "Leesburg", "state": "VA", "gps": 32, "specs": 9, "building_pairs": 1, "total_pairs": 288, "maps": "https://www.google.com/maps/search/?api=1&query=Leesburg,+VA+20175"}, {"zip": "20602", "city": "Waldorf", "state": "MD", "gps": 35, "specs": 8, "building_pairs": 19, "total_pairs": 280, "maps": "https://www.google.com/maps/search/?api=1&query=Waldorf,+MD+20602"}, {"zip": "20151", "city": "Chantilly", "state": "VA", "gps": 31, "specs": 9, "building_pairs": 13, "total_pairs": 279, "maps": "https://www.google.com/maps/search/?api=1&query=Chantilly,+VA+20151"}, {"zip": "22041", "city": "Falls Church", "state": "VA", "gps": 45, "specs": 6, "building_pairs": 36, "total_pairs": 270, "maps": "https://www.google.com/maps/search/?api=1&query=Falls+Church,+VA+22041"}, {"zip": "20003", "city": "Washington", "state": "DC", "gps": 38, "specs": 7, "building_pairs": 7, "total_pairs": 266, "maps": "https://www.google.com/maps/search/?api=1&query=Washington,+DC+20003"}, {"zip": "22033", "city": "Fairfax", "state": "VA", "gps": 33, "specs": 7, "building_pairs": 11, "total_pairs": 231, "maps": "https://www.google.com/maps/search/?api=1&query=Fairfax,+VA+22033"}, {"zip": "21702", "city": "Frederick", "state": "MD", "gps": 9, "specs": 25, "building_pairs": 7, "total_pairs": 225, "maps": "https://www.google.com/maps/search/?api=1&query=Frederick,+MD+21702"}, {"zip": "22554", "city": "Stafford", "state": "VA", "gps": 35, "specs": 6, "building_pairs": 14, "total_pairs": 210, "maps": "https://www.google.com/maps/search/?api=1&query=Stafford,+VA+22554"}, {"zip": "22102", "city": "Mc Lean", "state": "VA", "gps": 14, "specs": 15, "building_pairs": 3, "total_pairs": 210, "maps": "https://www.google.com/maps/search/?api=1&query=Mc+Lean,+VA+22102"}, {"zip": "22152", "city": "Springfield", "state": "VA", "gps": 32, "specs": 6, "building_pairs": 24, "total_pairs": 192, "maps": "https://www.google.com/maps/search/?api=1&query=Springfield,+VA+22152"}, {"zip": "20009", "city": "Washington", "state": "DC", "gps": 38, "specs": 5, "building_pairs": 13, "total_pairs": 190, "maps": "https://www.google.com/maps/search/?api=1&query=Washington,+DC+20009"}, {"zip": "20740", "city": "College Park", "state": "MD", "gps": 30, "specs": 6, "building_pairs": 23, "total_pairs": 180, "maps": "https://www.google.com/maps/search/?api=1&query=College+Park,+MD+20740"}, {"zip": "20002", "city": "Washington", "state": "DC", "gps": 36, "specs": 5, "building_pairs": 7, "total_pairs": 180, "maps": "https://www.google.com/maps/search/?api=1&query=Washington,+DC+20002"}, {"zip": "22044", "city": "Falls Church", "state": "VA", "gps": 42, "specs": 4, "building_pairs": 5, "total_pairs": 168, "maps": "https://www.google.com/maps/search/?api=1&query=Falls+Church,+VA+22044"}, {"zip": "22079", "city": "Lorton", "state": "VA", "gps": 24, "specs": 7, "building_pairs": 23, "total_pairs": 168, "maps": "https://www.google.com/maps/search/?api=1&query=Lorton,+VA+22079"}, {"zip": "20008", "city": "Washington", "state": "DC", "gps": 33, "specs": 5, "building_pairs": 5, "total_pairs": 165, "maps": "https://www.google.com/maps/search/?api=1&query=Washington,+DC+20008"}, {"zip": "20770", "city": "Greenbelt", "state": "MD", "gps": 41, "specs": 4, "building_pairs": 28, "total_pairs": 164, "maps": "https://www.google.com/maps/search/?api=1&query=Greenbelt,+MD+20770"}, {"zip": "20012", "city": "Washington", "state": "DC", "gps": 31, "specs": 5, "building_pairs": 24, "total_pairs": 155, "maps": "https://www.google.com/maps/search/?api=1&query=Washington,+DC+20012"}, {"zip": "22204", "city": "Arlington", "state": "VA", "gps": 15, "specs": 10, "building_pairs": 7, "total_pairs": 150, "maps": "https://www.google.com/maps/search/?api=1&query=Arlington,+VA+22204"}, {"zip": "22042", "city": "Falls Church", "state": "VA", "gps": 25, "specs": 6, "building_pairs": 14, "total_pairs": 150, "maps": "https://www.google.com/maps/search/?api=1&query=Falls+Church,+VA+22042"}, {"zip": "20132", "city": "Purcellville", "state": "VA", "gps": 18, "specs": 8, "building_pairs": 6, "total_pairs": 144, "maps": "https://www.google.com/maps/search/?api=1&query=Purcellville,+VA+20132"}, {"zip": "22903", "city": "Charlottesville", "state": "VA", "gps": 28, "specs": 5, "building_pairs": 2, "total_pairs": 140, "maps": "https://www.google.com/maps/search/?api=1&query=Charlottesville,+VA+22903"}, {"zip": "20015", "city": "Washington", "state": "DC", "gps": 23, "specs": 6, "building_pairs": 32, "total_pairs": 138, "maps": "https://www.google.com/maps/search/?api=1&query=Washington,+DC+20015"}, {"zip": "21061", "city": "Glen Burnie", "state": "MD", "gps": 7, "specs": 19, "building_pairs": 4, "total_pairs": 133, "maps": "https://www.google.com/maps/search/?api=1&query=Glen+Burnie,+MD+21061"}, {"zip": "22043", "city": "Falls Church", "state": "VA", "gps": 18, "specs": 7, "building_pairs": 13, "total_pairs": 126, "maps": "https://www.google.com/maps/search/?api=1&query=Falls+Church,+VA+22043"}, {"zip": "21042", "city": "Ellicott City", "state": "MD", "gps": 5, "specs": 23, "building_pairs": 0, "total_pairs": 115, "maps": "https://www.google.com/maps/search/?api=1&query=Ellicott+City,+MD+21042"}, {"zip": "22312", "city": "Alexandria", "state": "VA", "gps": 27, "specs": 4, "building_pairs": 12, "total_pairs": 108, "maps": "https://www.google.com/maps/search/?api=1&query=Alexandria,+VA+22312"}, {"zip": "20011", "city": "Washington", "state": "DC", "gps": 34, "specs": 3, "building_pairs": 4, "total_pairs": 102, "maps": "https://www.google.com/maps/search/?api=1&query=Washington,+DC+20011"}, {"zip": "22193", "city": "Woodbridge", "state": "VA", "gps": 20, "specs": 5, "building_pairs": 9, "total_pairs": 100, "maps": "https://www.google.com/maps/search/?api=1&query=Woodbridge,+VA+22193"}, {"zip": "20005", "city": "Washington", "state": "DC", "gps": 20, "specs": 5, "building_pairs": 2, "total_pairs": 100, "maps": "https://www.google.com/maps/search/?api=1&query=Washington,+DC+20005"}, {"zip": "20708", "city": "Laurel", "state": "MD", "gps": 14, "specs": 7, "building_pairs": 41, "total_pairs": 98, "maps": "https://www.google.com/maps/search/?api=1&query=Laurel,+MD+20708"}, {"zip": "20735", "city": "Clinton", "state": "MD", "gps": 5, "specs": 19, "building_pairs": 6, "total_pairs": 95, "maps": "https://www.google.com/maps/search/?api=1&query=Clinton,+MD+20735"}, {"zip": "22201", "city": "Arlington", "state": "VA", "gps": 30, "specs": 3, "building_pairs": 3, "total_pairs": 90, "maps": "https://www.google.com/maps/search/?api=1&query=Arlington,+VA+22201"}, {"zip": "20706", "city": "Lanham", "state": "MD", "gps": 11, "specs": 8, "building_pairs": 4, "total_pairs": 88, "maps": "https://www.google.com/maps/search/?api=1&query=Lanham,+MD+20706"}, {"zip": "22191", "city": "Woodbridge", "state": "VA", "gps": 22, "specs": 4, "building_pairs": 9, "total_pairs": 88, "maps": "https://www.google.com/maps/search/?api=1&query=Woodbridge,+VA+22191"}, {"zip": "22207", "city": "Arlington", "state": "VA", "gps": 14, "specs": 6, "building_pairs": 12, "total_pairs": 84, "maps": "https://www.google.com/maps/search/?api=1&query=Arlington,+VA+22207"}, {"zip": "22980", "city": "Waynesboro", "state": "VA", "gps": 28, "specs": 3, "building_pairs": 0, "total_pairs": 84, "maps": "https://www.google.com/maps/search/?api=1&query=Waynesboro,+VA+22980"}, {"zip": "22302", "city": "Alexandria", "state": "VA", "gps": 21, "specs": 4, "building_pairs": 0, "total_pairs": 84, "maps": "https://www.google.com/maps/search/?api=1&query=Alexandria,+VA+22302"}, {"zip": "22405", "city": "Fredericksburg", "state": "VA", "gps": 8, "specs": 10, "building_pairs": 6, "total_pairs": 80, "maps": "https://www.google.com/maps/search/?api=1&query=Fredericksburg,+VA+22405"}, {"zip": "20164", "city": "Sterling", "state": "VA", "gps": 20, "specs": 4, "building_pairs": 5, "total_pairs": 80, "maps": "https://www.google.com/maps/search/?api=1&query=Sterling,+VA+20164"}];
+const MAX_BSCORE = 6832;
+const MAX_ZPAIRS = 7320;
+const PAGE_SIZE = 50;
+
+let bSort = {col:'score', asc:false};
+let zSort = {col:'total_pairs', asc:false};
+let bPage = 0, zPage = 0;
+
+function switchTab(tab, el) {
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('panel-'+tab).classList.add('active');
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function bar(val, max, color) {
+  const pct = Math.max(4, Math.round((val/max)*120));
+  return `<div class="bar-wrap"><div class="bar" style="width:${pct}px;background:${color||'var(--grad)'}"></div><span style="font-size:12px;font-weight:600">${val.toLocaleString()}</span></div>`;
+}
+
+// ── Buildings ─────────────────────────────────────────────────────────────
+function filterB() {
+  const q = document.getElementById('b-search').value.toLowerCase();
+  const st = document.getElementById('b-state').value;
+  return BUILDINGS.filter(r =>
+    (!q || r.address.toLowerCase().includes(q) || r.city.toLowerCase().includes(q)) &&
+    (!st || r.state === st)
+  );
+}
+
+function sortB(col) {
+  if (bSort.col===col) bSort.asc=!bSort.asc; else {bSort.col=col; bSort.asc=col==='address'||col==='city';}
+  bPage=0; renderBuildings();
+}
+
+function renderBuildings() {
+  let data = filterB();
+  const {col, asc} = bSort;
+  data.sort((a,b) => {
+    const av = a[col], bv = b[col];
+    if (typeof av === 'number') return asc ? av-bv : bv-av;
+    return asc ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+  });
+  const total = data.length;
+  const pages = Math.ceil(total/PAGE_SIZE)||1;
+  if(bPage>=pages) bPage=pages-1;
+  const slice = data.slice(bPage*PAGE_SIZE, (bPage+1)*PAGE_SIZE);
+  document.getElementById('b-count').textContent = `${total.toLocaleString()} buildings`;
+  document.getElementById('b-empty').style.display = total?'none':'block';
+  const globalStart = bPage * PAGE_SIZE;
+  document.getElementById('b-tbody').innerHTML = slice.map((r,i) => {
+    const rank = globalStart + i + 1;
+    const isTop3 = rank <= 3;
+    return `<tr>
+      <td class="rank ${isTop3?'top3':''}">${rank}</td>
+      <td class="addr-cell">
+        ${esc(r.address)}
+        <br><a class="maps-link" href="${esc(r.maps)}" target="_blank">
+          <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Maps
+        </a>
+      </td>
+      <td>${esc(r.city)}</td>
+      <td>${esc(r.state)}</td>
+      <td><span class="pill pill-gp">${r.gps}</span></td>
+      <td><span class="pill pill-spec">${r.specs}</span></td>
+      <td>${r.specialties}</td>
+      <td>${bar(r.score, MAX_BSCORE)}</td>
+    </tr>`;
+  }).join('');
+  renderPagination('b', pages, total);
+}
+
+// ── ZIPs ──────────────────────────────────────────────────────────────────
+function filterZ() {
+  const q = document.getElementById('z-search').value.toLowerCase();
+  const st = document.getElementById('z-state').value;
+  return ZIPS.filter(r =>
+    (!q || r.zip.includes(q) || r.city.toLowerCase().includes(q)) &&
+    (!st || r.state === st)
+  );
+}
+
+function sortZ(col) {
+  if (zSort.col===col) zSort.asc=!zSort.asc; else {zSort.col=col; zSort.asc=col==='zip'||col==='city';}
+  zPage=0; renderZips();
+}
+
+function renderZips() {
+  let data = filterZ();
+  const {col, asc} = zSort;
+  data.sort((a,b) => {
+    const av = a[col], bv = b[col];
+    if (typeof av === 'number') return asc ? av-bv : bv-av;
+    return asc ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+  });
+  const total = data.length;
+  const pages = Math.ceil(total/PAGE_SIZE)||1;
+  if(zPage>=pages) zPage=pages-1;
+  const slice = data.slice(zPage*PAGE_SIZE, (zPage+1)*PAGE_SIZE);
+  document.getElementById('z-count').textContent = `${total.toLocaleString()} ZIP codes`;
+  document.getElementById('z-empty').style.display = total?'none':'block';
+  const globalStart = zPage * PAGE_SIZE;
+  document.getElementById('z-tbody').innerHTML = slice.map((r,i) => {
+    const rank = globalStart + i + 1;
+    const isTop3 = rank <= 3;
+    return `<tr>
+      <td class="rank ${isTop3?'top3':''}">${rank}</td>
+      <td><strong>${esc(r.zip)}</strong>
+        <br><a class="maps-link" href="${esc(r.maps)}" target="_blank">
+          <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Maps
+        </a>
+      </td>
+      <td>${esc(r.city)}</td>
+      <td>${esc(r.state)}</td>
+      <td><span class="pill pill-gp">${r.gps}</span></td>
+      <td><span class="pill pill-spec">${r.specs}</span></td>
+      <td><span class="pill pill-bld">${r.building_pairs.toLocaleString()}</span></td>
+      <td>${bar(r.total_pairs, MAX_ZPAIRS, 'linear-gradient(90deg,#0099ff,#06d6a0)')}</td>
+    </tr>`;
+  }).join('');
+  renderPagination('z', pages, total);
+}
+
+// ── Pagination ─────────────────────────────────────────────────────────────
+function renderPagination(prefix, pages, total) {
+  const page = prefix==='b' ? bPage : zPage;
+  const el = document.getElementById(prefix+'-pagination');
+  if(pages<=1){el.innerHTML='';return;}
+  const start=page*PAGE_SIZE+1, end=Math.min((page+1)*PAGE_SIZE,total);
+  let btns='';
+  const lo=Math.max(0,page-2), hi=Math.min(pages-1,page+2);
+  if(lo>0) btns+=`<button onclick="goPage('${prefix}',0)">1</button><span style="color:#9ca3af">…</span>`;
+  for(let i=lo;i<=hi;i++) btns+=`<button class="${i===page?'active':''}" onclick="goPage('${prefix}',${i})">${i+1}</button>`;
+  if(hi<pages-1) btns+=`<span style="color:#9ca3af">…</span><button onclick="goPage('${prefix}',${pages-1})">${pages}</button>`;
+  el.innerHTML=btns+`<span class="info">Showing ${start.toLocaleString()}–${end.toLocaleString()} of ${total.toLocaleString()}</span>`;
+}
+
+function goPage(prefix, page) {
+  if(prefix==='b'){bPage=page;renderBuildings();}
+  else{zPage=page;renderZips();}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+renderBuildings();
+renderZips();
+</script>
+</body>
+</html>
